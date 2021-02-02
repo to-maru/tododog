@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Jobs;
+
+use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
+
+class GetEventsFromItem implements ShouldQueue
+{
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public int $object_id = 3725455823; //DailyPlanning
+    const OBJECT_TYPE = 'item';
+    const EVENT_TYPE = 'completed';
+    const DAY_START_HOUR = 3;
+
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        $events_arr = [];
+        for ($i = 0; $i <= 20; $i++) {
+            $events_arr = array_merge($events_arr, $this->getEventsFromPage($i));
+        }
+        $all_events = array_merge($events_arr);
+        $events_dates = $this->getDatesOfEvents($all_events);
+
+        echo(json_encode($all_events, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        echo(json_encode($events_dates, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    }
+
+    private function getEventsFromPage(int $page)
+    {
+        $response = Http::asForm()->post('https://api.todoist.com/sync/v8/activity/get', [
+            'token' => config('todoapp.todoist.api_key'),
+            'limit' => 100,
+            'object_type' => self::OBJECT_TYPE,
+            'object_id' => $this->object_id,
+            'event_type' => self::EVENT_TYPE,
+            'page' => $page,
+        ]);
+        return json_decode($response->body(), true)['events'];
+    }
+
+    private function getDateTimesOfEvents(array $events)
+    {
+        return array_column($events, 'event_date');
+    }
+
+    private function getDatesOfEvents(array $events)
+    {
+        return array_map(function ($event) {
+            $datetime_format = function (string $datetime) {
+                return Carbon::parse($datetime)->subHour(self::DAY_START_HOUR)->toDateString();
+            };
+            return $datetime_format($event['event_date']);
+        }, $events);
+    }
+}
