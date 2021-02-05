@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User
+abstract class TodoApplication
+class Todo
+class Todoist
+
+TodoApplication "1"--"0..*" Todo
+TodoApplication "1"--"0..*" Project
+TodoApplication "1"--"0..*" Tag
+Todo "1"--"0..1" Project
+Todo "0..*"--"0..*" Tag
+
+TodoApplication <|-- Todoist
+TodoApplication <|-- Torello
+
+
+User "1"--"*" TodoApplication
+'User ..> TodoApplication : registry
+
+class TodoApplication {
+Object[] todos
+}
+
+class Todo {
+string name
+int project_id
+int[] tag_ids
+datetime[] done_datetimes
+}
+
+@enduml
