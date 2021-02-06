@@ -47,7 +47,7 @@ string name
 
 Analyser .left> TodoApplication : analyse
 
-User "1"--"1" TodoApplication
+User "1"--"0..1" TodoApplication
 User "1"--"1" Analyser
 
 TodoApplication "1"--"0..*" Todo
