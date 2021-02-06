@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class User {
+string id
+TodoApplication todo_application
+addTodoApplication()
+removeTodoApplication()
+}
+
+abstract class TodoApplication {
+Todo[] todos
+Project[] projects
+Tag[] tags
+Json sync_status
+sync()
+createTag()
+}
+
+abstract class Todo {
+string name
+int project_id
+int[] tag_ids
+datetime[] done_datetimes
+sync()
+addTag()
+addCommend()
+}
+
+class Analyser {
+condition
+setCondition()
+run()
+}
+
+class Project {
+int id
+string name
+}
+
+class Tag {
+int id
+string name
+}
+
+Analyser .left> TodoApplication : analyse
+
+User "1"--"1" TodoApplication
+
+TodoApplication "1"--"0..*" Todo
+TodoApplication "1"--"0..*" Project
+TodoApplication "1"--"0..*" Tag
+Todo -left Project
+Todo -right Tag
+
+TodoApplication <|-left Todoist
+TodoApplication <|-left Torello
+
+Todo <|-- TodoOfTodoist
+Todo <|-- TodoOfTorello
+
+@enduml
