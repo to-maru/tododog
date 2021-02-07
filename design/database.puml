@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+entity user {
++id: int [PK]
+--
+username: string
+}
+
+entity todo_application {
+# id: int [PK][FK(user,id)]
+--
+# type_id: int [FK(todo_application_type,id)]
+auth: json /'authのDataの持ち方に合わせる'/
+sync_status: json
+}
+
+entity todo_application_type {
++ id: int
+--
+name: string
+}
+
+entity todo {
++id: int [PK]
+--
+#todo_application_id: int [FK(todo_application,id)]
+name: string
+#project_id: int [FK(project,id)]
+}
+
+entity todo_tags {
++id: int [PK]
+--
+#todo_id: int [FK(todo,id)]
+#tag_id: int  [FK(tag,id)]
+}
+
+entity done_datetime {
++id: int [PK]
+--
+#todo_id: int [FK(todo,id)]
+done_datetime: datetime
+}
+
+entity project {
++id: int [PK]
+--
+#todo_application_id: int [FK(todo_application,id)]
+name: string
+}
+
+entity tag {
++id: int [PK]
+--
+#todo_application_id: int [FK(todo_application,id)]
+name: string
+}
+
+entity analyser {
+# id: int [PK][FK(user,id)]
+--
+condition: json
+}
+
+user --o| todo_application
+user - analyser
+
+todo_application - todo_application_type
+todo_application ---o{ todo
+todo_application -o{ project
+todo_application --o{ tag
+project |o--o{ todo
+tag }o--o{ todo_tags
+todo }o-o{ todo_tags
+todo --o{ done_datetime
+
+@enduml
