@@ -27,6 +27,7 @@ entity todo {
 +id: int [PK]
 --
 #todo_application_id: int [FK(todo_application,id)]
+uuid: int
 name: string
 #project_id: int [FK(project,id)]
 }
@@ -49,6 +50,7 @@ entity project {
 +id: int [PK]
 --
 #todo_application_id: int [FK(todo_application,id)]
+uuid: int
 name: string
 }
 
@@ -56,6 +58,7 @@ entity tag {
 +id: int [PK]
 --
 #todo_application_id: int [FK(todo_application,id)]
+uuid: int
 name: string
 }
 
