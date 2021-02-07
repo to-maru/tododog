@@ -68,7 +68,7 @@ condition: json
 user --o| todo_application
 user - analyser
 
-todo_application - todo_application_type
+todo_application }o- todo_application_type
 todo_application ---o{ todo
 todo_application -o{ project
 todo_application --o{ tag
