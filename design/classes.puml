@@ -37,6 +37,12 @@ setCondition()
 run()
 }
 
+abstract class Notifier {
+condition
+setCondition()
+run()
+}
+
 class Project {
 int id
 string name
@@ -51,6 +57,7 @@ Analyser .left> TodoApplication : analyse
 
 User "1"--"0..1" TodoApplication
 User "1"--"1" Analyser
+User "1"-"0..*" Notifier
 
 TodoApplication "1"--"0..*" Todo
 TodoApplication "1"--"0..*" Project
@@ -58,10 +65,13 @@ TodoApplication "1"--"0..*" Tag
 Todo -left Project
 Todo -right Tag
 
-TodoApplication <|-left Todoist
-TodoApplication <|-left Torello
+TodoApplication <|-up- Todoist
+TodoApplication <|-left- Torello
 
 Todo <|-- TodoOfTodoist
 Todo <|-- TodoOfTorello
+
+Notifier <|-- Mail
+Notifier <|-- Slack
 
 @enduml
