@@ -70,8 +70,23 @@ entity analyser {
 condition: json
 }
 
+entity notifier {
++ id: int [PK][FK(user,id)]
+--
+# type_id: int[FK(notifier_type,id)]
+condition: json
+}
+
+entity notifier_type {
++ id: int [PK]
+--
+name: string
+}
+
 user --o| todo_application
 user - analyser
+user -left-o{ notifier
+notifier }o-- notifier_type
 
 todo_application }o- todo_application_type
 todo_application ---o{ todo
