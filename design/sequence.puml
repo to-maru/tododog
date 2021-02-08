@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+actor User
+control Controller
+database DB
+control Job
+
+
+User -> Controller: LoginViewRequest
+Controller -> User: LoginViewResponse
+User -> Controller: Auth
+Controller -> DB: Select Auth
+Controller <- DB: Get UserData
+User <- Controller: UserViewResponse
+====
+User -> Controller: SyncSettingUpdateRequest
+Controller -> DB: Update SyncSetting
+Controller <- DB: OK
+User <- Controller: UpdateDoneResponse
+====
+User -> Controller: NotificationSettingUpdateRequest
+Controller -> DB: Update NotificationSetting
+Controller <- DB: OK
+User <- Controller: UpdateDoneResponse
+====
+User -> Controller: JobRunRequest
+Controller->Job: StartRun
+Job->DB: Get Auth
+Job<-DB: OK
+Job->DB: Get SyncSetting
+Job<-DB: OK
+Job->DB: Get NotificationSetting
+Job<-DB: OK
+loop [for every toto]
+    Job->DB: Get TodoSyncStatus
+    Job<-DB: OK
+    Job->TodoAppAPI: TodoInformationGetRequest
+    Job<-TodoAppAPI: GetDoneResponse
+    Job->DB: Update TodoInformation
+    Job<-DB: OK
+    |||
+    Job->DB: Get TodoFullInfomation
+    Job<-DB: OK
+    Job->Job: Analyse
+end
+Job->Job: Create Notification
+Job->TodoAppAPI: TodoInformationUpdateRequest
+Job<-TodoAppAPI: UpdateDoneResponse
+Job->ThirdPartyAPI: NotificationCreateRequest
+Job<-ThirdPartyAPI: CreateDoneResponse
+Controller<-Job: RunDoneResponse
+@enduml

@@ -23,6 +23,8 @@ abstract class Todo {
 string name
 int project_id
 int[] tag_ids
+datetime sync_started_at
+datetime sync_ended_at
 datetime[] done_datetimes
 sync()
 addTag()

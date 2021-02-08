@@ -30,6 +30,8 @@ entity todo {
 uuid: int
 name: string
 #project_id: int [FK(project,id)]
+sync_started_at: datetime
+sync_ended_at: datetime
 }
 
 entity todo_tags {
