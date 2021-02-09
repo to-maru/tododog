@@ -71,8 +71,9 @@ condition: json
 }
 
 entity notifier {
-+ id: int [PK][FK(user,id)]
++ id: int [PK]
 --
+# user_id: int[FK(user,id)]
 # type_id: int[FK(notifier_type,id)]
 condition: json
 }
