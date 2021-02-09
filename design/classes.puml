@@ -5,6 +5,8 @@
 class User {
 string id
 TodoApplication todo_application
+Analyser analyser
+Notifier[] notifiers
 addTodoApplication()
 removeTodoApplication()
 setAnalyseCondition()
