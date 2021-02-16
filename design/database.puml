@@ -85,7 +85,7 @@ entity notifier_type {
 name: string
 }
 
-user --o| todo_application
+user -- todo_application
 user - analyser
 user -left-o{ notifier
 notifier }o-- notifier_type
