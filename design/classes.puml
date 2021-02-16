@@ -13,6 +13,8 @@ setAnalyseCondition()
 }
 
 abstract class TodoApplication {
+int application_user_id
+string access_token
 Todo[] todos
 Project[] projects
 Tag[] tags
