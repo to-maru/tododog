@@ -5,13 +5,28 @@ actor User
 control Controller
 database DB
 control Job
-
+boundary TodoistLoginPg
 
 User -> Controller: LoginViewRequest
 Controller -> User: LoginViewResponse
-User -> Controller: Auth
-Controller -> DB: Select Auth
-Controller <- DB: Get UserData
+User -> TodoistLoginPg: LoginViewOnTodoistRequest
+User <- TodoistLoginPg: LoginViewOnTodoistResponse
+note right of User: todoist.com/oauth/authorize?client_id=&scope=&state=&redirect_uri={api_url}
+
+User -> TodoistLoginPg: Submit ID/PW
+TodoistLoginPg -> TodoistLoginPg: Authentication
+User <- TodoistLoginPg: ResponseAuthCode&RedirectUri
+activate User
+User -> Controller: RequestAuthApiWithAuthCode
+deactivate User
+note right of User: {api_url?code=&state=}
+Controller -> TodoAppAPI: TokenRequest
+note right of Controller: https://todoist.com/oauth/access_token?code=&client_id=&client_secret=&redirect_uri=
+Controller <- TodoAppAPI: TokenResponse
+Controller -> TodoAppAPI: UserInfoRequest
+Controller <- TodoAppAPI: UserInfoResponse
+Controller -> DB: Select User
+Controller <- DB: UserData
 User <- Controller: UserViewResponse
 ====
 User -> Controller: SyncSettingUpdateRequest
