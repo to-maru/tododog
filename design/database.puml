@@ -13,7 +13,8 @@ entity todo_application {
 # id: int [PK][FK(user,id)]
 --
 # type_id: int [FK(todo_application_type,id)]
-auth: json /'authのDataの持ち方に合わせる'/
+application_user_id: int
+access_token: string
 sync_status: json
 }
 
@@ -84,7 +85,7 @@ entity notifier_type {
 name: string
 }
 
-user --o| todo_application
+user -- todo_application
 user - analyser
 user -left-o{ notifier
 notifier }o-- notifier_type

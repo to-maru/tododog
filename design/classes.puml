@@ -13,6 +13,8 @@ setAnalyseCondition()
 }
 
 abstract class TodoApplication {
+int application_user_id
+string access_token
 Todo[] todos
 Project[] projects
 Tag[] tags
@@ -57,7 +59,7 @@ string name
 
 Analyser .left> TodoApplication : analyse
 
-User "1"--"0..1" TodoApplication
+User "1"--"1" TodoApplication
 User "1"--"1" Analyser
 User "1"-"0..*" Notifier
 
