@@ -15,6 +15,7 @@ use App\Http\Controllers;
 */
 
 Route::get('/', Controllers\HomeController::class)->name('login');
+Route::get('/api/auth/todoist', Controllers\ApiAuthTodoistController::class . '@' . 'index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/settings', function () {

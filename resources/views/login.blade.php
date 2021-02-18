@@ -29,7 +29,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://todoist.com/oauth/authorize?client_id={{Config::get('todoapp.todoist.client_id')}}&scope=data:read_write&state={{ csrf_token() }}" class="underline text-gray-900 dark:text-white">Login with Todoist</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/api/auth/todoist" class="underline text-gray-900 dark:text-white">Login with Todoist</a></div>
                             </div>
                         </div>
                     </div>

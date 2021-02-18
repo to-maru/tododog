@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->get('/api/auth/todoist', function (Request $request) {
+Route::get('/api/auth/todoist/callback', function (Request $request) {
     return $request->user(); //todo: controllerを設定する
 });
