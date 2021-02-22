@@ -15,6 +15,9 @@ class CreateNotifiersTable extends Migration
     {
         Schema::create('notifiers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->bigInteger('type_id');
+            $table->jsonb('condition');
             $table->timestamps();
         });
     }

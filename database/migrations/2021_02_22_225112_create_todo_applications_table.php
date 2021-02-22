@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnalysersTable extends Migration
+class CreateTodoApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateAnalysersTable extends Migration
      */
     public function up()
     {
-        Schema::create('analysers', function (Blueprint $table) {
+        Schema::create('todo_applications', function (Blueprint $table) {
             $table->foreignId('id')->constrained('users');
-            $table->bigInteger('project_id');
-            $table->jsonb('tag_ids');
+            $table->bigInteger('type_id');
+            $table->string('application_user_id');
+            $table->string('access_token');
+            $table->jsonb('sync_status');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateAnalysersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('analysers');
+        Schema::dropIfExists('todo_applications');
     }
 }
