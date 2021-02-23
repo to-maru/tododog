@@ -15,8 +15,8 @@ class CreateAnalysersTable extends Migration
     {
         Schema::create('analysers', function (Blueprint $table) {
             $table->foreignId('id')->constrained('users');
-            $table->bigInteger('project_id');
-            $table->jsonb('tag_ids');
+            $table->bigInteger('project_id')->nullable();
+            $table->jsonb('tag_ids')->nullable();
             $table->timestamps();
         });
     }

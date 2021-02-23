@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TodoApplication;
+use App\Models\User;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -20,7 +23,7 @@ class ApiAuthTodoistController extends Controller
             'state' => $state,
         ]);
 
-        return redirect('https://todoist.com/oauth/authorize?'.$query);
+        return redirect('https://todoist.com/oauth/authorize?' . $query);
     }
 
     public function callback(Request $request)
@@ -46,7 +49,30 @@ class ApiAuthTodoistController extends Controller
             'sync_token' => '*',
             'resource_types' => '["user"]',
         ]);
-        $user = json_decode($user_sync_response->body(),true)['user'];
+        $user_data = json_decode($user_sync_response->body(), true)['user'];
+
+        $todo_application = TodoApplication::firstOrNew(
+            [
+                'type_id' => 1,
+                'application_user_id' => $user_data['id'],
+            ],[
+                'access_token' => $access_token,
+            ]
+        );
+
+
+        DB::transaction(function () use ($todo_application, $user_data) {
+            if (is_null($todo_application->id)) {
+                $user = new User;
+                $user->name = $user_data['full_name'];
+                $user->save();
+
+                $todo_application->id = $user->id;
+            }
+
+            $todo_application->save();
+        });
+
 
         return redirect()->route('dashboard');
     }

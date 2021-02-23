@@ -18,7 +18,7 @@ class CreateTodoApplicationsTable extends Migration
             $table->bigInteger('type_id');
             $table->string('application_user_id');
             $table->string('access_token');
-            $table->jsonb('sync_status');
+            $table->jsonb('sync_status')->nullable();
             $table->timestamps();
         });
     }
