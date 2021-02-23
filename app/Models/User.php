@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -35,16 +34,16 @@ class User extends Authenticatable
 
     public function todo_application()
     {
-        return $this->hasOne('TodoApplication');
+        return $this->hasOne(TodoApplication::class, 'id');
     }
 
     public function analyser()
     {
-        return $this->hasOne('Analyser');
+        return $this->hasOne(Analyser::class, 'id');
     }
 
     public function notifiers()
     {
-        return $this->hasMany('Notifier');
+        return $this->hasMany(Notifier::class);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\TodoApplication;
 use App\Models\User;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -61,7 +62,6 @@ class ApiAuthTodoistController extends Controller
             ]
         );
 
-
         DB::transaction(function () use ($todo_application, $user_data) {
             if (is_null($todo_application->id)) {
                 $user = new User;
@@ -76,6 +76,9 @@ class ApiAuthTodoistController extends Controller
 
             $todo_application->save();
         });
+
+        Auth::login($todo_application->user);
+        info('auth_id:' . Auth::id());
 
         return redirect()->route('dashboard');
     }
