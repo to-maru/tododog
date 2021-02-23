@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Analyser;
 use App\Models\TodoApplication;
 use App\Models\User;
 use http\Exception\InvalidArgumentException;
@@ -66,13 +67,15 @@ class ApiAuthTodoistController extends Controller
                 $user = new User;
                 $user->name = $user_data['full_name'];
                 $user->save();
-
                 $todo_application->id = $user->id;
+
+                $analyser = new Analyser;
+                $analyser->id = $user->id;
+                $analyser->save();
             }
 
             $todo_application->save();
         });
-
 
         return redirect()->route('dashboard');
     }
