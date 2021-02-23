@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', Controllers\HomeController::class)->name('login');
+Route::get('/api/auth/todoist', Controllers\ApiAuthTodoistController::class . '@' . 'index');
+Route::get('/api/auth/todoist/callback', Controllers\ApiAuthTodoistController::class . '@' . 'callback');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/settings', function () {
+        return view('settings'); //todo: 後で作る
+    })->name('dashboard');
 });
