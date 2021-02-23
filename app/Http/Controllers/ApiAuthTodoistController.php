@@ -64,14 +64,12 @@ class ApiAuthTodoistController extends Controller
 
         DB::transaction(function () use ($todo_application, $user_data) {
             if (is_null($todo_application->id)) {
-                $user = new User;
-                $user->name = $user_data['full_name'];
-                $user->save();
+                $user = User::create([
+                    'name' => $user_data['full_name']
+                ]);
                 $todo_application->id = $user->id;
 
-                $analyser = new Analyser;
-                $analyser->id = $user->id;
-                $analyser->save();
+                $user->analyser()->save(new Analyser);
             }
 
             $todo_application->save();
