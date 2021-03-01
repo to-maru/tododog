@@ -19,6 +19,7 @@
                 font-family: 'Nunito';
             }
         </style>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">
@@ -29,7 +30,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="p-6">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="/api/auth/todoist" class="underline text-gray-900 dark:text-white">Login with Todoist</a></div>
+                                <div class="btn btn-primary"><a href="/api/auth/todoist" class="underline text-gray-900 dark:text-white">Login with Todoist</a></div>
                             </div>
                         </div>
                     </div>
