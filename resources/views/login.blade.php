@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -23,19 +24,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-               <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <div class="flex items-center">
-                                <div class="btn btn-primary"><a href="/api/auth/todoist" class="underline text-gray-900 dark:text-white">Login with Todoist</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
+            <span class="navbar-brand font-weight-bold" style="color: #663114;">Tododog</span>
+            <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
+        </nav>
+        <div class="text-center pt-5">
+            <h1>Watch Always<br>your favorite Todo App</h1>
+            <p>Analyze your todo app and embed result the result in the app.</p>
+            <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
