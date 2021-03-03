@@ -45,7 +45,18 @@
                                 <div>Notification</div>
                                 <div>FeedBack</div>
                             </div>
-                            <div class="mb-3">Tomoya Maruyama</div>
+                            <div class="dropright">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
+                                    Dropright
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Sign Out</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>
