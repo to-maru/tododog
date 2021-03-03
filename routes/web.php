@@ -19,6 +19,7 @@ Route::get('/api/auth/todoist', Controllers\ApiAuthTodoistController::class . '@
 Route::get('/api/auth/todoist/callback', Controllers\ApiAuthTodoistController::class . '@' . 'callback');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/user/sign_out',Controllers\SignOutController::class)->name('logout');
     Route::get('/settings', function () {
         return view('settings'); //todo: 後で作る
     })->name('dashboard');

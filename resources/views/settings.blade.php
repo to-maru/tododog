@@ -54,7 +54,7 @@
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Sign Out</a>
+                                    <a class="dropdown-item" href="/user/sign_out">Sign Out</a>
                                 </div>
                             </div>
                         </div>
