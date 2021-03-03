@@ -15,7 +15,7 @@
         </style>
 
         <style>
-            html{
+            html, body{
                 height: 100vh;
             }
             body {
@@ -25,20 +25,34 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
-    <body class="antialiased h-100">
+    <body class="antialiased">
         <div class="container-fluid h-100">
             <div class="row h-100">
-                <nav class="sidebar col-2 h-100">
-                    <div class="sidebar-sticky">
-                        <ul>
-                            <li>Routine Watcher</li>
-                            <li>Resource Watcher</li>
-                            <li>Somedays Watcher</li>
-                        </ul>
+                <nav class="sidebar col-12 col-sm-2 sm:h-100" style="background-color: #CCBDB7;">
+                    <div class="h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="text-center">
+                                <span class="navbar-brand font-weight-bold mb-2" style="color: #663114;">Tododog</span>
+                            </div>
+                            <div>
+                                <div>Routine Watcher</div>
+                                <div>Resource Watcher</div>
+                                <div>Somedays Watcher</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <div>Notification</div>
+                                <div>FeedBack</div>
+                            </div>
+                            <div class="mb-3">Tomoya Maruyama</div>
+                        </div>
                     </div>
                 </nav>
                 <main class="col-10">
-                    AAA
+                    <div class="m-5">
+                        <h1>Routine Watcher</h1>
+                    </div>
                 </main>
             </div>
         </div>
