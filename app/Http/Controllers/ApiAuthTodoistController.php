@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class ApiAuthTodoistController extends Controller
 {
-    public function index(Request $request)
+    public function call(Request $request)
     {
         $request->session()->put('state', $state = Str::random(40));
         $query = http_build_query([
