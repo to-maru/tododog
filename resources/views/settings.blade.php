@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -18,8 +19,8 @@
             html, body{
                 height: 100vh;
             }
-            body {
-                font-family: 'Nunito';
+            h1 {
+                font-family: 'Hiragino Kaku Gothic Std W8';
             }
         </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,26 +29,26 @@
     <body class="antialiased">
         <div class="container-fluid h-100">
             <div class="row h-100">
-                <nav class="sidebar col-12 col-sm-2 sm:h-100" style="background-color: #CCBDB7;">
+                <nav class="sidebar col-12 col-sm-2 sm:h-100 p-0" style="background-color: #CCBDB7;">
                     <div class="h-100 d-flex flex-column justify-content-between">
                         <div>
                             <div class="text-center">
-                                <span class="navbar-brand font-weight-bold mb-2" style="color: #663114;">Tododog</span>
+                                <span class="navbar-brand font-weight-bold mt-2 mb-5" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">Tododog</span>
                             </div>
                             <div>
-                                <div>Routine Watcher</div>
-                                <div>Resource Watcher</div>
-                                <div>Somedays Watcher</div>
+                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std'; background-color: #9E7D6C;">Routine Watcher</div>
+                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Resource Watcher</div>
+                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Somedays Watcher</div>
                             </div>
                         </div>
-                        <div>
+                        <div class="pb-2">
                             <div>
-                                <div>Notification</div>
-                                <div>FeedBack</div>
+                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Notification</div>
+                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">FeedBack</div>
                             </div>
-                            <div class="dropright">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
-                                    Dropright
+                            <div class="dropright p-sm-2 pl-sm-4">
+                                <a class="dropdown-toggle" style="font-family: 'Hiragino Kaku Gothic Std W3';" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
+                                    User Name
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Action</a>
