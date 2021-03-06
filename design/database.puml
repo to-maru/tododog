@@ -16,6 +16,8 @@ entity todo_application {
 application_user_id: int
 access_token: string
 sync_status: json
+first_synced_at: datetime
+last_synced_at: datetime
 }
 
 entity todo_application_type {
@@ -30,16 +32,16 @@ entity todo {
 #todo_application_id: int [FK(todo_application,id)]
 uuid: int
 name: string
-#project_id: int [FK(project,id)]
-sync_started_at: datetime
-sync_ended_at: datetime
+raw_data: json
+project_name: string
+origin_created_at: datetime
 }
 
-entity todo_tags {
-+id: int [PK]
---
-#todo_id: int [FK(todo,id)]
-#tag_id: int  [FK(tag,id)]
+entity todo_plans {
+todo_id: int [FK(todo,id)]
+status_id:
+plan: string
+due: datetime
 }
 
 entity done_datetime {
@@ -49,26 +51,12 @@ entity done_datetime {
 done_datetime: datetime
 }
 
-entity project {
-+id: int [PK]
---
-#todo_application_id: int [FK(todo_application,id)]
-uuid: int
-name: string
-}
-
-entity tag {
-+id: int [PK]
---
-#todo_application_id: int [FK(todo_application,id)]
-uuid: int
-name: string
-}
-
-entity analyser {
+entity routine_watcher_setting {
 # id: int [PK][FK(user,id)]
 --
-condition: json
+project_id: int
+tag_ids: json
+due_filter: boolean
 }
 
 entity notifier {
@@ -86,17 +74,13 @@ name: string
 }
 
 user -- todo_application
-user - analyser
+user - routine_watcher_setting
 user -left-o{ notifier
 notifier }o-- notifier_type
 
 todo_application }o- todo_application_type
-todo_application ---o{ todo
-todo_application -o{ project
-todo_application --o{ tag
-project |o--o{ todo
-tag }o--o{ todo_tags
-todo }o-o{ todo_tags
+todo_application --o{ todo
 todo --o{ done_datetime
+todo -o{ todo_plans
 
 @enduml
