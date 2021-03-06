@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Analyser;
+use App\Models\RoutineWatcherSetting;
 use App\Models\TodoApplication;
 use App\Models\User;
 use http\Exception\InvalidArgumentException;
@@ -69,7 +69,7 @@ class ApiAuthTodoistController extends Controller
                 ]);
                 $todo_application->id = $user->id;
 
-                $user->analyser()->save(new Analyser);
+                $user->routine_watcher_setting()->save(new RoutineWatcherSetting);
             }
 
             $todo_application->save();

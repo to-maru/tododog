@@ -37,9 +37,9 @@ class User extends Authenticatable
         return $this->hasOne(TodoApplication::class, 'id');
     }
 
-    public function analyser()
+    public function routine_watcher_setting()
     {
-        return $this->hasOne(Analyser::class, 'id');
+        return $this->hasOne(RoutineWatcherSetting::class, 'id');
     }
 
     public function notifiers()
