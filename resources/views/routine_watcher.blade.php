@@ -64,6 +64,7 @@
                 <main class="col-10">
                     <div class="m-5">
                         <h1>Routine Watcher</h1>
+                        {{ $user }}
                     </div>
                 </main>
             </div>
