@@ -12,7 +12,7 @@ class RoutineWatcherController extends Controller
         $user = Auth::user();
         $analyser = $user->analyser;
         return view('routine_watcher', [
-//            'user' => $user,
+            'user' => $user,
             'analyser' => $analyser,
         ]);
     }
