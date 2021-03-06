@@ -10,10 +10,10 @@ class RoutineWatcherController extends Controller
     public function show()
     {
         $user = Auth::user();
-        $analyser = $user->analyser;
+        $routine_watcher_setting = $user->routine_watcher_setting;
         return view('routine_watcher', [
             'user' => $user,
-            'analyser' => $analyser,
+            'setting' => $routine_watcher_setting,
         ]);
     }
 }
