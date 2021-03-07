@@ -22,6 +22,9 @@
             h1 {
                 font-family: 'Hiragino Kaku Gothic Std W8';
             }
+            div {
+                font-family: 'Hiragino Kaku Gothic Pro W6';
+            }
         </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -36,35 +39,68 @@
                                 <span class="navbar-brand font-weight-bold mt-2 mb-5" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">Tododog</span>
                             </div>
                             <div>
-                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std'; background-color: #9E7D6C;">Routine Watcher</div>
-                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Resource Watcher</div>
-                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Somedays Watcher</div>
+                                <div class="p-sm-2 pl-sm-4" style="background-color: #9E7D6C;">Routine Watcher</div>
+                                <div class="p-sm-2 pl-sm-4">Resource Watcher</div>
+                                <div class="p-sm-2 pl-sm-4">Somedays Watcher</div>
                             </div>
                         </div>
                         <div class="pb-2">
                             <div>
-                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">Notification</div>
-                                <div class="p-sm-2 pl-sm-4" style="font-family: 'Hiragino Kaku Gothic Std W3';">FeedBack</div>
+                                <div class="p-sm-2 pl-sm-4">Notification</div>
+                                <div class="p-sm-2 pl-sm-4">FeedBack</div>
                             </div>
-                            <div class="dropright p-sm-2 pl-sm-4">
-                                <a class="dropdown-toggle" style="font-family: 'Hiragino Kaku Gothic Std W3';" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
-                                    User Name
+                            <div class="dropright p-sm-2 pl-sm-4 pb-sm-4">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-200,10">
+                                    {{ $user->name }}
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Action</a>
+                                    <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Another action</a>
+                                    <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Something else here</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/user/sign_out">Sign Out</a>
+                                    <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="/user/sign_out">Sign Out</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </nav>
                 <main class="col-10">
-                    <div class="m-5">
-                        <h1>Routine Watcher</h1>
-                        {{ $user }}
+                    <div class="container-md">
+                        <div class="m-5">
+                            <h1>Routine Watcher</h1>
+                            <div class="mt-5">
+                                <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
+                                    <div class="p-sm-2">Setting</div>
+                                    <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">
+                                        <div class="p-sm-2 d-flex flex-row justify-content-between">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                                <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                                            </div>
+                                        </div>
+                                        <div class="p-sm-2">Label</div>
+                                    </div>
+                                </div>
+                                <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
+                                    <div class="p-sm-2">Filter</div>
+                                    <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">
+                                        <div class="p-sm-2 d-flex flex-row justify-content-between">
+                                            <p>Project</p>
+                                            <div class="form-group">
+                                                <select class="form-control" id="project">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="p-sm-2">Label</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </div>
