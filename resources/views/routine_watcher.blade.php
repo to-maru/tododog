@@ -88,16 +88,15 @@
                                             <p class="flex-fill">Project</p>
                                             <div class="flex-fill form-group">
                                                 <select class="form-control" id="project">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    @foreach($projects as $key => $value)
+                                                        <option>{{$value}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="p-sm-1 d-flex flex-row justify-content-between">
                                             <p class="flex-fill">Label</p>
+                                            <div class="flex-fill"></div>
                                         </div>
                                     </div>
                                 </div>

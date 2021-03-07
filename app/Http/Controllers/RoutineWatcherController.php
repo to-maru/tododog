@@ -25,6 +25,7 @@ class RoutineWatcherController extends Controller
         return view('routine_watcher', [
             'user' => $user,
             'setting' => $routine_watcher_setting,
+            'projects' => $projects,
         ]);
     }
 }
