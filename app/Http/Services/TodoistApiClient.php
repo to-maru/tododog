@@ -19,7 +19,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["projects"]',
         ]);
-        return $response->body();
+        return array_column(json_decode($response->body(),true)['projects'],'name','id');
     }
 
     public function getAllTags(): array
@@ -27,8 +27,8 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         $response = Http::asForm()->post('https://api.todoist.com/sync/v8/sync', [
             'token' => $this->api_key,
             'sync_token' => '*',
-            'resource_types' => '["projects"]',
+            'resource_types' => '["labels"]',
         ]);
-        return $response->body();
+        return array_column(json_decode($response->body(),true)['labels'],'name','id');
     }
 }
