@@ -69,24 +69,24 @@
                         <div class="m-5">
                             <h1>Routine Watcher</h1>
                             <div class="mt-5">
+{{--                                <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">--}}
+{{--                                    <div class="p-sm-2" style="font-family: 'Hiragino Kaku Gothic Std W8';">Setting</div>--}}
+{{--                                    <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">--}}
+{{--                                        <div class="p-sm-2 d-flex flex-row justify-content-between">--}}
+{{--                                            <div class="custom-control custom-switch">--}}
+{{--                                                <input type="checkbox" class="custom-control-input" id="customSwitch1">--}}
+{{--                                                <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="p-sm-2">Label</div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
-                                    <div class="p-sm-2">Setting</div>
-                                    <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">
-                                        <div class="p-sm-2 d-flex flex-row justify-content-between">
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                                <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-                                            </div>
-                                        </div>
-                                        <div class="p-sm-2">Label</div>
-                                    </div>
-                                </div>
-                                <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
-                                    <div class="p-sm-2">Filter</div>
-                                    <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">
-                                        <div class="p-sm-2 d-flex flex-row justify-content-between">
-                                            <p>Project</p>
-                                            <div class="form-group">
+                                    <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Filter</div>
+                                    <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                                        <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                            <p class="flex-fill">Project</p>
+                                            <div class="flex-fill form-group">
                                                 <select class="form-control" id="project">
                                                     <option>1</option>
                                                     <option>2</option>
@@ -96,7 +96,9 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="p-sm-2">Label</div>
+                                        <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                            <p class="flex-fill">Label</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
