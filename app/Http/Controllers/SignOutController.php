@@ -9,6 +9,6 @@ class SignOutController extends Controller
     public function __invoke()
     {
         Auth::logout();
-        return redirect(route('login'));
+        return redirect()->route('login');
     }
 }
