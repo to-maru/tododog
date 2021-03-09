@@ -96,7 +96,16 @@
                                         </div>
                                         <div class="p-sm-1 d-flex flex-row justify-content-between">
                                             <p class="flex-fill">Label</p>
-                                            <div class="flex-fill"></div>
+                                            <div class="flex-fill">
+                                                @foreach($tags as $key => $value)
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1">
+                                                            {{$value}}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

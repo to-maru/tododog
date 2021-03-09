@@ -26,6 +26,7 @@ class RoutineWatcherController extends Controller
             'user' => $user,
             'setting' => $routine_watcher_setting,
             'projects' => $projects,
+            'tags' => $tags,
         ]);
     }
 }
