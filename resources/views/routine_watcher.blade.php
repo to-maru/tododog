@@ -90,6 +90,7 @@
                                                 <p class="flex-fill">Project</p>
                                                 <div class="flex-fill form-group">
                                                     <select class="form-control" id="project" name="project_id">
+                                                        <option value="" {{$setting->project_id == null ? 'selected="selected"' : ''}}>全てのプロジェクト</option>
                                                         @foreach($projects as $key => $value)
                                                             <option value="{{$key}}" {{$setting->project_id == $key ? 'selected="selected"' : ''}}>{{$value}}</option>
                                                         @endforeach
