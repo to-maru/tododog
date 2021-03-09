@@ -91,7 +91,7 @@
                                                 <div class="flex-fill form-group">
                                                     <select class="form-control" id="project" name="project_id">
                                                         @foreach($projects as $key => $value)
-                                                            <option value="{{$key}}">{{$value}}</option>
+                                                            <option value="{{$key}}" {{$setting->project_id == $key ? 'selected="selected"' : ''}}>{{$value}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -102,9 +102,9 @@
                                                     @foreach($tags as $key => $value)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]"
-                                                                   @if(!is_null($setting->tag_ids))
-                                                                       {{in_array($key,$setting->tag_ids)? 'checked="checked"' : ''}}
-                                                                   @endif>
+                                                                @if(!is_null($setting->tag_ids))
+                                                                    {{in_array($key, $setting->tag_ids) ? 'checked="checked"' : ''}}
+                                                                @endif>
                                                             <label class="form-check-label" for="tag{{$key}}">
                                                                 {{$value}}
                                                             </label>
