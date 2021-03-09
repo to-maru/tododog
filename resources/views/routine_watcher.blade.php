@@ -101,10 +101,14 @@
                                                 <div class="flex-fill">
                                                     @foreach($tags as $key => $value)
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]">
+                                                            <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]"
+                                                                   @if(!is_null($setting->tag_ids))
+                                                                       {{in_array($key,$setting->tag_ids)? 'checked="checked"' : ''}}
+                                                                   @endif>
                                                             <label class="form-check-label" for="tag{{$key}}">
                                                                 {{$value}}
                                                             </label>
+
                                                         </div>
                                                     @endforeach
                                                 </div>

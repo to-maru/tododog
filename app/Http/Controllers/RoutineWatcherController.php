@@ -16,7 +16,9 @@ class RoutineWatcherController extends Controller
     {
         $user = $request->user();
         $routine_watcher_setting = $user->routine_watcher_setting;
+        info($routine_watcher_setting);
 
+        $routine_watcher_setting->tag_ids = json_decode($routine_watcher_setting->tag_ids);
         $api_client = $this->page_service->getApiClient($user);
 
         $projects = $this->page_service->getAllProjects($api_client);
@@ -39,10 +41,12 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting->tag_ids = json_encode($request->tag_ids);
         $routine_watcher_setting->save();
 
+        $routine_watcher_setting->tag_ids = json_decode($routine_watcher_setting->tag_ids);
         $api_client = $this->page_service->getApiClient($user);
 
         $projects = $this->page_service->getAllProjects($api_client);
         $tags = $this->page_service->getAllTags($api_client);
+        info($routine_watcher_setting);
 
         return view('routine_watcher', [
             'user' => $user,
