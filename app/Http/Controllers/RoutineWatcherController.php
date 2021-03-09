@@ -29,4 +29,22 @@ class RoutineWatcherController extends Controller
             'tags' => $tags,
         ]);
     }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+        $routine_watcher_setting = $user->routine_watcher_setting;
+
+        $api_client = $this->page_service->getApiClient($user);
+
+        $projects = $this->page_service->getAllProjects($api_client);
+        $tags = $this->page_service->getAllTags($api_client);
+
+        return view('routine_watcher', [
+            'user' => $user,
+            'setting' => $routine_watcher_setting,
+            'projects' => $projects,
+            'tags' => $tags,
+        ]);
+    }
 }
