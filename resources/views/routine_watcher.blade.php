@@ -89,9 +89,9 @@
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
                                                 <p class="flex-fill">Project</p>
                                                 <div class="flex-fill form-group">
-                                                    <select class="form-control" id="project">
+                                                    <select class="form-control" id="project" name="project_id">
                                                         @foreach($projects as $key => $value)
-                                                            <option>{{$value}}</option>
+                                                            <option value="{{$key}}">{{$value}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -101,8 +101,8 @@
                                                 <div class="flex-fill">
                                                     @foreach($tags as $key => $value)
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                            <label class="form-check-label" for="defaultCheck1">
+                                                            <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]">
+                                                            <label class="form-check-label" for="tag{{$key}}">
                                                                 {{$value}}
                                                             </label>
                                                         </div>

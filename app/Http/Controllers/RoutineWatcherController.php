@@ -32,8 +32,12 @@ class RoutineWatcherController extends Controller
 
     public function update(Request $request)
     {
+        info($request);
         $user = $request->user();
         $routine_watcher_setting = $user->routine_watcher_setting;
+        $routine_watcher_setting->project_id = $request->project_id;
+        $routine_watcher_setting->tag_ids = json_encode($request->tag_ids);
+        $routine_watcher_setting->save();
 
         $api_client = $this->page_service->getApiClient($user);
 
