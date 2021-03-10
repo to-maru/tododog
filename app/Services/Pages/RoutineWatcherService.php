@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Services\Pages;
+namespace App\Services\Pages;
 
 
-use App\Http\Services\TodoApplicationApiClientInterface;
-use App\Http\Services\TodoistApiClient;
+use App\Services\TodoApplicationApiClientInterface;
+use App\Services\TodoistApiClient;
 use App\Models\User;
 
 class RoutineWatcherService

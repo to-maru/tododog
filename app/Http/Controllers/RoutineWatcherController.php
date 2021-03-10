@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\Pages\RoutineWatcherService;
+use App\Services\Pages\RoutineWatcherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
