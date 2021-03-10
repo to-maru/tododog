@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -20,20 +21,26 @@ class Watchdog implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param TodoApplicationSynchronizer $synchronizer
+     * @param Analyzer $analyzer
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        public TodoApplicationSynchronizer $synchronizer,
+        public Analyzer $analyzer
+    ) {
         //
     }
 
     /**
      * Execute the job.
      *
+     * @param User $user
      * @return void
      */
-    public function handle()
+    public function handle(User $user)
     {
-        //
+        $this->synchronizer;
+        $this->analyzer;
     }
 }
