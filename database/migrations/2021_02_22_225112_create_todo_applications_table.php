@@ -14,7 +14,7 @@ class CreateTodoApplicationsTable extends Migration
     public function up()
     {
         Schema::create('todo_applications', function (Blueprint $table) {
-            $table->foreignId('id')->constrained('users');
+            $table->foreignId('id')->unique()->constrained('users');
             $table->bigInteger('type_id');
             $table->string('application_user_id');
             $table->string('access_token');
