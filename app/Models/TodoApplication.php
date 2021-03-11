@@ -15,4 +15,9 @@ class TodoApplication extends Model
     {
         return $this->belongsTo(User::class, 'id');
     }
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
+    }
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class TodoDoneDatetime extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function todo()
+    {
+        return $this->belongsTo(Todo::class);
+    }
 }
