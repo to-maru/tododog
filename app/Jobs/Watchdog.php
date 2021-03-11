@@ -40,7 +40,7 @@ class Watchdog implements ShouldQueue
      */
     public function handle(User $user)
     {
-        $this->synchronizer;
+        $this->synchronizer->syncronizeTodo($user->todo_application);
         $this->analyzer;
     }
 }
