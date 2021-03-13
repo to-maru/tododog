@@ -31,4 +31,14 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         ]);
         return array_column(json_decode($response->body(),true)['labels'],'name','id');
     }
+
+    public function getAllTodos(): array
+    {
+        $response = Http::asForm()->post('https://api.todoist.com/sync/v8/sync', [
+            'token' => $this->api_key,
+            'sync_token' => '*',
+            'resource_types' => '["items"]',
+        ]);
+        return array_column(json_decode($response->body(),true)['items'],'name','id');
+    }
 }

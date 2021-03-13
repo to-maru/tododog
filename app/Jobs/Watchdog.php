@@ -18,29 +18,19 @@ class Watchdog implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
-    /**
-     * Create a new job instance.
-     *
-     * @param TodoApplicationSynchronizer $synchronizer
-     * @param Analyzer $analyzer
-     * @return void
-     */
     public function __construct(
-        public TodoApplicationSynchronizer $synchronizer,
-        public Analyzer $analyzer
+        public User $user
     ) {
         //
     }
 
-    /**
-     * Execute the job.
-     *
-     * @param User $user
-     * @return void
-     */
-    public function handle(User $user)
+    public function handle(
+        TodoApplicationSynchronizer $synchronizer,
+        Analyzer $analyzer
+    )
     {
-        $this->synchronizer->syncronizeTodo($user->todo_application);
-        $this->analyzer;
+        $synchronizer->setApiClient($this->user->todo_application);
+        $synchronizer->syncronizeTodo(); //syncromizeTodoAndDonedate の方がいいかも
+        $analyzer;
     }
 }
