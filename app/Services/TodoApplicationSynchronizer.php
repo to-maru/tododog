@@ -8,11 +8,10 @@ use App\Models\TodoApplication;
 
 class TodoApplicationSynchronizer
 {
-    /**
-     * TodoApplicationSynchronizer constructor.
-     * @param TodoApplicationApiClientInterface $api_client
-     */
-    public function __construct(public TodoApplicationApiClientInterface $api_client)
+
+    public $api_client;
+
+    public function __construct()
     {
 
     }

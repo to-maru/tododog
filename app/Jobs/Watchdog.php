@@ -29,6 +29,7 @@ class Watchdog implements ShouldQueue
         Analyzer $analyzer
     )
     {
+        info($this->user->todo_application);
         $synchronizer->setApiClient($this->user->todo_application);
         $synchronizer->syncronizeTodo(); //syncromizeTodoAndDonedate の方がいいかも
         $analyzer;

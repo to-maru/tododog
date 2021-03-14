@@ -39,6 +39,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["items"]',
         ]);
-        return array_column(json_decode($response->body(),true)['items'],'name','id');
+        info(json_decode($response->body(),true));
+        return array_column(json_decode($response->body(),true)['items'],'content','id');
     }
 }
