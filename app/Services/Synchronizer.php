@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Todo;
 use App\Models\TodoApplication;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -17,10 +18,14 @@ class Synchronizer
 
     }
 
-    public function syncronizeTodo()
+    public function syncronizeTodo($todo_application)
     {
         $todos = $this->getAllTodos($this->api_client);
-        info($todos);
-
+        foreach ($todos as $key => $value) {
+            Todo::updateOrCreate(
+                ['todo_application_id' => $todo_application->id, 'local_id' => $key],
+                ['name' => $value]
+            );
+        }
     }
 }

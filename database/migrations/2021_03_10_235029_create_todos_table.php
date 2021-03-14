@@ -16,11 +16,11 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('todo_application_id')->constrained();
-            $table->uuid('uuid');
-            $table->string('name')->nullable();
+            $table->string('local_id');
+            $table->text('name')->nullable();
             $table->jsonb('raw_data')->nullable();
             $table->string('project_name')->nullable();
-            $table->timestamp('origin_created_at');
+            $table->timestamp('origin_created_at')->nullable();
             $table->timestamps();
         });
     }
