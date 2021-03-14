@@ -5,10 +5,11 @@ namespace App\Services;
 
 
 use App\Models\TodoApplication;
+use App\Traits\TodoApplicationApiClientTrait;
 
 class TodoApplicationSynchronizer
 {
-
+    use TodoApplicationApiClientTrait;
     public $api_client;
 
     public function __construct()

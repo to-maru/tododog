@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Services\Pages\RoutineWatcherService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\TodoApplicationApiClientTrait;
 
 class RoutineWatcherController extends Controller
 {
-    public function __construct(protected RoutineWatcherService $page_service)
+    use TodoApplicationApiClientTrait;
+
+    public function __construct()
     {
     }
 
@@ -18,10 +21,10 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting = $user->routine_watcher_setting;
 
         $routine_watcher_setting->tag_ids = json_decode($routine_watcher_setting->tag_ids);
-        $api_client = $this->page_service->getApiClient($user);
+        $api_client = $this->getApiClient($user->todo_application);
 
-        $projects = $this->page_service->getAllProjects($api_client);
-        $tags = $this->page_service->getAllTags($api_client);
+        $projects = $this->getAllProjects($api_client);
+        $tags = $this->getAllTags($api_client);
 
         return view('routine_watcher', [
             'user' => $user,
