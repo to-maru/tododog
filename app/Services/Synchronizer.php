@@ -20,7 +20,7 @@ class Synchronizer
 
     public function syncronizeTodo($todo_application)
     {
-        $todos = $this->getAllTodos($this->api_client);
+        $todos = $this->getAllTodoNames($this->api_client);
         foreach ($todos as $key => $value) {
             Todo::updateOrCreate(
                 ['todo_application_id' => $todo_application->id, 'local_id' => $key],

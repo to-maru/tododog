@@ -29,4 +29,9 @@ trait TodoApplicationApiClientTrait
     {
         return $api_client->getAllTodos();
     }
+
+    public function getAllTodoNames(TodoistApiClient $api_client)
+    {
+        return $api_client->getAllTodoNames();
+    }
 }

@@ -35,9 +35,14 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return array_column(json_decode($response->body(),true)['labels'],'name','id');
     }
 
-    public function getAllTodos(): array
+    public function getAllTodoNames(): array
     {
         return array_column($this->postApiToGetTodos()['items'],'content','id');
+    }
+
+    public function getAllTodos(): array
+    {
+        return $this->postApiToGetTodos()['items'];
     }
 
     private function postApiToGetTodos(): array
