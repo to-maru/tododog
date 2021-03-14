@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Http;
 
 class TodoistApiClient implements TodoApplicationApiClientInterface
 {
+    protected const API_BASE_URL = 'https://api.todoist.com/sync/v8/sync';
+
+
     public function __construct(protected string $api_key)
     {
     }
 
     public function getAllProjects(): array
     {
-        $response = Http::asForm()->post('https://api.todoist.com/sync/v8/sync', [
+        $response = Http::asForm()->post(self::API_BASE_URL, [
             'token' => $this->api_key,
             'sync_token' => '*',
             'resource_types' => '["projects"]',
@@ -24,7 +27,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     public function getAllTags(): array
     {
-        $response = Http::asForm()->post('https://api.todoist.com/sync/v8/sync', [
+        $response = Http::asForm()->post(self::API_BASE_URL, [
             'token' => $this->api_key,
             'sync_token' => '*',
             'resource_types' => '["labels"]',
@@ -34,12 +37,17 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     public function getAllTodos(): array
     {
-        $response = Http::asForm()->post('https://api.todoist.com/sync/v8/sync', [
+        return array_column($this->postApiToGetTodos()['items'],'content','id');
+    }
+
+    private function postApiToGetTodos(): array
+    {
+        $response = Http::asForm()->post(self::API_BASE_URL, [
             'token' => $this->api_key,
             'sync_token' => '*',
             'resource_types' => '["items"]',
         ]);
-        info(json_decode($response->body(),true));
-        return array_column(json_decode($response->body(),true)['items'],'content','id');
+        return json_decode($response->body(),true);
     }
+
 }
