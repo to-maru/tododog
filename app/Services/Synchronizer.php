@@ -5,7 +5,6 @@ namespace App\Services;
 
 
 use App\Models\Todo;
-use App\Models\TodoApplication;
 use App\Traits\TodoApplicationApiClientTrait;
 
 class Synchronizer

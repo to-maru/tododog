@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Pages\RoutineWatcherService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Traits\TodoApplicationApiClientTrait;
 
 class RoutineWatcherController extends Controller
