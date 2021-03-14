@@ -24,7 +24,7 @@ class RoutineWatcherController extends Controller
         $api_client = $this->getApiClient($user->todo_application);
 
         $projects = $this->getAllProjectNames($api_client);
-        $tags = $this->getAllTags($api_client);
+        $tags = $this->getAllTagNames($api_client);
 
         return view('routine_watcher', [
             'user' => $user,

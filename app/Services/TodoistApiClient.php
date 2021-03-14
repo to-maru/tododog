@@ -35,14 +35,24 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return json_decode($response->body(),true);
     }
 
+    public function getAllTagNames(): array
+    {
+        return array_column($this->postApiToGetTags()['labels'],'name','id');
+    }
+
     public function getAllTags(): array
+    {
+        return $this->postApiToGetTags();
+    }
+
+    public function postApiToGetTags(): array
     {
         $response = Http::asForm()->post(self::API_BASE_URL, [
             'token' => $this->api_key,
             'sync_token' => '*',
             'resource_types' => '["labels"]',
         ]);
-        return array_column(json_decode($response->body(),true)['labels'],'name','id');
+        return json_decode($response->body(),true);
     }
 
     public function getAllTodoNames(): array
