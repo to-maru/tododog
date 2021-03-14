@@ -40,8 +40,13 @@ trait TodoApplicationApiClientTrait
         return $api_client->getAllTodos();
     }
 
-    public function getAllTodoNames(TodoistApiClient $api_client)
+    public function getAllTodoNames(TodoApplicationApiClientInterface $api_client)
     {
         return $api_client->getAllTodoNames();
+    }
+
+    public function getAllTodoDonetimes(TodoApplicationApiClientInterface $api_client)
+    {
+        return $api_client->getAllTodoDonetimes();
     }
 }
