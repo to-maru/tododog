@@ -20,6 +20,11 @@ trait TodoApplicationApiClientTrait
         return $api_client->getAllProjects();
     }
 
+    public function getAllProjectNames(TodoApplicationApiClientInterface $api_client)
+    {
+        return $api_client->getAllProjectNames();
+    }
+
     public function getAllTags(TodoApplicationApiClientInterface $api_client)
     {
         return $api_client->getAllTags();

@@ -17,12 +17,22 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     public function getAllProjects(): array
     {
+        return $this->postApiToGetProjects()['projects'];
+    }
+
+    public function getAllProjectNames(): array
+    {
+        return array_column($this->postApiToGetProjects()['projects'],'name','id');
+    }
+
+    private function postApiToGetProjects() :array
+    {
         $response = Http::asForm()->post(self::API_BASE_URL, [
             'token' => $this->api_key,
             'sync_token' => '*',
             'resource_types' => '["projects"]',
         ]);
-        return array_column(json_decode($response->body(),true)['projects'],'name','id');
+        return json_decode($response->body(),true);
     }
 
     public function getAllTags(): array
@@ -54,5 +64,6 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         ]);
         return json_decode($response->body(),true);
     }
+
 
 }
