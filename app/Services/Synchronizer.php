@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Models\TodoApplication;
 use App\Traits\TodoApplicationApiClientTrait;
 
-class TodoApplicationSynchronizer
+class Synchronizer
 {
     use TodoApplicationApiClientTrait;
     public $api_client;
@@ -17,16 +17,10 @@ class TodoApplicationSynchronizer
 
     }
 
-    public function setApiClient(TodoApplication $todo_application)
-    {
-        $this->api_client = new TodoistApiClient($todo_application->access_token);
-    }
-
     public function syncronizeTodo()
     {
-        info($this->api_client->getAllTodos());
+        $todos = $this->getAllTodos($this->api_client);
+        info($todos);
+
     }
-
-
-
 }

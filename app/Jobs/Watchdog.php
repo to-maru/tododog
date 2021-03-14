@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Services\TodoApplicationSynchronizer;
+use App\Services\Synchronizer;
 use App\Services\Analyzer;
 
 
@@ -25,13 +25,12 @@ class Watchdog implements ShouldQueue
     }
 
     public function handle(
-        TodoApplicationSynchronizer $synchronizer,
+        Synchronizer $synchronizer,
         Analyzer $analyzer
     )
     {
         info($this->user->todo_application);
-        $synchronizer->setApiClient($this->user->todo_application);
-        $synchronizer->syncronizeTodo(); //syncromizeTodoAndDonedate の方がいいかも
-        $analyzer;
+        $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
+        $synchronizer->syncronizeTodo();
     }
 }
