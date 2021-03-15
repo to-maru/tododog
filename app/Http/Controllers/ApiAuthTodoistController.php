@@ -58,6 +58,8 @@ class ApiAuthTodoistController extends Controller
                 'application_user_id' => $user_data['id'],
             ],[
                 'access_token' => $access_token,
+                'origin_created_at' => $user_data['join_date'],
+                'raw_data' => json_encode($user_data),
             ]
         );
 
