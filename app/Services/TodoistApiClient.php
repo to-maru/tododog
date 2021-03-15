@@ -87,14 +87,40 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     public function getAllTodoDonetimes(): array
     {
-        return $this->postApiToGetActivityLogs();
+        $event_type = 'completed';
+        return $this->postApiToGetActivityLogs(event_type: $event_type);
     }
 
-    private function postApiToGetActivityLogs(): array
-    {
-        $response = Http::asForm()->post(self::API_BASE_URL . self::API_GET_ACTIVITY_LOGS, [
+    private function postApiToGetActivityLogs(
+        string $object_type = null,
+        int $object_id = null,
+        string $event_type = null,
+        int $page = null,
+        int $offset = null,
+    ): array{
+        $payload = [
             'token' => $this->api_key,
-        ]);
+            'limit' => 100,
+        ];
+
+        if (!is_null($object_type)) {
+            $payload['object_type'] = $object_type;
+        }
+        if (!is_null($object_id)) {
+            $payload['object_id'] = $object_id;
+        }
+        if (!is_null($event_type)) {
+            $payload['event_type'] = $event_type;
+        }
+        if (!is_null($page)) {
+            $payload['page'] = $page;
+        }
+        if (!is_null($offset)) {
+            $payload['offset'] = $offset;
+        }
+
+        info($payload);
+        $response = Http::asForm()->post(self::API_BASE_URL . self::API_GET_ACTIVITY_LOGS, $payload);
         return json_decode($response->body(),true);
     }
 
