@@ -93,7 +93,21 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     public function getAllTodoDonetimes(): array
     {
         $event_type = 'completed';
-        return $this->postApiToGetActivityLogs(event_type: $event_type);
+        $origin_created_at = $this->todo_application->origin_created_at;
+        $done_times_arr = [];
+        for ($i = 0; $i <= 20; $i++) {
+            $offset = 0;
+            do {
+                $response = $this->postApiToGetActivityLogs(event_type: $event_type, page: $i, offset: $offset);
+                $count = $response['count'];
+                $done_times_arr = array_merge(
+                    $done_times_arr,
+                    $response['events']
+                );
+                $offset += 100;
+            } while ($offset < $count); //$count=100のときは1回のリクエストで取得出来るため
+        }
+        return $all_done_times = array_merge($done_times_arr);
     }
 
     private function postApiToGetActivityLogs(
