@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\TodoApplication;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class TodoistApiClient implements TodoApplicationApiClientInterface
 {
@@ -93,9 +94,10 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     public function getAllTodoDonetimes(): array
     {
         $event_type = 'completed';
-        $origin_created_at = $this->todo_application->origin_created_at;
+        $origin_day = new Carbon($this->todo_application->origin_created_at);
+        $diff_week_num = $origin_day->diffInWeeks(Carbon::today()) + 1;
         $done_times_arr = [];
-        for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= $diff_week_num; $i++) {
             $offset = 0;
             do {
                 $response = $this->postApiToGetActivityLogs(event_type: $event_type, page: $i, offset: $offset);
