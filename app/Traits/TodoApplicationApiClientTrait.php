@@ -12,7 +12,7 @@ trait TodoApplicationApiClientTrait
 
     public function getApiClient(TodoApplication $todo_application)
     {
-        return new TodoistApiClient($todo_application->access_token);
+        return new TodoistApiClient($todo_application->access_token, $todo_application);
     }
 
     public function getAllProjects(TodoApplicationApiClientInterface $api_client)

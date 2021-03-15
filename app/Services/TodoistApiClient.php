@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\TodoApplication;
 use Illuminate\Support\Facades\Http;
 
 class TodoistApiClient implements TodoApplicationApiClientInterface
@@ -13,8 +14,12 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     protected const API_GET_ACTIVITY_LOGS = '/activity/get';
 
 
-    public function __construct(protected string $api_key)
+    public function __construct(
+        protected string $api_key,
+        protected TodoApplication $todo_application
+    )
     {
+
     }
 
     /* Projects */
@@ -119,7 +124,6 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             $payload['offset'] = $offset;
         }
 
-        info($payload);
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_GET_ACTIVITY_LOGS, $payload);
         return json_decode($response->body(),true);
     }
