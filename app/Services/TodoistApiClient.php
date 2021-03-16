@@ -94,8 +94,11 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     public function getAllTodoDonetimes(): array
     {
         $event_type = 'completed';
-        $origin_day = new Carbon($this->todo_application->origin_created_at);
-        $diff_week_num = $origin_day->diffInWeeks(Carbon::today()) + 1;
+        $from_date = new Carbon($this->todo_application->origin_created_at);
+        if (isset($this->todo_application->synced_at)) {
+            $from_date = new Carbon($this->todo_application->synced_at);
+        }
+        $diff_week_num = $from_date->diffInWeeks(Carbon::today()) + 1;
         $done_times_arr = [];
         for ($i = 0; $i <= $diff_week_num; $i++) {
             $offset = 0;

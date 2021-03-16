@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Todo;
 use App\Models\TodoDoneDatetime;
 use App\Traits\TodoApplicationApiClientTrait;
+use Carbon\Carbon;
 
 class Synchronizer
 {
@@ -37,5 +38,7 @@ class Synchronizer
                 );
             }
         }
+        $todo_application->synced_at = Carbon::now();
+        $todo_application->save();
     }
 }

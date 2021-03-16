@@ -77,8 +77,6 @@ class ApiAuthTodoistController extends Controller
         });
 
         Auth::login($todo_application->user);
-        info('auth_id:' . Auth::id());
-
         return redirect()->route('dashboard');
     }
 }
