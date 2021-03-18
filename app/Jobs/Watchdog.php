@@ -31,5 +31,6 @@ class Watchdog implements ShouldQueue
     {
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->syncronizeTodo($this->user->todo_application);
+        $analyzer->analyze($this->user);
     }
 }
