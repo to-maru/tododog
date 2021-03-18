@@ -67,7 +67,12 @@
                 <main class="col-10">
                     <div class="container-md">
                         <div class="m-5">
-                            <h1>Routine Watcher</h1>
+                            <div class="pr-sm-5 d-flex flex-row justify-content-between align-items-end">
+                                <h1>Routine Watcher</h1>
+                                <div>
+                                    <a href="./routine_watcher/run" class="btn btn-dark" type="submit">Manually Run</a>
+                                </div>
+                            </div>
                             <div class="mt-5">
                                 <form method="POST">
                                     @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Watchdog;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -40,6 +41,13 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting->tag_ids = json_encode($request->tag_ids);
         $routine_watcher_setting->save();
 
+        return redirect()->action($this::class . '@' . 'show');
+    }
+
+    public function run(Request $request)
+    {
+        $user = $request->user();
+        Watchdog::dispatchSync($user);
         return redirect()->action($this::class . '@' . 'show');
     }
 }
