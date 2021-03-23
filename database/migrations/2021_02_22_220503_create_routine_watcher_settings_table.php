@@ -15,7 +15,7 @@ class CreateRoutineWatcherSettingsTable extends Migration
     {
         Schema::create('routine_watcher_settings', function (Blueprint $table) {
             $table->foreignId('id')->constrained('users');
-            $table->bigInteger('project_id')->nullable();
+            $table->string('project_id')->nullable();
             $table->jsonb('tag_ids')->nullable();
             $table->boolean('due_filter')->nullable();
             $table->timestamps();

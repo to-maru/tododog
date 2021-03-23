@@ -19,7 +19,8 @@ class CreateTodosTable extends Migration
             $table->string('local_id');
             $table->text('name')->nullable();
             $table->jsonb('raw_data')->nullable();
-            $table->string('project_name')->nullable();
+            $table->string('project_id')->nullable();
+            $table->jsonb('tag_ids')->nullable();
             $table->timestamp('origin_created_at')->nullable();
             $table->timestamps();
         });
