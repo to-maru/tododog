@@ -15,20 +15,30 @@ class Analyzer
         $project_id = $routine_watcher_setting->project_id;
         $tag_ids = json_decode($routine_watcher_setting->tag_ids, true);
         $todos = new Todo;
-        if ($project_id == NULL) {
-            $todos = $todos::all();
-            $arr[] = ['project_id', '=', $project_id];
-        } else {
-            $todos = $todos::where('project_id', $project_id)->get();
-        }
+        $todos = $this->filterTodosByProjectId($todos, $project_id);
+        $todos = $this->filterTodosByTagIds($todos, $tag_ids);
 
+
+        info($todos);
+    }
+
+    public function filterTodosByProjectId($todos, $project_id)
+    {
+        if ($project_id == NULL) {
+            return $todos::all();
+        } else {
+            return $todos::where('project_id', $project_id)->get();
+        }
+    }
+
+    public function filterTodosByTagIds($todos, $tag_ids)
+    {
         if ($tag_ids !== NULL) {
-            $todos->filter(function ($todo) use ($tag_ids) {
+            return $todos->filter(function ($todo) use ($tag_ids) {
                 $todo_tag_ids = json_decode($todo->tag_ids, true);
                 return count(array_intersect($todo_tag_ids, $tag_ids)) > 0;
             });
         }
-
-        info($todos);
+        return $todos;
     }
 }
