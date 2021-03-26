@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Todo;
+use App\Models\TodoDoneDatetime;
 use App\Models\User;
 
 class Analyzer
@@ -18,8 +19,24 @@ class Analyzer
         $todos = $this->filterTodosByProjectId($todos, $project_id);
         $todos = $this->filterTodosByTagIds($todos, $tag_ids);
 
+        $results = array();
+        $todos->each(function ($todo) use (&$results) {
+            info($todo->id);
+            $results[$todo->id] = $this->analyzeTodo($todo);
+        });
+        info($results);
 
-        info($todos);
+    }
+
+    public function analyzeTodo($todo)
+    {
+        $done_datetimes = TodoDoneDatetime::where('todo_id', $todo->id)->get();
+        $result = array();
+        $result['running_days'] = 0;
+        $result['days_in_66days'] = 0;
+        $result['times_in_66days'] = 0;
+        $result['total_times'] = $done_datetimes->count();
+        return $result;
     }
 
     public function filterTodosByProjectId($todos, $project_id)
