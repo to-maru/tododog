@@ -40,10 +40,28 @@ class Analyzer
 
     public function countRunningDays($done_datetimes)
     {
+        $cheat_day_enabled = true;
+        $cheat_day_interval = 7;
+
         $running_days = 0;
+        $days_to_cheat_day = 0;
+        $date = Carbon::yesterday();
 
-
-        return $done_datetimes->count();
+        while (true) {
+            if ($this->existsDoneDatetime($done_datetimes, $date)) {
+                $days_to_cheat_day--;
+            } else {
+                if (!$cheat_day_enabled or $days_to_cheat_day > 0) {
+                    if ($cheat_day_enabled and $running_days === 1) {
+                        return 0;
+                    }
+                    return $running_days;
+                }
+                $days_to_cheat_day = $cheat_day_interval;
+            }
+            $running_days++;
+            $date = $date->subDay();
+        }
     }
 
     public function countFootPrints($done_datetimes)
