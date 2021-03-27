@@ -33,6 +33,7 @@ class Analyzer
         $done_datetimes = TodoDoneDatetime::where('todo_id', $todo->id)->orderBy('done_datetime', 'desc')->get();
         $result = array();
         $result['running_days'] = $this->countRunningDays($done_datetimes);
+        $result['sleeping_days'] = $this->countSleepingDays($done_datetimes);
         $result['foot_prints'] = $this->countFootPrints($done_datetimes);
         $result['total_times'] = $this->countTotalTimes($done_datetimes);
         return $result;
@@ -62,6 +63,14 @@ class Analyzer
             $running_days++;
             $date = $date->subDay();
         }
+    }
+
+    public function countSleepingDays($done_datetimes)
+    {
+        if (is_null($done_datetimes->first())) {
+            return null;
+        }
+        return Carbon::today()->diffInDays($done_datetimes->first()->done_datetime);
     }
 
     public function countFootPrints($done_datetimes)
