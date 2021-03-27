@@ -40,30 +40,27 @@ class Analyzer
 
     public function countRunningDays($done_datetimes)
     {
+        $running_days = 0;
+
+
         return $done_datetimes->count();
     }
 
     public function countFootPrints($done_datetimes)
     {
-        $foot_prints = "";
         $number_of_days = 7;
         $ok_char = 'o';
         $ng_char = 'x';
-        $start_date = Carbon::yesterday();
-        $end_date = Carbon::today();
-        for ($i = 0; $i < $number_of_days; $i++) {
-            $done_of_the_day = $done_datetimes->first(function ($done_datetime) use ($start_date, $end_date) {
-                $dt = $done_datetime->done_datetime;
-                return $dt->gte($start_date) and $dt->lt($end_date);
-            });
 
-            if (isset($done_of_the_day)) {
+        $foot_prints = "";
+        $date = Carbon::yesterday();
+        for ($i = 0; $i < $number_of_days; $i++) {
+            if ($this->existsDoneDatetime($done_datetimes, $date)) {
                 $foot_prints = $foot_prints . $ok_char;
             } else {
                 $foot_prints = $foot_prints . $ng_char;
             }
-            $start_date->subDay();
-            $end_date->subDay();
+            $date = $date->subDay();
         }
         return $foot_prints;
     }
@@ -71,6 +68,16 @@ class Analyzer
     public function countTotalTimes($done_datetimes)
     {
         return $done_datetimes->count();
+    }
+
+    public function existsDoneDatetime($done_datetimes, Carbon $date)
+    {
+        $next_date = $date->copy()->addDay();
+        $done_of_the_day = $done_datetimes->first(function ($done_datetime) use ($date, $next_date) {
+            $dt = $done_datetime->done_datetime;
+            return $dt->gte($date) and $dt->lt($next_date);
+        });
+        return isset($done_of_the_day);
     }
 
     public function filterTodosByProjectId($todos, $project_id)
