@@ -33,8 +33,7 @@ class Analyzer
         $done_datetimes = TodoDoneDatetime::where('todo_id', $todo->id)->get();
         $result = array();
         $result['running_days'] = 0;
-        $result['days_in_66days'] = 0;
-        $result['times_in_66days'] = 0;
+        $result['foot_prints'] = 0;
         $result['total_times'] = $done_datetimes->count();
         return $result;
     }
