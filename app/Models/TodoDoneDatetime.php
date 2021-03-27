@@ -9,6 +9,7 @@ class TodoDoneDatetime extends Model
 {
     use HasFactory;
 
+    protected $dates = ['done_datetime'];
     protected $guarded = [];
 
     public function todo()
