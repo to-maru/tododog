@@ -7,12 +7,14 @@ namespace App\Services;
 use App\Models\TodoApplication;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class TodoistApiClient implements TodoApplicationApiClientInterface
 {
     protected const API_BASE_URL = 'https://api.todoist.com/sync/v8';
     protected const API_SYNC = '/sync';
     protected const API_GET_ACTIVITY_LOGS = '/activity/get';
+    protected const COMMAND_TO_UPDATE_ITEM = 'item_update';
 
 
     public function __construct(
@@ -79,9 +81,13 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return $this->postApiToGetTodos()['items'];
     }
 
-    public function updateTodos(array $todo_update_orders)
+    public function updateTodos(array $todo_update_orders): array
     {
-
+        $commands = [];
+        foreach ($todo_update_orders as $todo_update_order) {
+            $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
+        }
+        return $this->postApiToWriteResources($commands);
     }
 
     private function postApiToGetTodos(): array
@@ -150,6 +156,42 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_GET_ACTIVITY_LOGS, $payload);
         return json_decode($response->body(),true);
+    }
+
+    /* WriteResources */
+    private function postApiToWriteResources(array $commands): array
+    {
+        $response = Http::asForm()->post(self::API_BASE_URL . self::API_SYNC, [
+            'token' => $this->api_key,
+            'commands' => $commands,
+        ]);
+
+        return json_decode($response->body(),true);
+    }
+
+    private function getWriteResourceCommand(string $type, array $args, string $temp_id = null): array
+    {
+        $command = array (
+            'type' => $type,
+            'uuid' => (string) Str::uuid(),
+            'args' => $args,
+        );
+        if (isset($temp_id)) {
+            $command['temp_id'] = $temp_id;
+        }
+
+        return $command;
+    }
+
+    private function getUpdateItemCommands(TodoUpdateOrder $todo_update_order): array
+    {
+        $commands = [];
+        $args = array (
+            'id' => $todo_update_order->local_id,
+        );
+        $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_ITEM, $args);
+
+        return $commands;
     }
 
 }

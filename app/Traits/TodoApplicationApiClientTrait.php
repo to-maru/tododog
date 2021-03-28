@@ -49,4 +49,9 @@ trait TodoApplicationApiClientTrait
     {
         return $api_client->getAllTodoDonetimes();
     }
+
+    public function updateTodos(TodoApplicationApiClientInterface $api_client, array $todo_update_orders)
+    {
+        return $api_client->updateTodos($todo_update_orders);
+    }
 }

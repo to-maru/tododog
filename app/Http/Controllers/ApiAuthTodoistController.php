@@ -15,7 +15,7 @@ class ApiAuthTodoistController extends Controller
 {
     public function call(Request $request)
     {
-        $request->session()->put('state', $state = Str::random(40));
+        $request->session()->put('state', $state = (string) Str::uuid());
         $query = http_build_query([
             'client_id' => config('todoapp.todoist.client_id'),
 //            'redirect_uri' => '',
@@ -23,7 +23,6 @@ class ApiAuthTodoistController extends Controller
             'scope' => 'data:read_write',
             'state' => $state,
         ]);
-
         return redirect('https://todoist.com/oauth/authorize?' . $query);
     }
 
