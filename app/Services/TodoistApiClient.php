@@ -79,6 +79,11 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return $this->postApiToGetTodos()['items'];
     }
 
+    public function updateTodos(array $todo_update_orders)
+    {
+
+    }
+
     private function postApiToGetTodos(): array
     {
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_SYNC, [
