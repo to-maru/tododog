@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\User;
+use App\Services\Notifier;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -26,11 +27,12 @@ class Watchdog implements ShouldQueue
 
     public function handle(
         Synchronizer $synchronizer,
-        Analyzer $analyzer
+        Analyzer $analyzer,
+        Notifier $notifier,
     )
     {
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->syncronizeTodo($this->user->todo_application);
-        $analyzer->analyze($this->user);
+        $notifier->notify($analyzer->analyze($this->user));
     }
 }
