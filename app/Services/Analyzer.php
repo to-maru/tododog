@@ -24,7 +24,7 @@ class Analyzer
         $todos->each(function ($todo) use (&$results) {
             $results[$todo->id] = $this->analyzeTodo($todo);
         });
-        info($results);
+        return $results;
 
     }
 
@@ -32,14 +32,15 @@ class Analyzer
     {
         $done_datetimes = TodoDoneDatetime::where('todo_id', $todo->id)->orderBy('done_datetime', 'desc')->get();
         $result = array();
-        $result['running_days'] = $this->countRunningDays($done_datetimes);
-        $result['sleeping_days'] = $this->countSleepingDays($done_datetimes);
-        $result['foot_prints'] = $this->countFootPrints($done_datetimes);
-        $result['total_times'] = $this->countTotalTimes($done_datetimes);
+        $result['running_days'] = $this->getRunningDays($done_datetimes);
+        $result['sleeping_days'] = $this->getSleepingDays($done_datetimes);
+        $result['foot_prints'] = $this->getFootPrints($done_datetimes);
+        $result['total_times'] = $this->getTotalTimes($done_datetimes);
+        $result['achievements'] = $this->getAchievement($result);
         return $result;
     }
 
-    public function countRunningDays($done_datetimes)
+    public function getRunningDays($done_datetimes)
     {
         $cheat_day_enabled = true;
         $cheat_day_interval = 7;
@@ -65,7 +66,7 @@ class Analyzer
         }
     }
 
-    public function countSleepingDays($done_datetimes)
+    public function getSleepingDays($done_datetimes)
     {
         if (is_null($done_datetimes->first())) {
             return null;
@@ -73,7 +74,7 @@ class Analyzer
         return Carbon::today()->diffInDays($done_datetimes->first()->done_datetime);
     }
 
-    public function countFootPrints($done_datetimes)
+    public function getFootPrints($done_datetimes)
     {
         $number_of_days = 7;
         $ok_char = 'o';
@@ -92,9 +93,14 @@ class Analyzer
         return $foot_prints;
     }
 
-    public function countTotalTimes($done_datetimes)
+    public function getTotalTimes($done_datetimes)
     {
         return $done_datetimes->count();
+    }
+
+    public function getAchievement(array $result)
+    {
+        return '';
     }
 
     public function existsDoneDatetime($done_datetimes, Carbon $date)
