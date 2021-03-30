@@ -24,7 +24,6 @@ class Analyzer
         $todos->each(function ($todo) use (&$results) {
             $results[$todo->id] = $this->analyzeTodo($todo);
         });
-        info($results);
         return $results;
 
     }

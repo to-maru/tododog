@@ -8,8 +8,6 @@ use App\Models\Todo;
 
 class TodoUpdateOrder
 {
-//    const TODO_NAME_SEPARATOR = '/dog:';
-//    const TAG_PREFIX = 'dog:';
     public Todo $original;
 
     public function __construct(
