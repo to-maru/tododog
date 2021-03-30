@@ -24,7 +24,7 @@ class TodoUpdateOrder
             $this->name = $this->original->name;
         }
         if (is_null($this->tag_ids)) {
-            $this->tag_ids = $this->original->tag_ids;
+            $this->tag_ids = json_decode($this->original->tag_ids, true);
         }
     }
 
@@ -65,7 +65,7 @@ class TodoUpdateOrder
 
     public function existsTagUpdate(): boolean
     {
-        return $this->getTagsToAdd() != $this->getTagsToRemove();
+        return $this->getTagsToAdd() != $this->getTagsToRemove(); //todo: ちゃんと作る
     }
 
 }
