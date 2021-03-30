@@ -87,6 +87,8 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         foreach ($todo_update_orders as $todo_update_order) {
             $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
         }
+        var_dump($commands);
+        exit;
         return $this->postApiToWriteResources($commands);
     }
 
@@ -187,7 +189,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     {
         $commands = [];
         $args = array (
-            'id' => $todo_update_order->local_id,
+            'id' => $todo_update_order->original->local_id,
         );
         $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_ITEM, $args);
 
