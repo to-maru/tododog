@@ -18,11 +18,13 @@ class TodoUpdateOrder
     )
     {
         $this->original = Todo::find($todo_id);
+        $this->original->tag_ids = json_decode($this->original->tag_ids, true);
+
         if (is_null($this->name)) {
             $this->name = $this->original->name;
         }
         if (is_null($this->tag_ids)) {
-            $this->tag_ids = json_decode($this->original->tag_ids, true);
+            $this->tag_ids = $this->original->tag_ids;
         }
     }
 
@@ -46,7 +48,7 @@ class TodoUpdateOrder
         $this->tag_ids = array_diff($this->tag_ids, $tag_ids);
     }
 
-    public function existsNameUpdate(): boolean
+    public function existsNameUpdate(): bool
     {
         return $this->name !== $this->original->name;
     }
@@ -58,10 +60,10 @@ class TodoUpdateOrder
 
     public function getTagsToRemove(): array
     {
-        return array_diff($this->original->tag_id, $this->tag_ids);
+        return array_diff($this->original->tag_ids, $this->tag_ids);
     }
 
-    public function existsTagUpdate(): boolean
+    public function existsTagUpdate(): bool
     {
         return $this->getTagsToAdd() != $this->getTagsToRemove(); //todo: ちゃんと作る
     }

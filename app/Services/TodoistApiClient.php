@@ -188,9 +188,18 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     private function getUpdateItemCommands(TodoUpdateOrder $todo_update_order): array
     {
         $commands = [];
+
+        //$commands[] = $this->getWriteResourceCommand(self::COMMAND_OTHER, $args);
+
         $args = array (
             'id' => $todo_update_order->original->local_id,
         );
+        if ($todo_update_order->existsNameUpdate()) {
+            $args['content'] = $todo_update_order->name;
+        }
+        if ($todo_update_order->existsTagUpdate()) {
+            // $args['labels'] =
+        }
         $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_ITEM, $args);
 
         return $commands;
