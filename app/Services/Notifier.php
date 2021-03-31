@@ -18,7 +18,8 @@ class Notifier
     public function notify($results)
     {
         $todo_update_orders = $this->getTodoUpdateOrders($results);
-        $this->updateTodos($this->api_client, $todo_update_orders);
+        $response = $this->updateTodos($this->api_client, $todo_update_orders);
+        info(json_encode($response));
     }
 
     public function getTodoUpdateOrders($results): array

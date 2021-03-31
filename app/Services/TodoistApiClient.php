@@ -87,8 +87,6 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         foreach ($todo_update_orders as $todo_update_order) {
             $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
         }
-        var_dump($commands);
-        exit;
         return $this->postApiToWriteResources($commands);
     }
 
@@ -165,7 +163,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     {
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_SYNC, [
             'token' => $this->api_key,
-            'commands' => $commands,
+            'commands' => json_encode($commands),
         ]);
 
         return json_decode($response->body(),true);
