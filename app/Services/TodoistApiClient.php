@@ -14,7 +14,8 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     protected const API_BASE_URL = 'https://api.todoist.com/sync/v8';
     protected const API_SYNC = '/sync';
     protected const API_GET_ACTIVITY_LOGS = '/activity/get';
-    protected const COMMAND_TO_UPDATE_ITEM = 'item_update';
+    protected const COMMAND_TO_UPDATE_TODO = 'item_update';
+    protected const COMMAND_TO_ADD_TAG = 'label_add';
 
 
     public function __construct(
@@ -27,12 +28,12 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* Projects */
 
-    public function getAllProjects(): array
+    public function getAllProjects(): array //fetch
     {
         return $this->postApiToGetProjects()['projects'];
     }
 
-    public function getAllProjectNames(): array
+    public function getAllProjectNames(): array //fetch
     {
         return array_column($this->postApiToGetProjects()['projects'],'name','id');
     }
@@ -49,14 +50,19 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* Tags */
 
-    public function getAllTagNames(): array
+    public function getAllTagNames(): array //fetch
     {
         return array_column($this->postApiToGetTags()['labels'],'name','id');
     }
 
-    public function getAllTags(): array
+    public function getAllTags(): array //fetch
     {
         return $this->postApiToGetTags();
+    }
+
+    public function addTag(string $name): int
+    {
+        return $this->postApiToAddTag($name);
     }
 
     public function postApiToGetTags(): array
@@ -69,14 +75,26 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return json_decode($response->body(),true);
     }
 
+    private function postApiToAddTag(string $name): int
+    {
+        $args = array(
+            'name' => $name,
+        );
+        $temp_id = (string) Str::uuid();
+        $command = $this->getWriteResourceCommand('label_add', $args, $temp_id);
+        $response = $this->postApiToWriteResources(array($command));
+        logger(print_r($response,true));
+        return $response['temp_id_mapping'][$temp_id];
+    }
+
     /* Todos */
 
-    public function getAllTodoNames(): array
+    public function getAllTodoNames(): array //fetch
     {
         return array_column($this->postApiToGetTodos()['items'],'content','id');
     }
 
-    public function getAllTodos(): array
+    public function getAllTodos(): array //fetch
     {
         return $this->postApiToGetTodos()['items'];
     }
@@ -102,7 +120,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* ActivityLogs */
 
-    public function getAllTodoDonetimes(): array
+    public function getAllTodoDonetimes(): array //fetch
     {
         $event_type = 'completed';
         $from_date = new Carbon($this->todo_application->origin_created_at);
@@ -169,7 +187,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return json_decode($response->body(),true);
     }
 
-    private function getWriteResourceCommand(string $type, array $args, string $temp_id = null): array
+    private function getWriteResourceCommand(string $type, array $args, string $temp_id = null): array //build
     {
         $command = array (
             'type' => $type,
@@ -183,11 +201,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return $command;
     }
 
-    private function getUpdateItemCommands(TodoUpdateOrder $todo_update_order): array
+    private function getUpdateItemCommands(TodoUpdateOrder $todo_update_order): array //generateWriteResourceCommandFromTodoUpdateOrder
     {
         $commands = [];
-
-        //$commands[] = $this->getWriteResourceCommand(self::COMMAND_OTHER, $args);
 
         $args = array (
             'id' => $todo_update_order->original->local_id,
@@ -198,7 +214,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         if ($todo_update_order->existsTagUpdate()) {
             // $args['labels'] =
         }
-        $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_ITEM, $args);
+        $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_TODO, $args);
 
         return $commands;
     }

@@ -35,6 +35,11 @@ trait TodoApplicationApiClientTrait
         return $api_client->getAllTags();
     }
 
+    public function addTag(TodoApplicationApiClientInterface $api_client, string $name)
+    {
+        return $api_client->addTag($name);
+    }
+
     public function getAllTodos(TodoApplicationApiClientInterface $api_client)
     {
         return $api_client->getAllTodos();
