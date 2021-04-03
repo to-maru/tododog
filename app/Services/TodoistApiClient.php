@@ -212,10 +212,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             $args['content'] = $todo_update_order->name;
         }
         if ($todo_update_order->existsTagUpdate()) {
-            // $args['labels'] =
+            $args['labels'] = $todo_update_order->tag_ids;
         }
         $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_TODO, $args);
-
         return $commands;
     }
 

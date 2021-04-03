@@ -10,6 +10,7 @@ class Notifier
 {
     use TodoApplicationApiClientTrait;
     public $api_client;
+    public $all_created_tags;
 
     const FOOTNOTE_PREFIX = '/dog:';
     const FOOTNOTE_SEPARATOR = ', ';
@@ -24,21 +25,23 @@ class Notifier
 
     public function getTodoUpdateOrders($results): array
     {
-        $all_created_tags = $this->getAllCreatedTags();
+        $this->all_created_tags = $this->getAllCreatedTags();
         $todo_update_orders = [];
         foreach ($results as $todo_id => $result) {
-            $todo_update_orders[] = $this->getTodoUpdateOrder($todo_id, $result, $all_created_tags);
+            $todo_update_orders[] = $this->getTodoUpdateOrder($todo_id, $result);
         }
         return $todo_update_orders;
     }
 
-    public function getTodoUpdateOrder($todo_id, $result, $all_created_tags): TodoUpdateOrder
+    public function getTodoUpdateOrder($todo_id, $result): TodoUpdateOrder
     {
         $todo_update_order = new TodoUpdateOrder($todo_id);
         $todo_update_order->removeFootnoteFromName(self::FOOTNOTE_PREFIX);
         $todo_update_order->addFootnoteToName($this->getFootnote($result));
-        $todo_update_order->removeTags($all_created_tags);
-        $todo_update_order->addTags($this->getTags($result));
+        $todo_update_order->removeTags(array_keys($this->all_created_tags));
+        $tag_names = $this->convertAchievementsToTagNames($this->makeAchievements($result));
+        $tag_ids = $this->getOrMakeTagIdsByTagNames($tag_names);
+        $todo_update_order->addTags($tag_ids);
         return $todo_update_order;
     }
 
@@ -55,9 +58,43 @@ class Notifier
         return $footnote;
     }
 
-    public function getTags($result): array
+    public function getOrMakeTagIdsByTagNames($tag_names)
     {
-        return [];
+        $tag_ids = array();
+        foreach ($tag_names as $tag_name) {
+            $tag_id = array_search($tag_name, $this->all_created_tags, true);
+            if ($tag_id === false) {
+                $tag_id = $this->addTag($this->api_client, $tag_name);
+                $this->all_created_tags[$tag_id] = $tag_name;
+            }
+            $tag_ids[] = $tag_id;
+        }
+        return $tag_ids;
+    }
+
+    public function convertAchievementsToTagNames($achievements): array
+    {
+        return array_map(function ($achievement) {
+            return self::TAG_PREFIX . $achievement;
+        }, $achievements);
+    }
+
+    public function makeAchievements($result): array
+    {
+        $achievements = array();
+
+        if ($result['sleeping_days'] > 100) {
+            $achievement[] = 'dead';
+        }elseif ($result['sleeping_days'] > 30) {
+            $achievement[] = 'half_dead';
+        }
+
+        if ($result['running_days'] > 100) {
+            $achievement[] = 'excellent';
+        }elseif ($result['running_days'] > 30) {
+            $achievement[] = 'good';
+        }
+        return $achievements;
     }
 
     public function getAllCreatedTags(): array
