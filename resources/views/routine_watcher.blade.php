@@ -25,6 +25,15 @@
             div {
                 font-family: 'Hiragino Kaku Gothic Pro W6';
             }
+            ::-webkit-scrollbar {
+                -webkit-appearance: none;
+                width: 7px;
+            }
+            ::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background-color: rgba(0,0,0,.5);
+                box-shadow: 0 0 1px rgba(255,255,255,.5);
+            }
         </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -104,13 +113,14 @@
                                             </div>
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
                                                 <p class="flex-fill">Label</p>
-                                                <div class="flex-fill">
+                                                <div class="flex-fill overflow-auto" style="max-height: 200px;">
                                                     @foreach($tags as $key => $value)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]"
                                                                 @if(!is_null($setting->tag_ids))
                                                                     {{in_array($key, $setting->tag_ids) ? 'checked="checked"' : ''}}
-                                                                @endif>
+                                                                @endif
+                                                            >
                                                             <label class="form-check-label" for="tag{{$key}}">
                                                                 {{$value}}
                                                             </label>
