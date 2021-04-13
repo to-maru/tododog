@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoutineWatcherSettingsTable extends Migration
+class CreateTodosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateRoutineWatcherSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('routine_watcher_settings', function (Blueprint $table) {
-            $table->foreignId('id')->constrained('users');
+        Schema::create('todos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('todo_application_id')->constrained();
+            $table->string('local_id');
+            $table->text('name')->nullable();
+            $table->jsonb('raw_data')->nullable();
             $table->string('project_id')->nullable();
             $table->jsonb('tag_ids')->nullable();
-            $table->boolean('due_filter')->nullable();
+            $table->timestamp('origin_created_at')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateRoutineWatcherSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routine_watcher_settings');
+        Schema::dropIfExists('todos');
     }
 }

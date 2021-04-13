@@ -22,4 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/sign_out',Controllers\SignOutController::class)->name('logout');
     Route::get('/routine_watcher', Controllers\RoutineWatcherController::class . '@' . 'show')->name('dashboard');
     Route::post('/routine_watcher', Controllers\RoutineWatcherController::class . '@' . 'update');
+    Route::get('/routine_watcher/run', Controllers\RoutineWatcherController::class . '@' . 'run');
 });

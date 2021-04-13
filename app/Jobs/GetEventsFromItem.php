@@ -64,6 +64,7 @@ class GetEventsFromItem implements ShouldQueue
             'event_type' => self::EVENT_TYPE,
             'page' => $page,
         ]);
+        info(json_decode($response->body(), true)['count']);
         return json_decode($response->body(), true)['events'];
     }
 

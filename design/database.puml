@@ -3,13 +3,13 @@
 
 hide empty members
 
-entity user {
+entity users {
 +id: int [PK]
 --
 username: string
 }
 
-entity todo_application {
+entity todo_applications {
 # id: int [PK][FK(user,id)]
 --
 # type_id: int [FK(todo_application_type,id)]
@@ -20,13 +20,13 @@ first_synced_at: datetime
 last_synced_at: datetime
 }
 
-entity todo_application_type {
+entity todo_application_types {
 + id: int
 --
 name: string
 }
 
-entity todo {
+entity todos {
 +id: int [PK]
 --
 #todo_application_id: int [FK(todo_application,id)]
@@ -44,14 +44,14 @@ plan: string
 due: datetime
 }
 
-entity done_datetime {
+entity todo_done_datetimes {
 +id: int [PK]
 --
 #todo_id: int [FK(todo,id)]
 done_datetime: datetime
 }
 
-entity routine_watcher_setting {
+entity routine_watcher_settings {
 # id: int [PK][FK(user,id)]
 --
 project_id: int
@@ -59,7 +59,7 @@ tag_ids: json
 due_filter: boolean
 }
 
-entity notifier {
+entity notifiers {
 + id: int [PK]
 --
 # user_id: int[FK(user,id)]
@@ -67,20 +67,20 @@ entity notifier {
 condition: json
 }
 
-entity notifier_type {
+entity notifier_types {
 + id: int [PK]
 --
 name: string
 }
 
-user -- todo_application
-user - routine_watcher_setting
-user -left-o{ notifier
-notifier }o-- notifier_type
+users -- todo_applications
+users - routine_watcher_settings
+users -left-o{ notifiers
+notifiers }o-- notifier_types
 
-todo_application }o- todo_application_type
-todo_application --o{ todo
-todo --o{ done_datetime
-todo -o{ todo_plans
+todo_applications }o- todo_application_types
+todo_applications --o{ todos
+todos --o{ todo_done_datetimes
+todos -o{ todo_plans
 
 @enduml

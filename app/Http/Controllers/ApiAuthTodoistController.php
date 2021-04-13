@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\RoutineWatcherSetting;
 use App\Models\TodoApplication;
 use App\Models\User;
-use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +15,7 @@ class ApiAuthTodoistController extends Controller
 {
     public function call(Request $request)
     {
-        $request->session()->put('state', $state = Str::random(40));
+        $request->session()->put('state', $state = (string) Str::uuid());
         $query = http_build_query([
             'client_id' => config('todoapp.todoist.client_id'),
 //            'redirect_uri' => '',
@@ -24,7 +23,6 @@ class ApiAuthTodoistController extends Controller
             'scope' => 'data:read_write',
             'state' => $state,
         ]);
-
         return redirect('https://todoist.com/oauth/authorize?' . $query);
     }
 
@@ -59,6 +57,8 @@ class ApiAuthTodoistController extends Controller
                 'application_user_id' => $user_data['id'],
             ],[
                 'access_token' => $access_token,
+                'origin_created_at' => $user_data['join_date'],
+                'raw_data' => json_encode($user_data),
             ]
         );
 
@@ -76,8 +76,6 @@ class ApiAuthTodoistController extends Controller
         });
 
         Auth::login($todo_application->user);
-        info('auth_id:' . Auth::id());
-
         return redirect()->route('dashboard');
     }
 }
