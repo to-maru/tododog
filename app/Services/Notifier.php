@@ -14,7 +14,7 @@ class Notifier
 
     const FOOTNOTE_PREFIX = '/dog:';
     const FOOTNOTE_SEPARATOR = ', ';
-    const TAG_PREFIX = 'dog:';
+    const TAG_PREFIX = 'Tododog:';
 
     public function notify($results)
     {
