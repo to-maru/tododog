@@ -11,11 +11,13 @@ use Carbon\Carbon;
 
 class Analyzer
 {
+    private $setting;
+
     public function analyze(User $user)
     {
-        $routine_watcher_setting = $user->routine_watcher_setting;
-        $project_id = $routine_watcher_setting->project_id;
-        $tag_ids = json_decode($routine_watcher_setting->tag_ids, true);
+        $this->setting = $user->routine_watcher_setting;
+        $project_id = $this->setting->project_id;
+        $tag_ids = json_decode($this->setting->tag_ids, true);
         $todos = new Todo;
         $todos = $this->filterTodosByProjectId($todos, $project_id);
         $todos = $this->filterTodosByTagIds($todos, $tag_ids);
@@ -42,8 +44,8 @@ class Analyzer
 
     public function getRunningDays($done_datetimes)
     {
-        $cheat_day_enabled = true;
-        $cheat_day_interval = 7;
+        $cheat_day_enabled = $this->setting->cheat_day_enabled;
+        $cheat_day_interval = $this->setting->cheat_day_interval;
 
         $running_days = 0;
         $days_to_cheat_day = 0;
@@ -76,7 +78,7 @@ class Analyzer
 
     public function getFootPrints($done_datetimes)
     {
-        $number_of_days = 7;
+        $number_of_days = $this->setting->footprints_number;
         $ok_char = 'o';
         $ng_char = 'x';
 
