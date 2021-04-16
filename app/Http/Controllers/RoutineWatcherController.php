@@ -39,6 +39,10 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting = $user->routine_watcher_setting;
         $routine_watcher_setting->project_id = $request->project_id;
         $routine_watcher_setting->tag_ids = json_encode($request->tag_ids);
+        $routine_watcher_setting->project_id = $request->project_id;
+        $routine_watcher_setting->cheat_day_enabled = $request->cheat_day_enabled === 'on';
+        $routine_watcher_setting->cheat_day_interval = $request->cheat_day_interval;
+        $routine_watcher_setting->footprints_number = $request->footprints_number;
         $routine_watcher_setting->save();
 
         return redirect()->action($this::class . '@' . 'show');
