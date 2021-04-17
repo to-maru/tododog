@@ -12,7 +12,7 @@ class Notifier
     public $api_client;
     public $all_created_tags;
 
-    const FOOTNOTE_PREFIX = '/dog:';
+    const FOOTNOTE_PREFIX = '\🐶';
     const FOOTNOTE_SEPARATOR = ', ';
     const TAG_PREFIX = 'Tododog:';
 
@@ -35,14 +35,15 @@ class Notifier
 
     public function getTodoUpdateOrder($todo_id, $result): TodoUpdateOrder
     {
-        $todo_update_order = new TodoUpdateOrder($todo_id);
-        $todo_update_order->removeFootnoteFromName(self::FOOTNOTE_PREFIX);
-        $todo_update_order->addFootnoteToName($this->getFootnote($result));
-        $todo_update_order->removeTags(array_keys($this->all_created_tags));
         $tag_names = $this->convertAchievementsToTagNames($this->makeAchievements($result));
         $tag_ids = $this->getOrMakeTagIdsByTagNames($tag_names);
-        $todo_update_order->addTags($tag_ids);
-        return $todo_update_order;
+        $todo_update_order = new TodoUpdateOrder($todo_id);
+
+        return $todo_update_order
+            ->removeFootnoteFromName(self::FOOTNOTE_PREFIX)
+            ->addFootnoteToName($this->getFootnote($result))
+            ->removeTags(array_keys($this->all_created_tags))
+            ->addTags($tag_ids);
     }
 
     public function getFootnote($result): string

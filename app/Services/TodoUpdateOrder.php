@@ -31,21 +31,25 @@ class TodoUpdateOrder
     public function addFootnoteToName(string $footnote)
     {
         $this->name = $this->name . $footnote;
+        return $this;
     }
 
     public function removeFootnoteFromName(string $footnote_prefix)
     {
         $this->name = explode($footnote_prefix, $this->name)[0];
+        return $this;
     }
 
     public function addTags(array $tag_ids)
     {
         $this->tag_ids = array_unique(array_merge($this->tag_ids, $tag_ids));
+        return $this;
     }
 
     public function removeTags(array $tag_ids)
     {
         $this->tag_ids = array_diff($this->tag_ids, $tag_ids);
+        return $this;
     }
 
     public function existsNameUpdate(): bool
