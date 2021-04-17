@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Cleaner;
 use App\Jobs\Watchdog;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
@@ -52,6 +53,13 @@ class RoutineWatcherController extends Controller
     {
         $user = $request->user();
         Watchdog::dispatchSync($user);
+        return redirect()->action($this::class . '@' . 'show');
+    }
+
+    public function clean(Request $request)
+    {
+        $user = $request->user();
+        Cleaner::dispatchSync($user);
         return redirect()->action($this::class . '@' . 'show');
     }
 }

@@ -18,7 +18,7 @@ class Analyzer
         $this->setting = $user->routine_watcher_setting;
         $project_id = $this->setting->project_id;
         $tag_ids = json_decode($this->setting->tag_ids, true);
-        $todos = new Todo;
+        $todos = Todo::where('todo_application_id', $user->todo_application->id)->get();
         $todos = $this->filterTodosByProjectId($todos, $project_id);
         $todos = $this->filterTodosByTagIds($todos, $tag_ids);
 
@@ -117,11 +117,12 @@ class Analyzer
 
     public function filterTodosByProjectId($todos, $project_id)
     {
-        if ($project_id == NULL) {
-            return $todos::all();
-        } else {
-            return $todos::where('project_id', $project_id)->get();
+        if ($project_id !== NULL) {
+            return $todos->filter(function ($todo) use ($project_id) {
+                return $todo->project_id == $project_id;
+            });
         }
+        return $todos;
     }
 
     public function filterTodosByTagIds($todos, $tag_ids)

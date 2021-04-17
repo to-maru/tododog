@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Models\Todo;
 use App\Models\User;
 use App\Services\Notifier;
+use App\Services\TodoUpdateOrder;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -15,7 +17,7 @@ use App\Services\Synchronizer;
 use App\Services\Analyzer;
 
 
-class Watchdog implements ShouldQueue
+class Cleaner implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
 
@@ -27,14 +29,25 @@ class Watchdog implements ShouldQueue
 
     public function handle(
         Synchronizer $synchronizer,
-        Analyzer $analyzer,
         Notifier $notifier,
     )
     {
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->syncronizeTodo($this->user->todo_application);
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
-        $notifier->notify($analyzer->analyze($this->user));
+
+        $all_created_tags = $notifier->getAllCreatedTags();
+        $todos = Todo::where('todo_application_id', $this->user->todo_application->id)->get();
+        $todo_update_orders = $todos->map(function ($todo) use ($all_created_tags){
+            $todo_update_order = new TodoUpdateOrder($todo->id);
+            $todo_update_order->removeFootnoteFromName(Notifier::FOOTNOTE_PREFIX);
+            $todo_update_order->removeTags(array_keys($all_created_tags));
+            return $todo_update_order;
+        })->toArray();
+
+        $response = $notifier->updateTodos($notifier->api_client, $todo_update_orders);
+        //$response = $notifier->deleteTags($notifier->api_client, array_keys($all_created_tags));
+        //scope=>data:delete が必要.
         $synchronizer->syncronizeTodo($this->user->todo_application);
     }
 }
