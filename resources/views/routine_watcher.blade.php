@@ -25,6 +25,15 @@
             div {
                 font-family: 'Hiragino Kaku Gothic Pro W6';
             }
+            ::-webkit-scrollbar {
+                -webkit-appearance: none;
+                width: 7px;
+            }
+            ::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                background-color: rgba(0,0,0,.5);
+                box-shadow: 0 0 1px rgba(255,255,255,.5);
+            }
         </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -77,18 +86,6 @@
                                 <form method="POST">
                                     @csrf
                                     <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
-{{--                                        <div class="p-sm-2" style="font-family: 'Hiragino Kaku Gothic Std W8';">Setting</div>--}}
-{{--                                        <div class="p-sm-0 pl-sm-5 pr-sm-5 m-sm-0 ml-sm-5 mr-sm-5">--}}
-{{--                                            <div class="p-sm-2 d-flex flex-row justify-content-between">--}}
-{{--                                                <div class="custom-control custom-switch">--}}
-{{--                                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">--}}
-{{--                                                    <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="p-sm-2">Label</div>--}}
-{{--                                        </div>--}}
-                                    </div>
-                                    <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
                                         <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Filter</div>
                                         <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
@@ -104,19 +101,44 @@
                                             </div>
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
                                                 <p class="flex-fill">Label</p>
-                                                <div class="flex-fill">
+                                                <div class="flex-fill overflow-auto" style="max-height: 200px;">
                                                     @foreach($tags as $key => $value)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="{{$key}}" id="tag{{$key}}" name="tag_ids[]"
                                                                 @if(!is_null($setting->tag_ids))
                                                                     {{in_array($key, $setting->tag_ids) ? 'checked="checked"' : ''}}
-                                                                @endif>
+                                                                @endif
+                                                            >
                                                             <label class="form-check-label" for="tag{{$key}}">
                                                                 {{$value}}
                                                             </label>
 
                                                         </div>
                                                     @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Setting</div>
+                                        <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                                            <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                                <p class="flex-fill">CheatDay System</p>
+                                                <div class="flex-fill custom-control custom-switch">
+                                                    <input class="custom-control-input" type="checkbox" id="cheat-day-enabled" name="cheat_day_enabled" {{$setting->cheat_day_enabled ? 'checked="checked"' : ''}}>
+                                                    <label class="custom-control-label" for="cheat-day-enabled">
+{{--                                                        If it's enabled, the running days will not be reset even if you take a break once in a while.--}}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                                <p class="flex-fill">CheatDay Interval</p>
+                                                <div class="flex-fill form-group">
+                                                    <input type="number" class="form-control" id="cheat-day-interval" name="cheat_day_interval" value={{$setting->cheat_day_interval}} placeholder="Enter Number">
+                                                </div>
+                                            </div>
+                                            <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                                <p class="flex-fill">Number Of Footprints</p>
+                                                <div class="flex-fill form-group">
+                                                    <input type="number" class="form-control" id="footprints-number" name="footprints_number" value={{$setting->footprints_number}} placeholder="Enter Number">
                                                 </div>
                                             </div>
                                         </div>

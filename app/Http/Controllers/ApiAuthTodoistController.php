@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoutineWatcherSetting;
 use App\Models\TodoApplication;
 use App\Models\User;
+use \RuntimeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class ApiAuthTodoistController extends Controller
 
         throw_unless(
             strlen($state) > 0 && $state === $request->state,
-            \App\Exceptions\Handler::class
+            RuntimeException::class
         );
         $access_token_response = Http::asForm()->post('https://todoist.com/oauth/access_token', [
             'code' => $request->code,
