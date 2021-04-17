@@ -68,4 +68,9 @@ class TodoUpdateOrder
         return $this->getTagsToAdd() != $this->getTagsToRemove(); //todo: ちゃんと作る
     }
 
+    public function existsAnyUpdate(): bool
+    {
+        return $this->existsNameUpdate() || $this->existsTagUpdate();
+    }
+
 }
