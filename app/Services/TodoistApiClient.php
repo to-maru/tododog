@@ -16,6 +16,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     protected const API_GET_ACTIVITY_LOGS = '/activity/get';
     protected const COMMAND_TO_UPDATE_TODO = 'item_update';
     protected const COMMAND_TO_ADD_TAG = 'label_add';
+    protected const COMMAND_TO_DELETE_TAG = 'label_delete';
 
 
     public function __construct(
@@ -65,6 +66,15 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return $this->postApiToAddTag($name);
     }
 
+    public function deleteTags(array $ids): array
+    {
+        $commands = array_map(function (int $id) {
+            $args['id'] = $id;
+            return $this->getWriteResourceCommand(self::COMMAND_TO_DELETE_TAG, $args);
+        }, $ids);
+        return $this->postApiToWriteResources($commands);
+    }
+
     public function postApiToGetTags(): array
     {
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_SYNC, [
@@ -103,7 +113,12 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
     {
         $commands = [];
         foreach ($todo_update_orders as $todo_update_order) {
-            $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
+            if ($todo_update_order->existsAnyUpdate()) {
+                $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
+            }
+        }
+        if (empty($commands)) {
+            return [];
         }
         return $this->postApiToWriteResources($commands);
     }

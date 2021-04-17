@@ -40,6 +40,11 @@ trait TodoApplicationApiClientTrait
         return $api_client->addTag($name);
     }
 
+    public function deleteTags(TodoApplicationApiClientInterface $api_client, array $ids)
+    {
+        return $api_client->deleteTags($ids);
+    }
+
     public function getAllTodos(TodoApplicationApiClientInterface $api_client)
     {
         return $api_client->getAllTodos();
