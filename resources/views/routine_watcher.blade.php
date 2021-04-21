@@ -86,6 +86,16 @@
                                 <form method="POST">
                                     @csrf
                                     <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
+                                        <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Auto Run (Daily)</div>
+                                        <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                                            <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                                <p class="flex-fill">Enable Autorun</p>
+                                                <div class="flex-fill custom-control custom-switch">
+                                                    <input class="custom-control-input" type="checkbox" id="autorun-enabled" name="autorun_enabled" {{$setting->autorun_enabled ? 'checked="checked"' : ''}}>
+                                                    <label class="custom-control-label" for="autorun-enabled"></label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Filter</div>
                                         <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">

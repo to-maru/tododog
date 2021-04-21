@@ -44,6 +44,7 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting->cheat_day_enabled = $request->cheat_day_enabled === 'on';
         $routine_watcher_setting->cheat_day_interval = $request->cheat_day_interval;
         $routine_watcher_setting->footprints_number = $request->footprints_number;
+        $routine_watcher_setting->autorun_enabled = $request->autorun_enabled === 'on';
         $routine_watcher_setting->save();
 
         return redirect()->action($this::class . '@' . 'show');

@@ -19,7 +19,7 @@ use App\Services\Analyzer;
 
 class Cleaner implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Batchable;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
         public User $user
