@@ -19,9 +19,9 @@ class Synchronizer
 
     }
 
-    public function syncronizeTodo($todo_application)
+    public function pullTodosAndDonetimes($todo_application)
     {
-        $todos = $this->getAllTodos($this->api_client);
+        $todos = $this->fetchAllTodos($this->api_client);
         foreach ($todos as $todo) {
             Todo::updateOrCreate(
                 ['todo_application_id' => $todo_application->id, 'local_id' => $todo['id']],
@@ -29,7 +29,7 @@ class Synchronizer
             ); //todo:各todo_appで共通化したい 'name' => $todo['name']的な
         }
 
-        $todo_done_datetimes = $this->getAllTodoDonetimes($this->api_client);
+        $todo_done_datetimes = $this->fetchAllTodoDonetimes($this->api_client);
         foreach ($todo_done_datetimes as $todo_done_datetime) {
             $todo = Todo::firstwhere('local_id',$todo_done_datetime['object_id']);
             if (!is_null($todo)) {

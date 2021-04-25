@@ -29,12 +29,12 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* Projects */
 
-    public function getAllProjects(): array //fetch
+    public function fetchAllProjects(): array //fetch
     {
         return $this->postApiToGetProjects()['projects'];
     }
 
-    public function getAllProjectNames(): array //fetch
+    public function fetchAllProjectNames(): array //fetch
     {
         return array_column($this->postApiToGetProjects()['projects'],'name','id');
     }
@@ -51,26 +51,26 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* Tags */
 
-    public function getAllTagNames(): array //fetch
+    public function fetchAllTagNames(): array //fetch
     {
         return array_column($this->postApiToGetTags()['labels'],'name','id');
     }
 
-    public function getAllTags(): array //fetch
+    public function fetchAllTags(): array //fetch
     {
         return $this->postApiToGetTags();
     }
 
-    public function addTag(string $name): int
+    public function pushNewTag(string $name): int
     {
         return $this->postApiToAddTag($name);
     }
 
-    public function deleteTags(array $ids): array
+    public function pushDeletedTags(array $ids): array
     {
         $commands = array_map(function (int $id) {
             $args['id'] = $id;
-            return $this->getWriteResourceCommand(self::COMMAND_TO_DELETE_TAG, $args);
+            return $this->makeWriteResourceCommand(self::COMMAND_TO_DELETE_TAG, $args);
         }, $ids);
         return $this->postApiToWriteResources($commands);
     }
@@ -91,7 +91,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'name' => $name,
         );
         $temp_id = (string) Str::uuid();
-        $command = $this->getWriteResourceCommand('label_add', $args, $temp_id);
+        $command = $this->makeWriteResourceCommand('label_add', $args, $temp_id);
         $response = $this->postApiToWriteResources(array($command));
         logger(print_r($response,true));
         return $response['temp_id_mapping'][$temp_id];
@@ -99,22 +99,22 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* Todos */
 
-    public function getAllTodoNames(): array //fetch
+    public function fetchAllTodoNames(): array //fetch
     {
         return array_column($this->postApiToGetTodos()['items'],'content','id');
     }
 
-    public function getAllTodos(): array //fetch
+    public function fetchAllTodos(): array //fetch
     {
         return $this->postApiToGetTodos()['items'];
     }
 
-    public function updateTodos(array $todo_update_orders): array
+    public function pushTodos(array $todo_update_orders): array
     {
         $commands = [];
         foreach ($todo_update_orders as $todo_update_order) {
             if ($todo_update_order->existsAnyUpdate()) {
-                $commands = array_merge($commands, $this->getUpdateItemCommands($todo_update_order));
+                $commands = array_merge($commands, $this->makeUpdateItemCommands($todo_update_order));
             }
         }
         if (empty($commands)) {
@@ -135,7 +135,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
 
     /* ActivityLogs */
 
-    public function getAllTodoDonetimes(): array //fetch
+    public function fetchAllTodoDonetimes(): array //fetch
     {
         $event_type = 'completed';
         $from_date = new Carbon($this->todo_application->origin_created_at);
@@ -202,7 +202,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return json_decode($response->body(),true);
     }
 
-    private function getWriteResourceCommand(string $type, array $args, string $temp_id = null): array //build
+    private function makeWriteResourceCommand(string $type, array $args, string $temp_id = null): array //build
     {
         $command = array (
             'type' => $type,
@@ -216,7 +216,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         return $command;
     }
 
-    private function getUpdateItemCommands(TodoUpdateOrder $todo_update_order): array //generateWriteResourceCommandFromTodoUpdateOrder
+    private function makeUpdateItemCommands(TodoUpdateOrder $todo_update_order): array //generateWriteResourceCommandFromTodoUpdateOrder
     {
         $commands = [];
 
@@ -229,7 +229,7 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         if ($todo_update_order->existsTagUpdate()) {
             $args['labels'] = $todo_update_order->tag_ids;
         }
-        $commands[] = $this->getWriteResourceCommand(self::COMMAND_TO_UPDATE_TODO, $args);
+        $commands[] = $this->makeWriteResourceCommand(self::COMMAND_TO_UPDATE_TODO, $args);
         return $commands;
     }
 

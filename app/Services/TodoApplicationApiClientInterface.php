@@ -6,9 +6,9 @@ namespace App\Services;
 
 interface TodoApplicationApiClientInterface
 {
-    public function getAllProjects(): array;
-    public function getAllTags(): array;
-    public function getAllTodos(): array;
-    public function getAllTodoDonetimes(): array;
-    public function updateTodos(array $todo_update_orders): array;
+    public function fetchAllProjects(): array;
+    public function fetchAllTags(): array;
+    public function fetchAllTodos(): array;
+    public function fetchAllTodoDonetimes(): array;
+    public function pushTodos(array $todo_update_orders): array;
 }
