@@ -15,53 +15,53 @@ trait TodoApplicationApiClientTrait
         return new TodoistApiClient($todo_application->access_token, $todo_application);
     }
 
-    public function getAllProjects(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllProjects(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllProjects();
+        return $api_client->fetchAllProjects();
     }
 
-    public function getAllProjectNames(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllProjectNames(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllProjectNames();
+        return $api_client->fetchAllProjectNames();
     }
 
-    public function getAllTagNames(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllTagNames(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllTagNames();
+        return $api_client->fetchAllTagNames();
     }
 
-    public function getAllTags(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllTags(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllTags();
+        return $api_client->fetchAllTags();
     }
 
-    public function addTag(TodoApplicationApiClientInterface $api_client, string $name)
+    public function pushNewTag(TodoApplicationApiClientInterface $api_client, string $name)
     {
-        return $api_client->addTag($name);
+        return $api_client->pushNewTag($name);
     }
 
-    public function deleteTags(TodoApplicationApiClientInterface $api_client, array $ids)
+    public function pushDeletedTags(TodoApplicationApiClientInterface $api_client, array $ids)
     {
-        return $api_client->deleteTags($ids);
+        return $api_client->pushDeletedTags($ids);
     }
 
-    public function getAllTodos(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllTodos(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllTodos();
+        return $api_client->fetchAllTodos();
     }
 
-    public function getAllTodoNames(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllTodoNames(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllTodoNames();
+        return $api_client->fetchAllTodoNames();
     }
 
-    public function getAllTodoDonetimes(TodoApplicationApiClientInterface $api_client)
+    public function fetchAllTodoDonetimes(TodoApplicationApiClientInterface $api_client)
     {
-        return $api_client->getAllTodoDonetimes();
+        return $api_client->fetchAllTodoDonetimes();
     }
 
-    public function updateTodos(TodoApplicationApiClientInterface $api_client, array $todo_update_orders)
+    public function pushTodos(TodoApplicationApiClientInterface $api_client, array $todo_update_orders)
     {
-        return $api_client->updateTodos($todo_update_orders);
+        return $api_client->pushTodos($todo_update_orders);
     }
 }

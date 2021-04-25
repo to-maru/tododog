@@ -23,8 +23,8 @@ class RoutineWatcherController extends Controller
         $routine_watcher_setting->tag_ids = json_decode($routine_watcher_setting->tag_ids);
         $api_client = $this->getApiClient($user->todo_application);
 
-        $projects = $this->getAllProjectNames($api_client);
-        $tags = $this->getAllTagNames($api_client);
+        $projects = $this->fetchAllProjectNames($api_client);
+        $tags = $this->fetchAllTagNames($api_client);
 
         return view('routine_watcher', [
             'user' => $user,

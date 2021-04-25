@@ -33,10 +33,10 @@ class Cleaner implements ShouldQueue
     )
     {
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
-        $synchronizer->syncronizeTodo($this->user->todo_application);
+        $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
 
-        $all_created_tags = $notifier->getAllCreatedTags();
+        $all_created_tags = $notifier->searchAllCreatedTags();
         $todos = Todo::where('todo_application_id', $this->user->todo_application->id)->get();
         $todo_update_orders = $todos->map(function ($todo) use ($all_created_tags){
             $todo_update_order = new TodoUpdateOrder($todo->id);
@@ -45,9 +45,9 @@ class Cleaner implements ShouldQueue
             return $todo_update_order;
         })->toArray();
 
-        $response = $notifier->updateTodos($notifier->api_client, $todo_update_orders);
-        //$response = $notifier->deleteTags($notifier->api_client, array_keys($all_created_tags));
+        $response = $notifier->pushTodos($notifier->api_client, $todo_update_orders);
+        //$response = $notifier->pushDeletedTags($notifier->api_client, array_keys($all_created_tags));
         //scope=>data:delete が必要.
-        $synchronizer->syncronizeTodo($this->user->todo_application);
+        $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
     }
 }
