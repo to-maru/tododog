@@ -78,21 +78,24 @@
                         <div class="m-5">
                             <div class="pr-sm-5 d-flex flex-row justify-content-between align-items-end">
                                 <h1>Routine Watcher</h1>
-                                <div>
-                                    <a href="/routine_watcher/run" class="btn btn-dark" type="submit">Manually Run</a>
-                                </div>
                             </div>
                             <div class="mt-5">
                                 <form method="POST">
                                     @csrf
                                     <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
-                                        <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Auto Run (Daily)</div>
+                                        <div class="p-sm-2 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Run</div>
                                         <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                                <p class="flex-fill">Enable Autorun</p>
-                                                <div class="flex-fill custom-control custom-switch">
+                                                <p class="flex-fill">Autorun (Daily)</p>
+                                                <div class="custom-control custom-switch">
                                                     <input class="custom-control-input" type="checkbox" id="autorun-enabled" name="autorun_enabled" {{$setting->autorun_enabled ? 'checked="checked"' : ''}}>
                                                     <label class="custom-control-label" for="autorun-enabled"></label>
+                                                </div>
+                                            </div>
+                                            <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                                <p class="flex-fill">Manually run</p>
+                                                <div>
+                                                    <a href="/routine_watcher/run" class="btn btn-dark" type="submit">Run</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,7 +135,7 @@
                                         <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
                                             <div class="p-sm-1 d-flex flex-row justify-content-between">
                                                 <p class="flex-fill">CheatDay System</p>
-                                                <div class="flex-fill custom-control custom-switch">
+                                                <div class="custom-control custom-switch">
                                                     <input class="custom-control-input" type="checkbox" id="cheat-day-enabled" name="cheat_day_enabled" {{$setting->cheat_day_enabled ? 'checked="checked"' : ''}}>
                                                     <label class="custom-control-label" for="cheat-day-enabled">
 {{--                                                        If it's enabled, the running days will not be reset even if you take a break once in a while.--}}
@@ -152,8 +155,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <input class="btn btn-dark float-right" type="submit" value="Save">
+                                        <div class="p-sm-2 mt-8 border-bottom border-dark" style="font-family: 'Hiragino Kaku Gothic Std W8';">Unwatch</div>
+                                        <div class="p-sm-2">
+                                            <a href="/routine_watcher/reset" class="btn btn-warning float-right" type="submit">Clear result</a>
+                                        </div>
                                     </div>
-                                    <input class="btn btn-dark" type="submit" value="Save">
                                 </form>
                             </div>
                         </div>
