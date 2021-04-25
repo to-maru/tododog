@@ -36,7 +36,7 @@ class Cleaner implements ShouldQueue
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
 
-        $all_created_tags = $notifier->searchAllCreatedTags();
+        $all_created_tags = $notifier->fetchAllCreatedTags();
         $todos = Todo::where('todo_application_id', $this->user->todo_application->id)->get();
         $todo_update_orders = $todos->map(function ($todo) use ($all_created_tags){
             $todo_update_order = new TodoUpdateOrder($todo->id);

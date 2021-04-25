@@ -25,7 +25,7 @@ class Notifier
 
     public function makeTodoUpdateOrders($results): array
     {
-        $this->all_created_tags = $this->searchAllCreatedTags();
+        $this->all_created_tags = $this->fetchAllCreatedTags();
         $todo_update_orders = [];
         foreach ($results as $todo_id => $result) {
             $todo_update_orders[] = $this->makeTodoUpdateOrder($todo_id, $result);
@@ -98,7 +98,7 @@ class Notifier
         return $achievements;
     }
 
-    public function searchAllCreatedTags(): array
+    public function fetchAllCreatedTags(): array
     {
         $tags = $this->fetchAllTagNames($this->api_client);
         return array_filter($tags, function($tag_name) {
