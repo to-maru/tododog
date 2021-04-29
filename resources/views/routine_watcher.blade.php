@@ -35,7 +35,7 @@
                 box-shadow: 0 0 1px rgba(255,255,255,.5);
             }
         </style>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">

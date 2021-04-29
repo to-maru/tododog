@@ -23,7 +23,7 @@
                 font-family: 'Hiragino Kaku Gothic Std W8';
             }
         </style>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">
