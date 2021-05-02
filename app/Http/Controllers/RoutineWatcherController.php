@@ -53,14 +53,14 @@ class RoutineWatcherController extends Controller
     public function run(Request $request)
     {
         $user = $request->user();
-        Watchdog::dispatchSync($user);
+        Watchdog::dispatch($user);
         return redirect()->action($this::class . '@' . 'show');
     }
 
     public function clean(Request $request)
     {
         $user = $request->user();
-        Cleaner::dispatchSync($user);
+        Cleaner::dispatch($user);
         return redirect()->action($this::class . '@' . 'show');
     }
 }
