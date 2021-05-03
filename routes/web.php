@@ -14,12 +14,14 @@ use App\Http\Controllers;
 |
 */
 
-Route::get('/', Controllers\HomeController::class)->name('login');
-Route::get('/api/auth/todoist', Controllers\ApiAuthTodoistController::class . '@' . 'call');
-Route::get('/api/auth/todoist/callback', Controllers\ApiAuthTodoistController::class . '@' . 'callback');
+Route::middleware('auth.very_basic')->group(function () {
+    Route::get('/', Controllers\HomeController::class)->name('login');
+    Route::get('/api/auth/todoist', Controllers\ApiAuthTodoistController::class . '@' . 'call');
+    Route::get('/api/auth/todoist/callback', Controllers\ApiAuthTodoistController::class . '@' . 'callback');
+});
 
-Route::middleware('auth')->group(function () {
-    Route::get('/user/sign_out',Controllers\SignOutController::class)->name('logout');
+Route::middleware(['auth.very_basic', 'auth'])->group(function () {
+    Route::get('/user/sign_out', Controllers\SignOutController::class)->name('logout');
     Route::get('/routine_watcher', Controllers\RoutineWatcherController::class . '@' . 'show')->name('dashboard');
     Route::post('/routine_watcher', Controllers\RoutineWatcherController::class . '@' . 'update');
     Route::get('/routine_watcher/run', Controllers\RoutineWatcherController::class . '@' . 'run');
