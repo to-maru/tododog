@@ -15,7 +15,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "nesbot/carbon": "^2.44"
+        "nesbot/carbon": "^2.44",
+        "olssonm/l5-very-basic-auth": "^6.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
