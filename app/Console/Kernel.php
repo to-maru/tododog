@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->job(new Doghouse)->everyMinute();
+         $schedule->job(new Doghouse)
+             ->everyMinute()
+             ->sendOutputTo('storage/logs/cronResult.log');
     }
 
     /**
