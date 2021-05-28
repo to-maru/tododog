@@ -1,45 +1,69 @@
-<x-main>
-    <x-slot name="nav">
-        <div class="h-100 d-flex flex-column justify-content-between">
-            <div>
-                <div class="text-center">
-                            <span class="navbar-brand font-weight-bold mt-2 mb-5"
-                                  style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">Tododog</span>
-                </div>
-                <div>
-                    <div class="p-sm-2 pl-sm-4" style="background-color: #9E7D6C;">Routine Watcher</div>
-                    <div class="p-sm-2 pl-sm-4">Resource Watcher</div>
-                    <div class="p-sm-2 pl-sm-4">Somedays Watcher</div>
-                </div>
-            </div>
-            <div class="pb-2">
-                <div>
-                    <div class="p-sm-2 pl-sm-4">Notification</div>
-                    <div class="p-sm-2 pl-sm-4">FeedBack</div>
-                </div>
-                <div class="dropright p-sm-2 pl-sm-4 pb-sm-4">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       data-offset="-200,10">
-                        {{ $user->name }}
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Action</a>
-                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Another
-                            action</a>
-                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Something
-                            else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';"
-                           href="/user/sign_out">Sign Out</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<x-app>
+    <x-slot name="style">
+        html, body{
+        height: 100vh;
+        }
+        h1 {
+        font-family: 'Hiragino Kaku Gothic Std W8';
+        }
+        div {
+        font-family: 'Hiragino Kaku Gothic Pro W6';
+        }
+        ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+        }
+        ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0,0,0,.5);
+        box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
     </x-slot>
+{{--    <x-slot name="nav">--}}
+{{--        <div class="h-100 d-flex flex-column justify-content-between">--}}
+{{--            <div>--}}
+{{--                <div class="text-center">--}}
+{{--                            <span class="navbar-brand font-weight-bold mt-2 mb-5"--}}
+{{--                                  style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">Tododog</span>--}}
+{{--                </div>--}}
+{{--                <div>--}}
+{{--                    <div class="p-sm-2 pl-sm-4" style="background-color: #9E7D6C;">Routine Watcher</div>--}}
+{{--                    <div class="p-sm-2 pl-sm-4">Resource Watcher</div>--}}
+{{--                    <div class="p-sm-2 pl-sm-4">Somedays Watcher</div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="pb-2">--}}
+{{--                <div>--}}
+{{--                    <div class="p-sm-2 pl-sm-4">Notification</div>--}}
+{{--                    <div class="p-sm-2 pl-sm-4">FeedBack</div>--}}
+{{--                </div>--}}
+{{--                <div class="dropright p-sm-2 pl-sm-4 pb-sm-4">--}}
+{{--                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"--}}
+{{--                       data-offset="-200,10">--}}
+{{--                        {{ $user->name }}--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-menu">--}}
+{{--                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Action</a>--}}
+{{--                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Another--}}
+{{--                            action</a>--}}
+{{--                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="#">Something--}}
+{{--                            else here</a>--}}
+{{--                        <div class="dropdown-divider"></div>--}}
+{{--                        <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';"--}}
+{{--                           href="/user/sign_out">Sign Out</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </x-slot>--}}
+    <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
+        <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
+        <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
+    </nav>
     <div class="container-md">
         <div class="m-5">
             <div class="pr-sm-5 d-flex flex-row justify-content-between align-items-end">
-                <h1>Routine Watcher</h1>
+                <h1>設定</h1>
             </div>
             <div class="mt-5">
                 <form method="POST">
@@ -149,4 +173,4 @@
             </div>
         </div>
     </div>
-</x-main>
+</x-app>

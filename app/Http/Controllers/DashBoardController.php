@@ -7,7 +7,7 @@ use App\Jobs\Watchdog;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
-class RoutineWatcherController extends Controller
+class DashBoardController extends Controller
 {
     use TodoApplicationApiClientTrait;
 
@@ -26,7 +26,7 @@ class RoutineWatcherController extends Controller
         $projects = $this->fetchAllProjectNames($api_client);
         $tags = $this->fetchAllTagNames($api_client);
 
-        return view('routine_watcher', [
+        return view('dashboard', [
             'user' => $user,
             'setting' => $routine_watcher_setting,
             'projects' => $projects,
