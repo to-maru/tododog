@@ -21,7 +21,7 @@
     </x-slot>
     <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
         <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
-        <div class="dropright">
+        <div class="dropleft">
             <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                data-offset="-200,10">
                 {{ $user->name }}
@@ -43,18 +43,35 @@
             @csrf
             <div class="p-sm-0 b-sm-0">
                 <div class="p-sm-4 m-sm-0 pl-sm-5 pr-sm-5">
-                    <div class="border-dark border rounded mt-5 mb-5 p-2">
+                    <div class="border border-info rounded mt-5 mb-5 p-2">
                         <div class="d-flex flex-row justify-content-between">
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
                             <div>
-                                <a href="/settings/analysis" class="btn btn-dark"
+                                <a href="/settings/analysis" class="btn btn-info btn-sm"
                                    type="submit">Edit</a>
                             </div>
                         </div>
-                        <div>　対象のプロジェクト：　</div>
-                        <div>　対象のプロジェクト：　</div>
-                        <div>　チートデイ：　</div>
-                        <div>　足跡の表示日数：　</div>
+                        <div>
+                            <span>　対象のプロジェクト：</span>
+                            {{$setting->project_id == null ? '全てのプロジェクト' : ''}}
+                            @foreach($projects as $key => $value)
+                                {{$setting->project_id == $key ? $value : ''}}
+                            @endforeach
+                        </div>
+                        <div>
+                            <span>　対象のタグ：</span>
+                            @foreach($tags as $key => $value)
+                                {{in_array($key, $setting->tag_ids) ? $value . ' ': ''}}
+                            @endforeach
+                        </div>
+                        <div>
+                            <span>　チートデイ：</span>
+                            {{$setting->cheat_day_enabled ? "有効（{$setting->cheat_day_interval}日に1回）" : '無効'}}
+                        </div>
+                        <div>
+                            <span>　足跡の表示日数：</span>
+                            直近{{$setting->footprints_number}}日間
+                        </div>
                     </div>
                     <div class="p-sm-1 d-flex flex-row justify-content-between">
                         <div>
@@ -62,7 +79,11 @@
                             <div>設定を有効にすると1日１回分析を実行します</div>
                         </div>
                         <div>
-                            <a href="/app/autorun/?enable=true" class="btn btn-dark" type="submit">有効化</a>
+                        @if($setting->autorun_enabled)
+                            <a href="/app/autorun/?enable=false" class="btn btn-dark" type="submit">無効にする</a>
+                        @else
+                            <a href="/app/autorun/?enable=true" class="btn btn-outline-dark" type="submit">有効にする</a>
+                        @endif
                         </div>
                     </div>
                     <div class="p-sm-1 pt-sm-4 pb-sm-4 d-flex flex-row justify-content-between">
@@ -71,10 +92,10 @@
                             <div>実行ボタンを押すと即座に分析を実行します</div>
                         </div>
                         <div>
-                            <a href="/app/run" class="btn btn-dark" type="submit">実行</a>
+                            <a href="/app/run" class="btn btn-dark" type="submit">実行する</a>
                         </div>
                     </div>
-                    <div class="text-right">最終実行日時　2021/05/31</div>
+                    <div class="text-right">最終実行日時　{{$synced_at ?? '---- / -- / --'}}</div>
                     <div class="border-dark border-top p-sm-1 pt-sm-2 mt-sm-5 mb-sm-5 d-flex flex-row justify-content-between">
                         <div>
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析結果の消去</div>
@@ -83,7 +104,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="/app/revert" class="btn btn-warning"
+                            <a href="/app/revert" class="btn btn-danger"
                                type="submit">分析結果を消去する</a>
                         </div>
                     </div>

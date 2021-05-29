@@ -70,26 +70,6 @@
                     @csrf
                     <div class="p-sm-0 b-sm-0 pr-sm-5 br-sm-5">
                         <div class="p-sm-2 border-bottom border-dark"
-                             style="font-family: 'Hiragino Kaku Gothic Std W8';">Run
-                        </div>
-                        <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
-                            <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                <p class="flex-fill">Autorun (Daily)</p>
-                                <div class="custom-control custom-switch">
-                                    <input class="custom-control-input" type="checkbox" id="autorun-enabled"
-                                           name="autorun_enabled" {{$setting->autorun_enabled ? 'checked="checked"' : ''}}>
-                                    <label class="custom-control-label" for="autorun-enabled"></label>
-                                </div>
-                            </div>
-                            <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                <p class="flex-fill">Manually run</p>
-                                <div>
-                                    <a href="/routine_watcher/run" class="btn btn-dark"
-                                       type="submit">Run</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-sm-2 border-bottom border-dark"
                              style="font-family: 'Hiragino Kaku Gothic Std W8';">Filter
                         </div>
                         <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
@@ -161,13 +141,6 @@
                             </div>
                         </div>
                         <input class="btn btn-dark float-right" type="submit" value="Save">
-                        <div class="p-sm-2 mt-8 border-bottom border-dark"
-                             style="font-family: 'Hiragino Kaku Gothic Std W8';">Unwatch
-                        </div>
-                        <div class="p-sm-2">
-                            <a href="/routine_watcher/reset" class="btn btn-warning float-right"
-                               type="submit">Clear result</a>
-                        </div>
                     </div>
                 </form>
             </div>
