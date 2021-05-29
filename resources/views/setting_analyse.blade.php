@@ -19,10 +19,7 @@
         box-shadow: 0 0 1px rgba(255,255,255,.5);
         }
     </x-slot>
-    <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
-        <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
-        <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
-    </nav>
+    <x-nav :user="$user" />
     <div class="container-md">
         <div class="m-5">
             <div class="pb-sm-3 d-flex flex-row justify-content-between align-items-end">
