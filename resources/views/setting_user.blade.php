@@ -21,7 +21,7 @@
     </x-slot>
     <x-nav :user="$user" />
     <div class="container-md">
-        <div class="m-5">
+        <div class="m-5 pb-5">
             <div class="pb-sm-3 d-flex flex-row justify-content-between align-items-end">
                 <h1>設定</h1>
             </div>
