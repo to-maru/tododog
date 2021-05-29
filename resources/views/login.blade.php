@@ -1,12 +1,12 @@
 <x-app>
     <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
         <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
-        <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
+        <a class="btn btn-danger" href="/api/auth/todoist/call">Login with Todoist</a>
     </nav>
     <div class="text-center pt-5 pb-5">
         <h1 class="display-4" style="font-family: 'Hiragino Kaku Gothic Std W8';">tododogを飼って<br>楽しく習慣を身につけよう</h1>
         <p class="pt-3 font-weight-bold">tododogはTodoアプリと連携することで行動データを分析し習慣化の支援を行うツールです</p>
-        <a class="btn btn-danger" href="/api/auth/todoist">Login with Todoist</a>
+        <a class="btn btn-danger" href="/api/auth/todoist/call">Login with Todoist</a>
     </div>
     <div class="text-center pt-5 pb-5">
         <img src="/images/app_abstruct.png" width="900">

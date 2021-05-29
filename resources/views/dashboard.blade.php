@@ -47,7 +47,7 @@
                         <div class="d-flex flex-row justify-content-between">
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
                             <div>
-                                <a href="/routine_watcher/run" class="btn btn-dark"
+                                <a href="/settings/analysis" class="btn btn-dark"
                                    type="submit">Edit</a>
                             </div>
                         </div>
@@ -61,10 +61,8 @@
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">自動実行</div>
                             <div>設定を有効にすると1日１回分析を実行します</div>
                         </div>
-                        <div class="custom-control custom-switch">
-                            <input class="custom-control-input" type="checkbox" id="autorun-enabled"
-                                   name="autorun_enabled" {{$setting->autorun_enabled ? 'checked="checked"' : ''}}>
-                            <label class="custom-control-label" for="autorun-enabled"></label>
+                        <div>
+                            <a href="/app/autorun/?enable=true" class="btn btn-dark" type="submit">有効化</a>
                         </div>
                     </div>
                     <div class="p-sm-1 pt-sm-4 pb-sm-4 d-flex flex-row justify-content-between">
@@ -73,8 +71,7 @@
                             <div>実行ボタンを押すと即座に分析を実行します</div>
                         </div>
                         <div>
-                            <a href="/routine_watcher/run" class="btn btn-dark"
-                               type="submit">Run</a>
+                            <a href="/app/run" class="btn btn-dark" type="submit">実行</a>
                         </div>
                     </div>
                     <div class="text-right">最終実行日時　2021/05/31</div>
@@ -86,7 +83,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="/routine_watcher/reset" class="btn btn-warning"
+                            <a href="/app/revert" class="btn btn-warning"
                                type="submit">分析結果を消去する</a>
                         </div>
                     </div>

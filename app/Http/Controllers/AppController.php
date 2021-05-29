@@ -7,7 +7,7 @@ use App\Jobs\Watchdog;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
-class DashBoardController extends Controller
+class AppController extends Controller
 {
     use TodoApplicationApiClientTrait;
 
@@ -57,7 +57,16 @@ class DashBoardController extends Controller
         return redirect()->action($this::class . '@' . 'show');
     }
 
-    public function clean(Request $request)
+    public function autorun(Request $request)
+    {
+        $user = $request->user();
+        $routine_watcher_setting = $user->routine_watcher_setting;
+        $routine_watcher_setting->autorun_enabled = $request->enable;
+        $routine_watcher_setting->save();
+        return redirect()->action($this::class . '@' . 'show');
+    }
+
+    public function revert(Request $request)
     {
         $user = $request->user();
         Cleaner::dispatch($user);
