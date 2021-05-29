@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input class="btn btn-dark float-right" type="submit" value="Save">
+                            <input class="btn btn-dark float-right" type="submit" value="設定を保存する">
                         </div>
                     </form>
                 </div>
