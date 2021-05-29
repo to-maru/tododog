@@ -34,10 +34,10 @@ class Doghouse implements ShouldQueue
      */
     public function handle()
     {
-        $users = User::with('routine_watcher_setting')
+        $users = User::with('user_setting_analysis')
             ->get()
             ->filter(function ($user) {
-                return $user->routine_watcher_setting->autorun_enabled;
+                return $user->user_setting_analysis->autorun_enabled;
             });
 
         if ($users->isEmpty()) {

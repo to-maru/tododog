@@ -18,9 +18,9 @@ class AppController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-        $routine_watcher_setting = $user->routine_watcher_setting;
+        $user_setting_analysis = $user->user_setting_analysis;
 
-        $routine_watcher_setting->tag_ids = json_decode($routine_watcher_setting->tag_ids);
+        $user_setting_analysis->tag_ids = json_decode($user_setting_analysis->tag_ids);
         $api_client = $this->getApiClient($user->todo_application);
 
         $projects = $this->fetchAllProjectNames($api_client);
@@ -28,7 +28,7 @@ class AppController extends Controller
 
         return view('dashboard', [
             'user' => $user,
-            'setting' => $routine_watcher_setting,
+            'setting' => $user_setting_analysis,
             'projects' => $projects,
             'tags' => $tags,
         ]);
@@ -37,15 +37,15 @@ class AppController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $routine_watcher_setting = $user->routine_watcher_setting;
-        $routine_watcher_setting->project_id = $request->project_id;
-        $routine_watcher_setting->tag_ids = json_encode($request->tag_ids);
-        $routine_watcher_setting->project_id = $request->project_id;
-        $routine_watcher_setting->cheat_day_enabled = $request->cheat_day_enabled === 'on';
-        $routine_watcher_setting->cheat_day_interval = $request->cheat_day_interval;
-        $routine_watcher_setting->footprints_number = $request->footprints_number;
-        $routine_watcher_setting->autorun_enabled = $request->autorun_enabled === 'on';
-        $routine_watcher_setting->save();
+        $user_setting_analysis = $user->user_setting_analysis;
+        $user_setting_analysis->project_id = $request->project_id;
+        $user_setting_analysis->tag_ids = json_encode($request->tag_ids);
+        $user_setting_analysis->project_id = $request->project_id;
+        $user_setting_analysis->cheat_day_enabled = $request->cheat_day_enabled === 'on';
+        $user_setting_analysis->cheat_day_interval = $request->cheat_day_interval;
+        $user_setting_analysis->footprints_number = $request->footprints_number;
+        $user_setting_analysis->autorun_enabled = $request->autorun_enabled === 'on';
+        $user_setting_analysis->save();
 
         return redirect()->action($this::class . '@' . 'show');
     }
@@ -60,9 +60,9 @@ class AppController extends Controller
     public function autorun(Request $request)
     {
         $user = $request->user();
-        $routine_watcher_setting = $user->routine_watcher_setting;
-        $routine_watcher_setting->autorun_enabled = $request->enable;
-        $routine_watcher_setting->save();
+        $user_setting_analysis = $user->user_setting_analysis;
+        $user_setting_analysis->autorun_enabled = $request->enable;
+        $user_setting_analysis->save();
         return redirect()->action($this::class . '@' . 'show');
     }
 
