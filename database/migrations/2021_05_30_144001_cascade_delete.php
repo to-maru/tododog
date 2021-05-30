@@ -14,13 +14,13 @@ class CascadeDelete extends Migration
     public function up()
     {
         Schema::table('user_setting_analyses', function (Blueprint $table) {
-            $table->dropForeign('user_setting_analyses_id_foreign');
+            $table->dropForeign('routine_watcher_settings_id_foreign');
 //            $table->foreignId('id')->constrained('users')->cascadeOnDelete()->change();
             $table->foreign('id')->references('id')->on('users')->cascadeOnDelete()->change();
         });
 
         Schema::table('user_setting_notifications', function (Blueprint $table) {
-            $table->dropForeign('user_setting_notifications_user_id_foreign');
+            $table->dropForeign('notifiers_user_id_foreign');
 //            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->change();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete()->change();
         });
