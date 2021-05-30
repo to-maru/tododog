@@ -81,13 +81,36 @@
                     <div class="border-dark border-top p-sm-1 pt-sm-2 mt-sm-5 mb-sm-5 d-flex flex-row justify-content-between">
                         <div>
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析結果の消去</div>
-                            <div>Todoアプリからtododogが追加した分析結果を消去します。<br>
-                                分析結果を再び表示するためには再度分析を実行してください。
-                            </div>
+                            <div>Todoアプリからtododogが追加した分析結果を消去します。</div>
                         </div>
-                        <div>
-                            <a href="/app/revert" class="btn btn-danger"
-                               type="submit">分析結果を消去する</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#exampleModal">
+                            分析結果を消去する
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">分析結果を消去しますか？</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+                                            Todoアプリからtododogが追加した分析結果（追記された文言）を消去します。
+                                        </div>
+                                        <div>
+                                            分析結果を再び表示するためには再度分析を実行してください。
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                        <a class="btn btn-danger" href="/app/revert">分析結果を消去する</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
