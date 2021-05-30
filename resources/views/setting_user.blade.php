@@ -51,11 +51,11 @@
                                                name="name" value={{$errors->has('name') ? old('name') : $user->name}}>
                                     </div>
                                 </div>
+                                @error('name')
                                 <div class="text-right text-danger">
-                                    @error('name')
                                     {{ $message }}
-                                    @enderror
                                 </div>
+                                @enderror
                                 <div class="float-right">
                                     <input class="btn btn-dark" type="submit" value="ユーザー情報を保存する">
                                 </div>

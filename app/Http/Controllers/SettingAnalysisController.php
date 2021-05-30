@@ -39,11 +39,9 @@ class SettingAnalysisController extends Controller
         $user_setting_analysis = $user->user_setting_analysis;
         $user_setting_analysis->project_id = $request->project_id;
         $user_setting_analysis->tag_ids = json_encode($request->tag_ids);
-        $user_setting_analysis->project_id = $request->project_id;
         $user_setting_analysis->cheat_day_enabled = $request->cheat_day_enabled === 'on';
         $user_setting_analysis->cheat_day_interval = $request->cheat_day_interval;
         $user_setting_analysis->footprints_number = $request->footprints_number;
-        $user_setting_analysis->autorun_enabled = $request->autorun_enabled === 'on';
         $user_setting_analysis->save();
 
         session()->flash('msg_success', '設定を更新しました。');
