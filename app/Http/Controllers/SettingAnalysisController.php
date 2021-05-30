@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\Cleaner;
-use App\Jobs\Watchdog;
+use App\Http\Requests\SettingsAnalysisPostRequest;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -34,7 +33,7 @@ class SettingAnalysisController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(SettingsAnalysisPostRequest $request)
     {
         $user = $request->user();
         $user_setting_analysis = $user->user_setting_analysis;
@@ -47,20 +46,7 @@ class SettingAnalysisController extends Controller
         $user_setting_analysis->autorun_enabled = $request->autorun_enabled === 'on';
         $user_setting_analysis->save();
 
-        return redirect()->action($this::class . '@' . 'show');
-    }
-
-    public function run(Request $request)
-    {
-        $user = $request->user();
-        Watchdog::dispatch($user);
-        return redirect()->action($this::class . '@' . 'show');
-    }
-
-    public function clean(Request $request)
-    {
-        $user = $request->user();
-        Cleaner::dispatch($user);
+        session()->flash('msg_success', '設定を更新しました。');
         return redirect()->action($this::class . '@' . 'show');
     }
 }

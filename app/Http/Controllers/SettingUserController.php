@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\Cleaner;
-use App\Jobs\Watchdog;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -43,20 +41,14 @@ class SettingUserController extends Controller
         $user->name = $validated['name'];
         $user->save();
 
+        session()->flash('msg_success', '設定を更新しました。');
         return redirect()->action($this::class . '@' . 'show');
     }
 
-    public function run(Request $request)
+    public function delete(Request $request)
     {
-        $user = $request->user();
-        Watchdog::dispatch($user);
-        return redirect()->action($this::class . '@' . 'show');
-    }
-
-    public function clean(Request $request)
-    {
-        $user = $request->user();
-        Cleaner::dispatch($user);
-        return redirect()->action($this::class . '@' . 'show');
+        //user delete
+        //logout
+        //redirect
     }
 }
