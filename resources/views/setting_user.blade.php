@@ -37,9 +37,28 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-warning" role="alert">
-                        今後追加予定
-                    </div>
+                    <form method="POST">
+                        @csrf
+                        <div class="p-sm-0 b-sm-0 pr-sm-5 ml-sm-5">
+                            <div class="p-sm-2 border-bottom border-dark"
+                                 style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー設定
+                            </div>
+                            <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                                <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <p class="flex-fill">ユーザー名</p>
+                                    <div class="flex-fill form-group  row justify-content-end">
+                                        <input type="text" class="form-control col-9" id="cheat-day-interval"
+                                               name="name" value={{$user->name}}>
+                                    </div>
+                                </div>
+                                <input class="btn btn-dark float-right" type="submit" value="ユーザー情報を保存する">
+                            </div>
+                            <div class="p-sm-2 mt-5 mb-3 border-bottom border-dark"
+                                 style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー削除
+                            </div>
+                            <a href="./user" class="btn btn-danger float-right" type="submit">ユーザー情報を消去する</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
