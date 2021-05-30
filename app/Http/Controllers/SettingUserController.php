@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 use Illuminate\Support\Facades\Auth;
@@ -48,8 +49,10 @@ class SettingUserController extends Controller
 
     public function delete(Request $request)
     {
+        $user = $request->user();
+        $user_id = $user->id;
         Auth::logout();
-        //todo: user delete.
+        User::destroy($user_id);
         return redirect()->route('login');
     }
 }
