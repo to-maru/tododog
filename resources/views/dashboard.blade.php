@@ -42,9 +42,13 @@
                         </div>
                         <div>
                             <span>　対象のタグ：</span>
-                            @foreach($tags as $key => $value)
-                                {{in_array($key, $setting->tag_ids) ? $value . ' ': ''}}
-                            @endforeach
+                            @if(!empty($setting->tag_ids))
+                                @foreach($tags as $key => $value)
+                                    {{in_array($key, $setting->tag_ids) ? $value . ' ': ''}}
+                                @endforeach
+                            @else
+                                指定無し
+                            @endif
                         </div>
                         <div>
                             <span>　チートデイ：</span>

@@ -51,7 +51,11 @@ class SettingUserController extends Controller
     {
         $user = $request->user();
         $user_id = $user->id;
+
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         User::destroy($user_id);
         return redirect()->route('login');
     }

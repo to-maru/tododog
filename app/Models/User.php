@@ -46,4 +46,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserSettingNotification::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($user) {
+            $user->todo_application()->delete();
+            $user->user_setting_analysis()->delete();
+            $user->user_setting_notifications()->delete();
+        });
+    }
 }
