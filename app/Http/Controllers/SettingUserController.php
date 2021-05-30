@@ -37,7 +37,10 @@ class SettingUserController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-        $user->name = $request->name;
+        $validated = $request->validate([
+            'name' => 'required|string|between:4,32',
+        ]);
+        $user->name = $validated['name'];
         $user->save();
 
         return redirect()->action($this::class . '@' . 'show');

@@ -48,12 +48,19 @@
                                     <p class="flex-fill">ユーザー名</p>
                                     <div class="flex-fill form-group  row justify-content-end">
                                         <input type="text" class="form-control col-9" id="cheat-day-interval"
-                                               name="name" value={{$user->name}}>
+                                               name="name" value={{$errors->has('name') ? old('name') : $user->name}}>
                                     </div>
                                 </div>
-                                <input class="btn btn-dark float-right" type="submit" value="ユーザー情報を保存する">
+                                <div class="text-right text-danger">
+                                    @error('name')
+                                    {{ $message }}
+                                    @enderror
+                                </div>
+                                <div class="float-right">
+                                    <input class="btn btn-dark" type="submit" value="ユーザー情報を保存する">
+                                </div>
                             </div>
-                            <div class="p-sm-2 mt-5 mb-3 border-bottom border-dark"
+                            <div class="p-sm-2 mt-5 pt-5 mb-3 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー削除
                             </div>
                             <a href="./user" class="btn btn-danger float-right" type="submit">ユーザー情報を消去する</a>
