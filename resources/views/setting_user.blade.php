@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                                            <a class="btn btn-danger" href="/">ユーザーの全情報を消去する</a>
+                                            <a class="btn btn-danger" href="/settings/user/delete">ユーザーの全情報を消去する</a>
                                         </div>
                                     </div>
                                 </div>

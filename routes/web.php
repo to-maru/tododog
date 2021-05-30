@@ -31,4 +31,5 @@ Route::middleware(['auth.very_basic', 'auth'])->group(function () {
     Route::post('/settings/analysis', Controllers\SettingAnalysisController::class . '@' . 'update');
     Route::get('/settings/user', Controllers\SettingUserController::class . '@' . 'show');
     Route::post('/settings/user', Controllers\SettingUserController::class . '@' . 'update');
+    Route::get('/settings/user/delete', Controllers\SettingUserController::class . '@' . 'delete');
 });

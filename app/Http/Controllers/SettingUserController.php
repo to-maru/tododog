@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
+use Illuminate\Support\Facades\Auth;
 
 class SettingUserController extends Controller
 {
@@ -47,8 +48,8 @@ class SettingUserController extends Controller
 
     public function delete(Request $request)
     {
-        //user delete
-        //logout
-        //redirect
+        Auth::logout();
+        //todo: user delete.
+        return redirect()->route('login');
     }
 }
