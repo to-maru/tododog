@@ -39,7 +39,8 @@ class AppController extends Controller
     {
         $user = $request->user();
         Watchdog::dispatch($user);
-        return redirect()->action($this::class . '@' . 'show'); //todo: messageを表示させたい
+        session()->flash('msg_success', '分析を開始します。');
+        return redirect()->action($this::class . '@' . 'show');
     }
 
     public function autorun(Request $request)
@@ -48,13 +49,20 @@ class AppController extends Controller
         $user_setting_analysis = $user->user_setting_analysis;
         $user_setting_analysis->autorun_enabled = $request->enable;
         $user_setting_analysis->save();
-        return redirect()->action($this::class . '@' . 'show'); //todo: messageを表示させたい
+        $user_setting_analysis->refresh();
+        if ($user_setting_analysis->autorun_enabled) {
+            session()->flash('msg_success', '自動実行を有効化しました。');
+        } else {
+            session()->flash('msg_success', '自動実行を無効化しました。');
+        }
+        return redirect()->action($this::class . '@' . 'show');
     }
 
     public function revert(Request $request)
     {
         $user = $request->user();
         Cleaner::dispatch($user);
-        return redirect()->action($this::class . '@' . 'show'); //todo: messageを表示させたい
+        session()->flash('msg_success', '分析結果の消去を開始します。');
+        return redirect()->action($this::class . '@' . 'show');
     }
 }
