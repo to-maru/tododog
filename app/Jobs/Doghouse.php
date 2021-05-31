@@ -17,6 +17,8 @@ class Doghouse implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $timeout = 6000;
+
     /**
      * Create a new job instance.
      *
