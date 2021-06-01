@@ -21,6 +21,8 @@ class Cleaner implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $timeout = 600;
+
     public function __construct(
         public User $user
     ) {
