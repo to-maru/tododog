@@ -10,7 +10,9 @@
             <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="/settings/user">{{$user->name}}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="/settings/analysis">設定</a>
-            <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="https://twitter.com/to_maru815">開発者のツイッター</a>
+            <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="https://forms.gle/aMFfWTnXNoJhxMjd9">お問い合わせ</a>
+            <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="https://forms.gle/X5avmeJcnB7dNqUy9">フィードバック</a>
+            <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="https://twitter.com/to_maru815">開発者</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" style="font-family: 'Hiragino Kaku Gothic Std W3';" href="/user/sign_out">ログアウト</a>
         </div>
