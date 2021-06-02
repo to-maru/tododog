@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoutineWatcherSetting;
+use App\Models\UserSettingAnalysis;
 use App\Models\TodoApplication;
 use App\Models\User;
 use \RuntimeException;
@@ -70,7 +70,7 @@ class ApiAuthTodoistController extends Controller
                 ]);
                 $todo_application->id = $user->id;
 
-                $user->routine_watcher_setting()->save(new RoutineWatcherSetting);
+                $user->user_setting_analysis()->save(new UserSettingAnalysis);
             }
 
             $todo_application->save();

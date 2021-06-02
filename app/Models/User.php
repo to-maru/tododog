@@ -37,13 +37,24 @@ class User extends Authenticatable
         return $this->hasOne(TodoApplication::class, 'id');
     }
 
-    public function routine_watcher_setting()
+    public function user_setting_analysis()
     {
-        return $this->hasOne(RoutineWatcherSetting::class, 'id');
+        return $this->hasOne(UserSettingAnalysis::class, 'id');
     }
 
-    public function notifiers()
+    public function user_setting_notifications()
     {
-        return $this->hasMany(Notifier::class);
+        return $this->hasMany(UserSettingNotification::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($user) {
+            $user->todo_application()->delete();
+            $user->user_setting_analysis()->delete();
+            $user->user_setting_notifications()->delete();
+        });
     }
 }
