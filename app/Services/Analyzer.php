@@ -15,7 +15,7 @@ class Analyzer
 
     public function analyze(User $user)
     {
-        $this->setting = $user->routine_watcher_setting;
+        $this->setting = $user->user_setting_analysis;
         $project_id = $this->setting->project_id;
         $tag_ids = json_decode($this->setting->tag_ids, true);
         $todos = Todo::where('todo_application_id', $user->todo_application->id)->get();

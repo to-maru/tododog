@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ $title ?? 'Tododog' }}</title>
+        <title>{{ $title ?? 'tododog' }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -45,6 +45,21 @@
     </head>
     <body class="antialiased">
         {{ $slot }}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script>
+            @if (session('msg_success'))
+            $(function () {
+                toastr.success('{{ session('msg_success') }}');
+            });
+            @endif
+            @if (session('msg_danger'))
+            $(function () {
+                toastr.danger('{{ session('msg_danger') }}');
+            });
+            @endif
+        </script>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
