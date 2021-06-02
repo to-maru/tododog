@@ -31,3 +31,7 @@ uriとコントローラー名は一致させる
 
 - PRO DB
   - `heroku run php artisan migrate -a todo-dog`
+
+#### スケジューラの設定
+- STG / PRO
+  - `php artisan schedule:run >> ./storage/logs/cron.log 2>&1`

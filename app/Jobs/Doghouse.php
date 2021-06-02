@@ -65,6 +65,7 @@ class Doghouse implements ShouldQueue
                 info('batch ended');
                 // バッチの実行が終了
             })
+            ->onConnection('sync')
             ->dispatch();
     }
 }
