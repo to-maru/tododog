@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
-class SignOutController extends Controller
+class UserController extends Controller
 {
-    public function __invoke()
+    public function sign_out()
     {
         Auth::logout();
         return redirect()->route('login');

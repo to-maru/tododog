@@ -93,7 +93,6 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         $temp_id = (string) Str::uuid();
         $command = $this->makeWriteResourceCommand('label_add', $args, $temp_id);
         $response = $this->postApiToWriteResources(array($command));
-        logger(print_r($response,true));
         return $response['temp_id_mapping'][$temp_id];
     }
 
@@ -120,7 +119,12 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         if (empty($commands)) {
             return [];
         }
-        return $this->postApiToWriteResources($commands);
+        $chunked_commands = array_chunk($commands,100);
+        $responses = array();
+        foreach ($chunked_commands as $chunked_command) {
+            $responses[] = $this->postApiToWriteResources($chunked_command);
+        }
+        return $responses;
     }
 
     private function postApiToGetTodos(): array
