@@ -9,6 +9,7 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $dates = ['origin_created_at'];
     protected $guarded = [];
 
     public function todo_application()
