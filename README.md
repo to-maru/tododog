@@ -32,6 +32,11 @@ uriとコントローラー名は一致させる
 - PRO DB
   - `heroku run php artisan migrate -a todo-dog`
 
-#### スケジューラの設定
+#### スケジューラの記述内容
 - STG / PRO
+  - 7:00pmJST
   - `php artisan schedule:run >> ./storage/logs/cron.log 2>&1`
+    
+#### その他
+- 設定済み項目
+  - `heroku config:add TZ=Asia/Tokyo -a my-app-name`
