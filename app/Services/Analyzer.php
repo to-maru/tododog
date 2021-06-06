@@ -19,21 +19,22 @@ class Analyzer
         $this->setting = $user->user_setting_analysis;
         $project_id = $this->setting->project_id;
         $tag_ids = json_decode($this->setting->tag_ids, true);
-        $todos = Todo::where('todo_application_id', $user->todo_application->id)->get();
+        $todos = $user->todo_application->todos;
         $todos = $this->filterTodosByProjectId($todos, $project_id);
         $todos = $this->filterTodosByTagIds($todos, $tag_ids);
 
-        $results = array();
-        $todos->each(function ($todo) use (&$results) {
-            $results[$todo->id] = $this->analyzeTodo($todo);
+        $todo_results = array();
+        $todos->each(function ($todo) use (&$todo_results) {
+            $todo_results[$todo->id]['todo'] = $todo;
+            $todo_results[$todo->id]['result'] = $this->analyzeTodo($todo);
         });
-        return $results;
+        return $todo_results;
 
     }
 
-    public function analyzeTodo($todo)
+    public function analyzeTodo(Todo $todo)
     {
-        $done_datetimes = TodoDoneDatetime::where('todo_id', $todo->id)->orderBy('done_datetime', 'desc')->get();
+        $done_datetimes = $todo->done_datetimes->sortByDesc('done_datetime');
         if ($this->setting->time_offset_enabled) {
             $done_datetimes = $done_datetimes->map(function (Carbon $datetime) {
                 return $datetime->subHours(4);

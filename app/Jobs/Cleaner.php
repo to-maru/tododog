@@ -39,9 +39,9 @@ class Cleaner implements ShouldQueue
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
 
         $all_created_tags = $notifier->fetchAllCreatedTags();
-        $todos = Todo::where('todo_application_id', $this->user->todo_application->id)->get();
+        $todos = $this->user->todo_application->todos;
         $todo_update_orders = $todos->map(function ($todo) use ($all_created_tags){
-            $todo_update_order = new TodoUpdateOrder($todo->id);
+            $todo_update_order = new TodoUpdateOrder($todo);
             $todo_update_order->removeFootnoteFromName(Notifier::FOOTNOTE_PREFIX);
             $todo_update_order->removeTags(array_keys($all_created_tags));
             return $todo_update_order;

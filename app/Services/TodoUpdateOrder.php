@@ -8,16 +8,13 @@ use App\Models\Todo;
 
 class TodoUpdateOrder
 {
-    public Todo $original;
-
     public function __construct(
-        public int $todo_id,
+        public Todo $original,
         public ?string $name = null,
         public ?array $tag_ids = null,
         public ?string $comment = null,
     )
     {
-        $this->original = Todo::find($todo_id);
         $this->original->tag_ids = json_decode($this->original->tag_ids, true);
 
         if (is_null($this->name)) {
