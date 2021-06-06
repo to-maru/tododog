@@ -31,7 +31,7 @@ class AppController extends Controller
             'setting' => $user_setting_analysis,
             'projects' => $projects,
             'tags' => $tags,
-            'synced_at' => $user->todo_application->synced_at,
+            'synced_at' => $user->todo_application->synced_at ? $user->todo_application->synced_at->format('Y/m/d H:i:s') : null,
         ]);
     }
 
