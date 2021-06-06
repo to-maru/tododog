@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Todo;
 use App\Traits\TodoApplicationApiClientTrait;
 
 class Notifier
@@ -16,28 +17,28 @@ class Notifier
     const FOOTNOTE_SEPARATOR = ', ';
     const TAG_PREFIX = 'Tododog:';
 
-    public function notify($results)
+    public function notify($todo_results)
     {
-        $todo_update_orders = $this->makeTodoUpdateOrders($results);
+        $todo_update_orders = $this->makeTodoUpdateOrders($todo_results);
         $response = $this->pushTodos($this->api_client, $todo_update_orders);
         info(json_encode($response));
     }
 
-    public function makeTodoUpdateOrders($results): array
+    public function makeTodoUpdateOrders($todo_results): array
     {
         $this->all_created_tags = $this->fetchAllCreatedTags();
         $todo_update_orders = [];
-        foreach ($results as $todo_id => $result) {
-            $todo_update_orders[] = $this->makeTodoUpdateOrder($todo_id, $result);
+        foreach ($todo_results as $todo_result) {
+            $todo_update_orders[] = $this->makeTodoUpdateOrder($todo_result['todo'], $todo_result['result']);
         }
         return $todo_update_orders;
     }
 
-    public function makeTodoUpdateOrder($todo_id, $result): TodoUpdateOrder
+    public function makeTodoUpdateOrder(Todo $todo, array $result): TodoUpdateOrder
     {
         $tag_names = $this->convertAchievementsToTagNames($this->makeAchievements($result));
         $tag_ids = $this->makeTagIdsByTagNames($tag_names);
-        $todo_update_order = new TodoUpdateOrder($todo_id);
+        $todo_update_order = new TodoUpdateOrder($todo);
 
         return $todo_update_order
             ->removeFootnoteFromName(self::FOOTNOTE_PREFIX)
