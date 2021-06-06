@@ -55,6 +55,9 @@ class Notifier
             $footnote = $footnote . 'sleep:' . $result['sleeping_days'] . 'd';
         }
         $footnote = $footnote . self::FOOTNOTE_SEPARATOR . $result['foot_prints'];
+        $footnote = $footnote . self::FOOTNOTE_SEPARATOR . 'all:' . $result['total_times'];
+        $footnote = $footnote . self::FOOTNOTE_SEPARATOR . 'mo:' . $result['this_month_times'];
+        $footnote = $footnote . '(' . $result['max_monthly_times'] . ')';
 
         return $footnote;
     }
