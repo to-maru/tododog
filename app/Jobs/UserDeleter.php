@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UserDeleter implements ShouldQueue
 {
@@ -35,7 +36,10 @@ class UserDeleter implements ShouldQueue
      */
     public function handle()
     {
+        Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
         Cleaner::dispatchSync($this->user);
+        $destroying_user_id = $this->user->id;
         User::destroy($this->user->id);
+        Log::info('['.self::class.'] '.'end', ['user_id' => $destroying_user_id]);
     }
 }
