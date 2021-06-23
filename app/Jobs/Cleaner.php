@@ -15,6 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\Synchronizer;
 use App\Services\Analyzer;
+use Illuminate\Support\Facades\Log;
 
 
 class Cleaner implements ShouldQueue
@@ -34,6 +35,7 @@ class Cleaner implements ShouldQueue
         Notifier $notifier,
     )
     {
+        Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
@@ -51,5 +53,6 @@ class Cleaner implements ShouldQueue
         //$response = $notifier->pushDeletedTags($notifier->api_client, array_keys($all_created_tags));
         //scope=>data:delete が必要.
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+        Log::info('['.self::class.'] '.'end', ['user_id' => $this->user->id]);
     }
 }

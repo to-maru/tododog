@@ -21,7 +21,6 @@ class Notifier
     {
         $todo_update_orders = $this->makeTodoUpdateOrders($todo_results);
         $response = $this->pushTodos($this->api_client, $todo_update_orders);
-        info(json_encode($response));
     }
 
     public function makeTodoUpdateOrders($todo_results): array

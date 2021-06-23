@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Doghouse implements ShouldQueue
@@ -36,14 +37,16 @@ class Doghouse implements ShouldQueue
      */
     public function handle()
     {
+        Log::info('['.self::class.'] '.'start');
         $users = User::with('user_setting_analysis')
             ->get()
             ->filter(function ($user) {
-                return $user->user_setting_analysis->autorun_enabled;
+                return $user->user_setting_analysis->autorun_enabled ?? false;
             });
 
         if ($users->isEmpty()) {
-            info('batch not run');
+            info('['.self::class.'] '.'batch not run');
+            Log::info('['.self::class.'] '.'end');
             return;
         }
 
@@ -54,18 +57,19 @@ class Doghouse implements ShouldQueue
 
         $batch = Bus::batch($batch_list)
             ->then(function (Batch $batch) {
-                info('batch success');
+                info('['.self::class.'] '.'batch success');
                 // すべてのジョブが正常に完了
             })
             ->catch(function (Batch $batch, Throwable $e) {
-                info('batch failure');
+                info('['.self::class.'] '.'batch failure', ['error' => $e]);
                 // バッチジョブの失敗をはじめて検出
             })
             ->finally(function (Batch $batch) {
-                info('batch ended');
+                info('['.self::class.'] '.'batch ended');
                 // バッチの実行が終了
             })
             ->onConnection('sync')
             ->dispatch();
+        Log::info('['.self::class.'] '.'end');
     }
 }
