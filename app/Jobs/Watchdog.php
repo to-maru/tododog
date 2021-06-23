@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Services\Synchronizer;
 use App\Services\Analyzer;
+use Illuminate\Support\Facades\Log;
 
 
 class Watchdog implements ShouldQueue
@@ -33,10 +34,12 @@ class Watchdog implements ShouldQueue
         Notifier $notifier,
     )
     {
+        Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
         $notifier->notify($analyzer->analyze($this->user));
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+        Log::info('['.self::class.'] '.'end', ['user_id' => $this->user->id]);
     }
 }
