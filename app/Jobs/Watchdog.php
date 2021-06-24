@@ -35,11 +35,21 @@ class Watchdog implements ShouldQueue
     )
     {
         Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
+
         $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+        Log::info('['.self::class.'] '.'pulled todos', ['user_id' => $this->user->id]);
+
         $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
-        $notifier->notify($analyzer->analyze($this->user));
+        $analyzed = $analyzer->analyze($this->user);
+        Log::info('['.self::class.'] '.'analyzed', ['user_id' => $this->user->id]);
+
+        $notifier->notify($analyzed);
+        Log::info('['.self::class.'] '.'notified', ['user_id' => $this->user->id]);
+
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+        Log::info('['.self::class.'] '.'pulled todos again', ['user_id' => $this->user->id]);
+
         Log::info('['.self::class.'] '.'end', ['user_id' => $this->user->id]);
     }
 }
