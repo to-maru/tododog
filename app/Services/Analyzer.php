@@ -35,9 +35,10 @@ class Analyzer
     public function analyzeTodo(Todo $todo)
     {
         $done_datetimes = $todo->done_datetimes->sortByDesc('done_datetime');
-        if ($this->setting->time_offset_enabled) {
-            $done_datetimes = $done_datetimes->map(function (Carbon $datetime) {
-                return $datetime->subHours(4);
+        if ($this->setting->boundary_hour > 0) {
+            $done_datetimes = $done_datetimes->map(function (TodoDoneDatetime $datetime) {
+                $datetime->done_datetime = $datetime->done_datetime->subHours($this->setting->boundary_hour);
+                return $datetime;
             });
         }
         $result = array();

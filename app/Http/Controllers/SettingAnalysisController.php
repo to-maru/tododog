@@ -42,9 +42,11 @@ class SettingAnalysisController extends Controller
         $user_setting_analysis->cheat_day_enabled = $request->cheat_day_enabled === 'on';
         $user_setting_analysis->cheat_day_interval = $request->cheat_day_interval;
         $user_setting_analysis->footprints_number = $request->footprints_number;
+        $user_setting_analysis->boundary_hour = $request->boundary_hour;
         $user_setting_analysis->save();
 
         session()->flash('msg_success', '設定を更新しました。');
-        return redirect()->action($this::class . '@' . 'show');
+        //return redirect()->action($this::class . '@' . 'show');
+        return redirect()->route('dashboard');
     }
 }
