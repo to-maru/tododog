@@ -27,6 +27,7 @@ class SettingsAnalysisPostRequest extends FormRequest
             'cheat_day_enabled' => 'nullable|in:on',
             'cheat_day_interval' => 'required|integer|between:1,365',
             'footprints_number' => 'required|integer|between:0,31',
+            'boundary_hour' => 'required|integer|between:0,23',
         ];
     }
 }

@@ -58,6 +58,10 @@
                             <span>　足跡の表示日数：</span>
                             直近{{$setting->footprints_number}}日間
                         </div>
+                        <div>
+                            <span>　1日の区切り：</span>
+                            午前{{$setting->boundary_hour}}時
+                        </div>
                     </div>
                     <div class="p-sm-1 d-flex flex-row justify-content-between">
                         <div>

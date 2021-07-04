@@ -83,51 +83,72 @@
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定
                             </div>
                             <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                    <p class="flex-fill">チートデイ</p>
-                                    <div class="custom-control custom-switch">
-                                        <input class="custom-control-input" type="checkbox"
-                                               id="cheat-day-enabled"
-                                               name="cheat_day_enabled" {{($errors->has('cheat_day_enabled') ? old('cheat_day_enabled') : $setting->cheat_day_enabled) ? 'checked="checked"' : ''}}>
-                                        <label class="custom-control-label" for="cheat-day-enabled">
-                                            {{--                                                        If it's enabled, the running days will not be reset even if you take a break once in a while.--}}
-                                        </label>
+                                <div>
+                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                        <p class="flex-fill">チートデイ</p>
+                                        <div class="custom-control custom-switch">
+                                            <input class="custom-control-input" type="checkbox"
+                                                   id="cheat-day-enabled"
+                                                   name="cheat_day_enabled" {{($errors->has('cheat_day_enabled') ? old('cheat_day_enabled') : $setting->cheat_day_enabled) ? 'checked="checked"' : ''}}>
+                                            <label class="custom-control-label" for="cheat-day-enabled">
+                                                {{--                                                        If it's enabled, the running days will not be reset even if you take a break once in a while.--}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @error('cheat_day_enabled')
+                                    <div class="text-right text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                        <p class="flex-fill">チートデイ間隔</p>
+                                        <div class="flex-fill form-group row justify-content-end">
+                                            <input type="number" class="form-control col-3" id="cheat-day-interval"
+                                                   name="cheat_day_interval"
+                                                   value={{$errors->has('cheat_day_interval') ? old('cheat_day_interval') : $setting->cheat_day_interval}} placeholder="Enter Number">
+                                            <span>　日に1回</span>
+                                        </div>
+                                    </div>
+                                    @error('cheat_day_interval')
+                                    <div class="text-right text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                        <p class="flex-fill">足跡の表示日数</p>
+                                        <div class="flex-fill form-group row justify-content-end">
+                                            <span>直近　</span>
+                                            <input type="number" class="form-control col-3" id="footprints-number"
+                                                   name="footprints_number"
+                                                   value={{$errors->has('footprints_number') ? old('footprints_number') : $setting->footprints_number}} placeholder="Enter Number">
+                                            <span>　日間</span>
+                                        </div>
+                                    </div>
+                                    @error('footprints_number')
+                                    <div class="text-right text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                        <p class="flex-fill">1日の区切り</p>
+                                        <div class="flex-fill form-group row justify-content-end">
+                                            <select class="form-control col-6" id="project" name="boundary_hour">
+                                                <option value="0" {{$setting->boundary_hour == 0 ? 'selected="selected"' : ''}}>
+                                                    午前0時
+                                                </option>
+                                                <option value="4" {{$setting->boundary_hour == 4 ? 'selected="selected"' : ''}}>
+                                                    午前4時
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                @error('cheat_day_enabled')
-                                <div class="text-right text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                    <p class="flex-fill">チートデイ間隔</p>
-                                    <div class="flex-fill form-group row justify-content-end">
-                                        <input type="number" class="form-control col-3" id="cheat-day-interval"
-                                               name="cheat_day_interval"
-                                               value={{$errors->has('cheat_day_interval') ? old('cheat_day_interval') : $setting->cheat_day_interval}} placeholder="Enter Number">
-                                        <span>　日に1回</span>
-                                    </div>
-                                </div>
-                                @error('cheat_day_interval')
-                                <div class="text-right text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
-                                    <p class="flex-fill">足跡の表示日数</p>
-                                    <div class="flex-fill form-group row justify-content-end">
-                                        <span>直近　</span>
-                                        <input type="number" class="form-control col-3" id="footprints-number"
-                                               name="footprints_number"
-                                               value={{$errors->has('footprints_number') ? old('footprints_number') : $setting->footprints_number}} placeholder="Enter Number">
-                                        <span>　日間</span>
-                                    </div>
-                                </div>
-                                @error('footprints_number')
-                                <div class="text-right text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                             <input class="btn btn-dark float-right" type="submit" value="設定を保存する">
                         </div>
