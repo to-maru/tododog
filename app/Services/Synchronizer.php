@@ -24,21 +24,21 @@ class Synchronizer
     {
         $raw_todos = $this->fetchAllTodos($this->api_client);
         foreach ($raw_todos as $raw_todo) {
+            $origin_created_at_tz = Carbon::parse($raw_todo['date_added'])->addHours(9)->toDateTimeString() . '+09';
             Todo::updateOrCreate(
                 ['todo_application_id' => $todo_application->id, 'local_id' => $raw_todo['id']],
-                ['name' => $raw_todo['content'], 'origin_created_at' => $raw_todo['date_added'], 'project_id' => $raw_todo['project_id'], 'tag_ids' => json_encode($raw_todo['labels']), 'raw_data' => json_encode($raw_todo)]
+                ['name' => $raw_todo['content'], 'origin_created_at' => $origin_created_at_tz, 'project_id' => $raw_todo['project_id'], 'tag_ids' => json_encode($raw_todo['labels']), 'raw_data' => json_encode($raw_todo)]
             ); //todo:各todo_appで共通化したい 'name' => $todo['name']的な
         }
 
         $raw_todo_done_datetimes = $this->fetchAllTodoDonetimes($this->api_client);
         foreach ($raw_todo_done_datetimes as $raw_todo_done_datetime) {
             $todo = $todo_application->todos->firstwhere('local_id', $raw_todo_done_datetime['object_id']);
-            $formatted_todo_datetime = Carbon::parse($raw_todo_done_datetime['event_date'])->toDateTimeString() . '+09';
-            // todo: todoistのTZを読み取って日本時間で無い時に日本時間に変換する
+            $done_datetime_tz = Carbon::parse($raw_todo_done_datetime['event_date'])->addHours(9)->toDateTimeString() . '+09';
             if (!is_null($todo)) {
                 TodoDoneDatetime::firstOrCreate([
                     'todo_id' => $todo->id,
-                    'done_datetime' => $formatted_todo_datetime
+                    'done_datetime' => $done_datetime_tz
                 ]);
             }
         }
