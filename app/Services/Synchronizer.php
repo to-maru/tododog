@@ -33,10 +33,13 @@ class Synchronizer
         $raw_todo_done_datetimes = $this->fetchAllTodoDonetimes($this->api_client);
         foreach ($raw_todo_done_datetimes as $raw_todo_done_datetime) {
             $todo = $todo_application->todos->firstwhere('local_id', $raw_todo_done_datetime['object_id']);
+            $formatted_todo_datetime = Carbon::parse($raw_todo_done_datetime['event_date'])->toDateTimeString() . '+09';
+            // todo: todoistのTZを読み取って日本時間で無い時に日本時間に変換する
             if (!is_null($todo)) {
-                TodoDoneDatetime::firstOrCreate(
-                    ['todo_id' => $todo->id, 'done_datetime' => $raw_todo_done_datetime['event_date']]
-                );
+                TodoDoneDatetime::firstOrCreate([
+                    'todo_id' => $todo->id,
+                    'done_datetime' => $formatted_todo_datetime
+                ]);
             }
         }
         $todo_application->synced_at = Carbon::now();

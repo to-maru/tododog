@@ -40,3 +40,5 @@ uriとコントローラー名は一致させる
 #### その他
 - 設定済み項目
   - `heroku config:add TZ=Asia/Tokyo -a my-app-name`
+  - `heroku pg:psql --app your_database_name`
+    - `> alter database your_database_name set timezone = 'Asia/Tokyo';` 
