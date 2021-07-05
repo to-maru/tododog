@@ -28,6 +28,8 @@ class SettingsAnalysisPostRequest extends FormRequest
             'cheat_day_interval' => 'required|integer|between:1,365',
             'footprints_number' => 'required|integer|between:0,31',
             'boundary_hour' => 'required|integer|between:0,23',
+            'footnote_custom_enabled' => 'nullable|in:on',
+            'footnote_custom_template' => 'required_if:footnote_custom_enabled,on', //todo: 犬の絵文字を弾きたい
         ];
     }
 }

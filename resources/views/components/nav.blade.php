@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light" style="background-color: #CCBDB7;">
+<nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
     <a class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;" href="/">tododog</a>
     <div class="dropdown pr-2">
         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
