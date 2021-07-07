@@ -179,11 +179,11 @@
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                        <div class="text-right small pt-2">{days} → 現在の継続日数・休眠日数を表示します</div>
-                                        <div class="text-right small">{print} → 直近の成否を時系列で表示します</div>
-                                        <div class="text-right small">{all} → 合計の実行回数を表示します</div>
-                                        <div class="text-right small">{mo} → 今月の実行回数を表示します</div>
-                                        <div class="text-right small">{maxmo} → 1ヶ月あたりの実行回数の最高記録を表示します</div>
+                                        <div class="text-right small pt-2">{{'{'.$aliases['days'].'}'}} → 現在の継続日数・休眠日数を表示します</div>
+                                        <div class="text-right small">{{'{'.$aliases['foot_prints'].'}'}} → 直近の成否を時系列で表示します</div>
+                                        <div class="text-right small">{{'{'.$aliases['total_times'].'}'}} → 合計の実行回数を表示します</div>
+                                        <div class="text-right small">{{'{'.$aliases['this_month_times'].'}'}} → 今月の実行回数を表示します</div>
+                                        <div class="text-right small">{{'{'.$aliases['max_monthly_times'].'}'}} → 1ヶ月あたりの実行回数の最高記録を表示します</div>
                                     </div>
                                 </div>
                             </div>

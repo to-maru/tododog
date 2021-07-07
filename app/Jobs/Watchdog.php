@@ -44,7 +44,7 @@ class Watchdog implements ShouldQueue
         $analyzed = $analyzer->analyze($this->user);
         Log::info('['.self::class.'] '.'analyzed', ['user_id' => $this->user->id]);
 
-        $notifier->notify($analyzed);
+        $notifier->notify($analyzed, $this->user->user_setting_notification);
         Log::info('['.self::class.'] '.'notified', ['user_id' => $this->user->id]);
 
         $synchronizer->pullTodosAndDonetimes($this->user->todo_application);

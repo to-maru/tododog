@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingsAnalysisPostRequest;
+use App\Services\Notifier;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -14,7 +15,7 @@ class SettingAnalysisController extends Controller
     {
     }
 
-    public function show(Request $request)
+    public function show(Request $request, Notifier $notifier)
     {
         $user = $request->user();
         $user_setting_analysis = $user->user_setting_analysis;
@@ -32,6 +33,7 @@ class SettingAnalysisController extends Controller
             'setting_notification' => $user_setting_notification,
             'projects' => $projects,
             'tags' => $tags,
+            'aliases' => $notifier::ALIASES,
         ]);
     }
 
