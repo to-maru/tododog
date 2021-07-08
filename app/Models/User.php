@@ -42,9 +42,9 @@ class User extends Authenticatable
         return $this->hasOne(UserSettingAnalysis::class, 'id');
     }
 
-    public function user_setting_notifications()
+    public function user_setting_notification()
     {
-        return $this->hasMany(UserSettingNotification::class);
+        return $this->hasOne(UserSettingNotification::class,'id');
     }
 
     public static function boot()
@@ -54,7 +54,7 @@ class User extends Authenticatable
         static::deleted(function ($user) {
             $user->todo_application()->delete();
             $user->user_setting_analysis()->delete();
-            $user->user_setting_notifications()->delete();
+            $user->user_setting_notification()->delete();
         });
     }
 }

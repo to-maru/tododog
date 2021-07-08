@@ -5,20 +5,34 @@ namespace App\Services;
 
 
 use App\Models\Todo;
+use App\Models\UserSettingNotification;
 use App\Traits\TodoApplicationApiClientTrait;
 
 class Notifier
 {
     use TodoApplicationApiClientTrait;
+
+    const FOOTNOTE_PREFIX = '\🐶';
+    const TAG_PREFIX = 'Tododog:';
+    const ALIASES = [
+        'running_days' => null,
+        'sleeping_days' => null,
+        'days' => 'days',
+        'foot_prints' => 'print',
+        'total_times' => 'all',
+        'max_monthly_times' => 'maxmo',
+        'this_month_times' => 'mo',
+    ];
+    const FOOTNOTE_BASE_DEFAULT = '{days}, {print}, all:{all}';
+
     public $api_client;
     public $all_created_tags;
 
-    const FOOTNOTE_PREFIX = '\🐶';
-    const FOOTNOTE_SEPARATOR = ', ';
-    const TAG_PREFIX = 'Tododog:';
+    private $setting;
 
-    public function notify($todo_results)
+    public function notify($todo_results, UserSettingNotification $setting)
     {
+        $this->setting = $setting;
         $todo_update_orders = $this->makeTodoUpdateOrders($todo_results);
         $response = $this->pushTodos($this->api_client, $todo_update_orders);
     }
@@ -48,17 +62,24 @@ class Notifier
 
     public function makeFootnote($result): string
     {
-        $footnote = self::FOOTNOTE_PREFIX;
-        if ($result['running_days'] > 0) {
-            $footnote = $footnote . 'run:' . $result['running_days'] . 'd';
-        } elseif ($result['sleeping_days'] > 0)  {
-            $footnote = $footnote . 'sleep:' . $result['sleeping_days'] . 'd';
+        $footnote_base = self::FOOTNOTE_BASE_DEFAULT;
+        if ($this->setting->footnote_custom_enabled) {
+            $footnote_base = $this->setting->footnote_custom_template;
         }
-        $footnote = $footnote . self::FOOTNOTE_SEPARATOR . $result['foot_prints'];
-        $footnote = $footnote . self::FOOTNOTE_SEPARATOR . 'all:' . $result['total_times'];
-        $footnote = $footnote . self::FOOTNOTE_SEPARATOR . 'mo:' . $result['this_month_times'];
-        $footnote = $footnote . '(' . $result['max_monthly_times'] . ')';
+        $footnote = $this->buildFootnoteFromBase($footnote_base, $result);
+        $footnote = self::FOOTNOTE_PREFIX . $footnote;
+        return $footnote;
+    }
 
+    public function buildFootnoteFromBase($footnote_base, $result)
+    {
+        $footnote = $footnote_base;
+        foreach (self::ALIASES as $result_key => $alias) {
+            if (is_null($alias)) {
+                continue;
+            }
+            $footnote = str_replace("{{$alias}}", $result[$result_key], $footnote);
+        }
         return $footnote;
     }
 

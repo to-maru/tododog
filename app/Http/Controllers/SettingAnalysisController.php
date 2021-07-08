@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingsAnalysisPostRequest;
+use App\Services\Notifier;
 use Illuminate\Http\Request;
 use App\Traits\TodoApplicationApiClientTrait;
 
@@ -14,10 +15,11 @@ class SettingAnalysisController extends Controller
     {
     }
 
-    public function show(Request $request)
+    public function show(Request $request, Notifier $notifier)
     {
         $user = $request->user();
         $user_setting_analysis = $user->user_setting_analysis;
+        $user_setting_notification = $user->user_setting_notification;
 
         $user_setting_analysis->tag_ids = json_decode($user_setting_analysis->tag_ids);
         $api_client = $this->getApiClient($user->todo_application);
@@ -27,9 +29,11 @@ class SettingAnalysisController extends Controller
 
         return view('setting_analyse', [
             'user' => $user,
-            'setting' => $user_setting_analysis,
+            'setting_analysis' => $user_setting_analysis,
+            'setting_notification' => $user_setting_notification,
             'projects' => $projects,
             'tags' => $tags,
+            'aliases' => $notifier::ALIASES,
         ]);
     }
 
@@ -44,6 +48,11 @@ class SettingAnalysisController extends Controller
         $user_setting_analysis->footprints_number = $request->footprints_number;
         $user_setting_analysis->boundary_hour = $request->boundary_hour;
         $user_setting_analysis->save();
+
+        $user_setting_notification = $user->user_setting_notification;
+        $user_setting_notification->footnote_custom_template = $request->footnote_custom_template;
+        $user_setting_notification->footnote_custom_enabled = $request->footnote_custom_enabled === 'on';
+        $user_setting_notification->save();
 
         session()->flash('msg_success', '設定を更新しました。');
         //return redirect()->action($this::class . '@' . 'show');

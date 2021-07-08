@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserSettingAnalysis;
 use App\Models\TodoApplication;
 use App\Models\User;
+use App\Models\UserSettingNotification;
 use \RuntimeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,7 @@ class ApiAuthTodoistController extends Controller
                 $todo_application->id = $user->id;
 
                 $user->user_setting_analysis()->save(new UserSettingAnalysis);
+                $user->user_setting_notification()->save(new UserSettingNotification);
             }
 
             $todo_application->save();
