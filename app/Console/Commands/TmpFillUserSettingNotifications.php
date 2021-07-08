@@ -48,11 +48,11 @@ class TmpFillUserSettingNotifications extends Command
                 $user->user_setting_notification()->save(new UserSettingNotification);
                 Log::info('['.self::class.'] '. 'notification created', [
                     'user.id' => $user->id,
+                    'user_settings_notification.id' => $user->fresh()->user_setting_notification->id,
                 ]);
             } else {
                 Log::info('['.self::class.'] '. 'notification not created', [
                     'users.id' => $user->id,
-                    'user_settings_notification.id' => $user->fresh()->user_setting_notification->id,
                 ]);
             }
         });
