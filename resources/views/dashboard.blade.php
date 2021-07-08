@@ -35,16 +35,16 @@
                         </div>
                         <div>
                             <span>　対象のプロジェクト：</span>
-                            {{$setting->project_id == null ? '全てのプロジェクト' : ''}}
+                            {{$setting_analysis->project_id == null ? '全てのプロジェクト' : ''}}
                             @foreach($projects as $key => $value)
-                                {{$setting->project_id == $key ? $value : ''}}
+                                {{$setting_analysis->project_id == $key ? $value : ''}}
                             @endforeach
                         </div>
                         <div>
                             <span>　対象のタグ：</span>
-                            @if(!empty($setting->tag_ids))
+                            @if(!empty($setting_analysis->tag_ids))
                                 @foreach($tags as $key => $value)
-                                    {{in_array($key, $setting->tag_ids) ? $value . ' ': ''}}
+                                    {{in_array($key, $setting_analysis->tag_ids) ? $value . ' ': ''}}
                                 @endforeach
                             @else
                                 指定無し
@@ -52,15 +52,19 @@
                         </div>
                         <div>
                             <span>　チートデイ：</span>
-                            {{$setting->cheat_day_enabled ? "有効（{$setting->cheat_day_interval}日に1回）" : '無効'}}
+                            {{$setting_analysis->cheat_day_enabled ? "有効（{$setting_analysis->cheat_day_interval}日に1回）" : '無効'}}
                         </div>
                         <div>
                             <span>　足跡の表示日数：</span>
-                            直近{{$setting->footprints_number}}日間
+                            直近{{$setting_analysis->footprints_number}}日間
                         </div>
                         <div>
                             <span>　1日の区切り：</span>
-                            午前{{$setting->boundary_hour}}時
+                            午前{{$setting_analysis->boundary_hour}}時
+                        </div>
+                        <div>
+                            <span>　分析結果テキストのカスタマイズ：</span>
+                            {{$setting_notification->footnote_custom_enabled ? "有り（{$setting_notification->footnote_custom_template}）" : '無し'}}
                         </div>
                     </div>
                     <div class="p-sm-1 d-flex flex-row justify-content-between">
@@ -69,7 +73,7 @@
                             <div>設定を有効にすると1日１回分析を実行します</div>
                         </div>
                         <div>
-                        @if($setting->autorun_enabled)
+                        @if($setting_analysis->autorun_enabled)
                             <a href="/app/autorun/?enable=false" class="btn btn-dark" type="submit">無効にする</a>
                         @else
                             <a href="/app/autorun/?enable=true" class="btn btn-outline-dark" type="submit">有効にする</a>
