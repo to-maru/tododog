@@ -1,5 +1,5 @@
 <x-app>
-    <nav class="navbar navbar-light" style="background-color: #CCBDB7;">
+    <nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
         <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
         <a class="btn btn-danger" href="/api/auth/todoist/call">Todoistと連携する</a>
     </nav>

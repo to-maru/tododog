@@ -44,6 +44,7 @@ class Analyzer
         $result = array();
         $result['running_days'] = $this->calculateRunningDays($done_datetimes);
         $result['sleeping_days'] = $this->calculateSleepingDays($done_datetimes);
+        $result['days'] = $this->calculateDays($result['running_days'], $result['sleeping_days']);
         $result['foot_prints'] = $this->makeFootPrints($done_datetimes, $todo->origin_created_at);
         $result['total_times'] = $this->getTotalTimes($done_datetimes);
         $result['max_monthly_times'] = $this->calculateMaxMonthlyTimes($done_datetimes);
@@ -84,6 +85,16 @@ class Analyzer
             return null;
         }
         return Carbon::today()->diffInDays($done_datetimes->first()->done_datetime);
+    }
+
+    public function calculateDays($running_days, $sleeping_days)
+    {
+        if ($running_days > 0) {
+            return 'run:' . $running_days . 'd';
+        } elseif ($sleeping_days > 0)  {
+            return 'sleep:' . $sleeping_days . 'd';
+        }
+        return '';
     }
 
     public function makeFootPrints(Collection $done_datetimes, Carbon $origin_created_at)
