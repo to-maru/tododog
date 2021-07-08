@@ -19,6 +19,7 @@ class AppController extends Controller
     {
         $user = $request->user();
         $user_setting_analysis = $user->user_setting_analysis;
+        $user_setting_notification = $user->user_setting_notification;
 
         $user_setting_analysis->tag_ids = json_decode($user_setting_analysis->tag_ids);
         $api_client = $this->getApiClient($user->todo_application);
@@ -28,7 +29,8 @@ class AppController extends Controller
 
         return view('dashboard', [
             'user' => $user,
-            'setting' => $user_setting_analysis,
+            'setting_analysis' => $user_setting_analysis,
+            'setting_notification' => $user_setting_notification,
             'projects' => $projects,
             'tags' => $tags,
             'synced_at' => $user->todo_application->synced_at ? $user->todo_application->synced_at->format('Y/m/d H:i:s') : null,
