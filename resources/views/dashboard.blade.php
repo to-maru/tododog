@@ -24,7 +24,9 @@
         <form method="POST">
             @csrf
             <div class="p-sm-0 b-sm-0">
-                <div class="p-sm-4 m-sm-0 pl-sm-5 pr-sm-5">
+                <div class="p-sm-4 m-sm-0 pl-sm-4 pr-sm-4">
+                    <div class="h3">STEP1: 習慣化したいことをTODOアプリに追加しよう</div>
+                    <div>思いつかない場合は<a href="{{config('todoapp.todoist.todo_template_url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">良い習慣テンプレート」</a>の中から選んでみてください！！</div>
                     <div class="border border-info rounded mt-5 mb-5 p-2">
                         <div class="d-flex flex-row justify-content-between">
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
