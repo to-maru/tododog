@@ -36,8 +36,7 @@
                         <div class="d-flex flex-row justify-content-between">
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
                             <div>
-                                <a href="/settings/analysis" class="btn btn-info btn-sm"
-                                   type="submit">編集</a>
+                                <a href="/settings/analysis" class="btn btn-info btn-sm">編集</a>
                             </div>
                         </div>
                         <div>
@@ -85,7 +84,7 @@
                             <div>実行ボタンを押すと即座に分析を実行します。今すぐ試したい人はこちら。</div>
                         </div>
                         <div>
-                            <a href="/app/run" class="btn btn-dark" type="submit">実行する</a>
+                            <a href="/app/run" class="btn btn-dark">実行する</a>
                         </div>
                     </div>
                     <div class="p-1 pb-2 d-md-flex justify-content-between">
@@ -95,9 +94,9 @@
                         </div>
                         <div>
                             @if($setting_analysis->autorun_enabled)
-                                <a href="/app/autorun/?enable=false" class="btn btn-dark" type="submit">無効にする</a>
+                                <a href="/app/autorun/?enable=false" class="btn btn-dark">無効にする</a>
                             @else
-                                <a href="/app/autorun/?enable=true" class="btn btn-outline-dark" type="submit">有効にする</a>
+                                <a href="/app/autorun/?enable=true" class="btn btn-outline-dark">有効にする</a>
                             @endif
                         </div>
                     </div>
