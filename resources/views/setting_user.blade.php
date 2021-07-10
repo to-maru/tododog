@@ -40,8 +40,7 @@
                     <form method="POST">
                         @csrf
                         <div class="p-sm-0 b-sm-0 pr-sm-5 ml-sm-5">
-                            <div class="p-2 border-bottom border-dark"
-                                 style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー設定
+                            <div class="p-2 border-bottom border-dark text-bold">ユーザー設定
                             </div>
                             <div class="pt-4 pb-4 p-sm-4 pl-lg-5 ml-lg-5 pr-lg-5 mr-lg-5">
                                 <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
@@ -60,8 +59,7 @@
                                     <input class="btn btn-dark" type="submit" value="ユーザー情報を保存する">
                                 </div>
                             </div>
-                            <div class="p-2 mt-5 pt-5 mb-3 border-bottom border-dark"
-                                 style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー削除
+                            <div class="p-2 mt-5 pt-5 mb-3 border-bottom border-dark text-bold">ユーザー削除
                             </div>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#exampleModal">

@@ -10,8 +10,7 @@
         font-family: 'Hiragino Kaku Gothic Std W3', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
         a {
-        font-family: 'Hiragino Kaku Gothic Pro W6', 'Hiragino Kaku Gothic Std W3', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
-        font-weight: bold;
+        font-family: 'Hiragino Kaku Gothic Std W3', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
         span {
         font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
@@ -33,7 +32,7 @@
             <div>
                 <div class="mt-4">
                     <div class="h3 font-weight-bold">STEP1: 習慣化したいことをTODOアプリに追加しよう</div>
-                    <span>思いつかない場合は<a href="{{config('todoapp.todoist.todo_template_url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">「良い習慣テンプレート」</a>の中から選んでみてください！！</span>
+                    <span>思いつかない場合は<a href="{{config('todoapp.todoist.todo_template_url')}}" style="font-weight: bold;">「良い習慣テンプレート」</a>の中から選んでみてください！！</span>
                 </div>
 
                 <div class="mt-5">
@@ -41,7 +40,7 @@
                     <span>以下の設定を確認して、変えたいところがあれば編集しよう</span>
                     <div class="border border-info rounded p-2">
                         <div class="d-flex flex-row justify-content-between">
-                            <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
+                            <div>分析設定</div>
                             <div>
                                 <a href="/settings/analysis" class="btn btn-info btn-sm">編集</a>
                             </div>
@@ -87,7 +86,7 @@
 
                     <div class="p-1 pt-2 pb-3 d-md-flex justify-content-between">
                         <div>
-                            <div style="font-family: 'Hiragino Kaku Gothic Std W8';">手動実行</div>
+                            <div class="text-bold">手動実行</div>
                             <div>実行ボタンを押すと即座に分析を実行します。今すぐ試したい人はこちら。</div>
                         </div>
                         <div>
@@ -96,7 +95,7 @@
                     </div>
                     <div class="p-1 pb-2 d-md-flex justify-content-between">
                         <div>
-                            <div style="font-family: 'Hiragino Kaku Gothic Std W8';">自動実行</div>
+                            <div class="text-bold">自動実行</div>
                             <div>設定を有効にすると1日１回分析を実行します。継続したい人はこちら。</div>
                         </div>
                         <div>
@@ -112,12 +111,12 @@
 
                 <div class="mt-5 pb-3">
                     <div class="h3 font-weight-bold">STEP4: 分析結果を確認しよう</div>
-                    <span>分析結果は<a href="{{config('todoapp.todoist.url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">Todoアプリ内</a>に直接反映されます！（反映まで数分かかることがあります）</span>
+                    <span>分析結果は<a href="{{config('todoapp.todoist.url')}}" style="font-weight: bold;">Todoアプリ内</a>に直接反映されます！（反映まで数分かかることがあります）</span>
                 </div>
 
                 <div class="border-dark border-top p-1 pt-2 mt-5 pb-5 d-md-flex justify-content-between">
                     <div>
-                        <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析結果を取り除きたいとき</div>
+                        <div class="text-bold">分析結果を取り除きたいとき</div>
                         <div>下のボタンを押すとTodoアプリから分析結果を消去します。</div>
                     </div>
                     <!-- Button trigger modal -->
