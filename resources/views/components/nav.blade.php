@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
-    <a class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;" href="/">tododog</a>
+    <a class="navbar-brand logo" href="/">tododog</a>
     <div class="dropdown pr-2">
         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">

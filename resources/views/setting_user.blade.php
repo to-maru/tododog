@@ -4,10 +4,10 @@
         height: 100vh;
         }
         h1 {
-        font-family: 'Hiragino Kaku Gothic Std W8';
+        font-family: 'Hiragino Kaku Gothic Std W8', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
-        div {
-        font-family: 'Hiragino Kaku Gothic Pro W6';
+        div, a, span {
+        font-family: 'Hiragino Kaku Gothic Pro W6', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
         ::-webkit-scrollbar {
         -webkit-appearance: none;
