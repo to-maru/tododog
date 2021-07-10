@@ -4,10 +4,16 @@
         height: 100vh;
         }
         h1 {
-        font-family: 'Hiragino Kaku Gothic Std W8';
+        font-family: 'Hiragino Kaku Gothic Std W8', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
         div {
-        font-family: 'Hiragino Kaku Gothic Std W3';
+        font-family: 'Hiragino Kaku Gothic Std W3', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        a {
+        font-family: 'Hiragino Kaku Gothic Pro W6', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        span {
+        font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
         }
         ::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -25,12 +31,12 @@
             @csrf
             <div>
                 <div class="mt-4">
-                    <div class="h3">STEP1: 習慣化したいことをTODOアプリに追加しよう</div>
+                    <div class="h3 font-weight-bold">STEP1: 習慣化したいことをTODOアプリに追加しよう</div>
                     <span>思いつかない場合は<a href="{{config('todoapp.todoist.todo_template_url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">「良い習慣テンプレート」</a>の中から選んでみてください！！</span>
                 </div>
 
                 <div class="mt-5">
-                    <div class="h3">STEP2: 分析を行う対象や分析方法を決めよう</div>
+                    <div class="h3 font-weight-bold">STEP2: 分析を行う対象や分析方法を決めよう</div>
                     <span>以下の設定を確認して、変えたいところがあれば編集しよう</span>
                     <div class="border border-info rounded p-2">
                         <div class="d-flex flex-row justify-content-between">
@@ -76,7 +82,7 @@
                 </div>
 
                 <div class="mt-5">
-                    <div class="h3">STEP3: 分析を実行してみよう</div>
+                    <div class="h3 font-weight-bold">STEP3: 分析を実行してみよう</div>
 
                     <div class="p-1 pt-2 pb-3 d-md-flex justify-content-between">
                         <div>
@@ -104,7 +110,7 @@
                 </div>
 
                 <div class="mt-5 pb-3">
-                    <div class="h3">STEP4: 分析結果を確認しよう</div>
+                    <div class="h3 font-weight-bold">STEP4: 分析結果を確認しよう</div>
                     <span>分析結果は<a href="{{config('todoapp.todoist.url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">Todoアプリ内</a>に直接反映されます！（反映まで数分かかることがあります）</span>
                 </div>
 

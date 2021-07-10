@@ -1,10 +1,36 @@
 <x-app>
+    <x-slot name="style">
+        html, body{
+        height: 100vh;
+        }
+        h1 {
+        font-family: 'Hiragino Kaku Gothic Std W8', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        div {
+        font-family: 'Hiragino Kaku Gothic Std W3', Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        a, span {
+        font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        p {
+        font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+        }
+        ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+        }
+        ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0,0,0,.5);
+        box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
+    </x-slot>
     <nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
-        <span class="navbar-brand font-weight-bold" style="font-family: 'Hiragino Kaku Gothic Std';color: #663114;">tododog</span>
+        <span class="navbar-brand logo">tododog</span>
         <a class="btn btn-danger" href="/api/auth/todoist/call">Todoistと連携する</a>
     </nav>
     <div class="text-center pt-5 pb-5">
-        <h1 class="display-4" style="font-family: 'Hiragino Kaku Gothic Std W8';">tododogを飼って<br>楽しく習慣を身につけよう</h1>
+        <h1 class="display-4">tododogを飼って<br>楽しく習慣を身につけよう</h1>
         <p class="pt-3 ml-2 mr-2  font-weight-bold">tododogはTodoアプリと連携することで行動データを分析し習慣化の支援を行うツールです</p>
         <a class="btn btn-danger" href="/api/auth/todoist/call">Todoistと連携する</a>
     </div>
