@@ -36,8 +36,7 @@
                         <div class="d-flex flex-row justify-content-between">
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定</div>
                             <div>
-                                <a href="/settings/analysis" class="btn btn-info btn-sm"
-                                   type="submit">編集</a>
+                                <a href="/settings/analysis" class="btn btn-info btn-sm">編集</a>
                             </div>
                         </div>
                         <div>
@@ -79,32 +78,32 @@
                 <div class="mt-5 pb-3">
                     <div class="h3">STEP3: 分析を実行してみよう</div>
 
-                    <div class="p-1 pt-2 pb-3 d-flex flex-md-row flex-column justify-content-between">
+                    <div class="p-1 pt-2 pb-3 d-md-flex justify-content-between">
                         <div>
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">手動実行</div>
                             <div>実行ボタンを押すと即座に分析を実行します。今すぐ試したい人はこちら。</div>
                         </div>
                         <div>
-                            <a href="/app/run" class="btn btn-dark" type="submit">実行する</a>
+                            <a href="/app/run" class="btn btn-dark">実行する</a>
                         </div>
                     </div>
-                    <div class="p-1 pb-2 d-flex flex-md-row flex-column justify-content-between">
+                    <div class="p-1 pb-2 d-md-flex justify-content-between">
                         <div>
                             <div style="font-family: 'Hiragino Kaku Gothic Std W8';">自動実行</div>
                             <div>設定を有効にすると1日１回分析を実行します。継続したい人はこちら。</div>
                         </div>
                         <div>
                             @if($setting_analysis->autorun_enabled)
-                                <a href="/app/autorun/?enable=false" class="btn btn-dark" type="submit">無効にする</a>
+                                <a href="/app/autorun/?enable=false" class="btn btn-dark">無効にする</a>
                             @else
-                                <a href="/app/autorun/?enable=true" class="btn btn-outline-dark" type="submit">有効にする</a>
+                                <a href="/app/autorun/?enable=true" class="btn btn-outline-dark">有効にする</a>
                             @endif
                         </div>
                     </div>
                     <div class="text-right">最終実行日時　{{$synced_at ?? '---- / -- / --'}}</div>
                 </div>
 
-                <div class="border-dark border-top p-1 pt-2 mt-5 pb-5 d-flex flex-md-row flex-column justify-content-between">
+                <div class="border-dark border-top p-1 pt-2 mt-5 pb-5 d-md-flex justify-content-between">
                     <div>
                         <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析結果の消去</div>
                         <div>Todoアプリからtododogが追加した分析結果を消去します。</div>
