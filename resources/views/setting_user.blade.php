@@ -21,8 +21,8 @@
     </x-slot>
     <x-nav :user="$user" />
     <div class="container-md">
-        <div class="m-sm-5 mt-5 pb-sm-5">
-            <div class="pb-sm-3 d-flex flex-row justify-content-between align-items-end">
+        <div class="ml-md-5 ml-sm-3 mr-md-5 mr-sm-3 mt-5 mb-5">
+            <div class="pb-3">
                 <h1>設定</h1>
             </div>
             <div class="card">
@@ -40,11 +40,11 @@
                     <form method="POST">
                         @csrf
                         <div class="p-sm-0 b-sm-0 pr-sm-5 ml-sm-5">
-                            <div class="p-sm-2 border-bottom border-dark"
+                            <div class="p-2 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー設定
                             </div>
-                            <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
+                            <div class="pt-4 pb-4 p-sm-4 pl-lg-5 ml-lg-5 pr-lg-5 mr-lg-5">
+                                <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                     <p class="flex-fill">ユーザー名</p>
                                     <div class="flex-fill form-group  row justify-content-end">
                                         <input type="text" class="form-control col-9" id="cheat-day-interval"
@@ -60,7 +60,7 @@
                                     <input class="btn btn-dark" type="submit" value="ユーザー情報を保存する">
                                 </div>
                             </div>
-                            <div class="p-sm-2 mt-5 pt-5 mb-3 border-bottom border-dark"
+                            <div class="p-2 mt-5 pt-5 mb-3 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">ユーザー削除
                             </div>
                             <!-- Button trigger modal -->

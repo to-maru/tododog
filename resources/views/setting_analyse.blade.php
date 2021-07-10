@@ -21,8 +21,8 @@
     </x-slot>
     <x-nav :user="$user" />
     <div class="container-md">
-        <div class="m-sm-5 mt-5 pb-sm-5">
-            <div class="pb-sm-3 d-flex flex-row justify-content-between align-items-end">
+        <div class="ml-md-5 ml-sm-3 mr-md-5 mr-sm-3 mt-5 mb-5">
+            <div class="pb-3">
                 <h1>設定</h1>
             </div>
             <div class="card">
@@ -39,12 +39,12 @@
                 <div class="card-body">
                     <form method="POST">
                         @csrf
-                        <div class="p-sm-0 b-sm-0 pr-sm-5 ml-sm-5">
-                            <div class="p-sm-2 border-bottom border-dark"
+                        <div class="p-sm-0 b-sm-0 pr-md-5 ml-md-5">
+                            <div class="p-2 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">分析対象
                             </div>
-                            <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
+                            <div class="pt-4 pb-4 p-sm-4 pl-lg-5 ml-lg-5 pr-lg-5 mr-lg-5">
+                                <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                     <p class="flex-fill">プロジェクト</p>
                                     <div class="flex-fill form-group">
                                         <select class="form-control" id="project" name="project_id">
@@ -59,7 +59,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                     <p class="flex-fill">ラベル</p>
                                     <div class="flex-fill overflow-auto" style="max-height: 200px;">
                                         @foreach($tags as $key => $value)
@@ -79,14 +79,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-sm-2 border-bottom border-dark"
+                            <div class="p-2 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">分析設定
                             </div>
-                            <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                            <div class="pt-4 pb-4 p-sm-4 pl-lg-5 ml-lg-5 pr-lg-5 mr-lg-5">
                                 <div>
-                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                         <p class="flex-fill">チートデイ</p>
-                                        <div class="custom-control custom-switch">
+                                        <div class="custom-control custom-switch custom-switch-lg text-right">
                                             <input class="custom-control-input" type="checkbox"
                                                    id="cheat-day-enabled"
                                                    name="cheat_day_enabled" {{(old('cheat_day_enabled') ?? $setting_analysis->cheat_day_enabled) ? 'checked="checked"' : ''}}>
@@ -102,7 +102,7 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                         <p class="flex-fill">チートデイ間隔</p>
                                         <div class="flex-fill form-group row justify-content-end">
                                             <input type="number" class="form-control col-3" id="cheat-day-interval"
@@ -118,7 +118,7 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                         <p class="flex-fill">足跡の表示日数</p>
                                         <div class="flex-fill form-group row justify-content-end">
                                             <span>直近　</span>
@@ -135,7 +135,7 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                         <p class="flex-fill">1日の区切り</p>
                                         <div class="flex-fill form-group row justify-content-end">
                                             <select class="form-control col-6" id="project" name="boundary_hour">
@@ -153,12 +153,12 @@
                             <div class="p-sm-2 border-bottom border-dark"
                                  style="font-family: 'Hiragino Kaku Gothic Std W8';">通知設定
                             </div>
-                            <div class="p-sm-4 m-sm-0 pl-sm-5 ml-sm-5 pr-sm-5 mr-sm-5">
+                            <div class="pt-4 pb-4 p-sm-4 pl-lg-5 ml-lg-5 pr-lg-5 mr-lg-5">
                                 <div>
-                                    <div class="p-sm-1 d-flex flex-row justify-content-between">
+                                    <div class="p-sm-1 d-sm-flex flex-row justify-content-between">
                                         <p class="flex-fill">分析結果テキストのカスタマイズ</p>
                                         <div class="flex-fill form-group justify-content-end">
-                                            <div class="pb-sm-3 custom-control custom-switch text-right">
+                                            <div class="pb-sm-3 custom-control custom-switch custom-switch-lg text-right">
                                                 <input class="custom-control-input" type="checkbox"
                                                        id="footnote-custom-enabled"
                                                        name="footnote_custom_enabled"
