@@ -24,12 +24,12 @@
         <form method="POST">
             @csrf
             <div>
-                <div class="mt-sm-4">
+                <div class="mt-4">
                     <div class="h3">STEP1: 習慣化したいことをTODOアプリに追加しよう</div>
                     <span>思いつかない場合は<a href="{{config('todoapp.todoist.todo_template_url')}}" style="font-family: 'Hiragino Kaku Gothic Std W8';">「良い習慣テンプレート」</a>の中から選んでみてください！！</span>
                 </div>
 
-                <div class="mt-sm-5">
+                <div class="mt-5">
                     <div class="h3">STEP2: 分析を行う対象や分析方法を決めよう</div>
                     <span>以下の設定を確認して、変えたいところがあれば編集しよう</span>
                     <div class="border border-info rounded p-2">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="mt-sm-5 pb-sm-3">
+                <div class="mt-5 pb-3">
                     <div class="h3">STEP3: 分析を実行してみよう</div>
 
                     <div class="p-sm-1 pt-sm-2 pb-sm-3 d-flex flex-row justify-content-between">
@@ -104,7 +104,7 @@
                     <div class="text-right">最終実行日時　{{$synced_at ?? '---- / -- / --'}}</div>
                 </div>
 
-                <div class="border-dark border-top p-sm-1 pt-sm-2 mt-sm-5 pb-sm-5 d-flex flex-row justify-content-between">
+                <div class="border-dark border-top p-1 pt-2 mt-5 pb-5 d-flex flex-row justify-content-between">
                     <div>
                         <div style="font-family: 'Hiragino Kaku Gothic Std W8';">分析結果の消去</div>
                         <div>Todoアプリからtododogが追加した分析結果を消去します。</div>
