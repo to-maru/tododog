@@ -32,4 +32,14 @@ class SettingsAnalysisPostRequest extends FormRequest
             'footnote_custom_template' => 'required_if:footnote_custom_enabled,on', //todo: 犬の絵文字を弾きたい
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'required' => '入力必須です。',
+            'integer' => '数字を入力してください。',
+            'between' => ':minから:maxまでの数字を入力してください。',
+            'footnote_custom_template.required_if' => 'カスタマイズが有効なとき入力必須です。'
+        ];
+    }
 }
