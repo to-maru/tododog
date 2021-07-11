@@ -39,6 +39,8 @@ class SettingUserController extends Controller
         $user = $request->user();
         $validated = $request->validate([
             'name' => 'required|string|between:4,32',
+        ], [
+            'required' => '入力必須です。'
         ]);
         $user->name = $validated['name'];
         $user->save();
