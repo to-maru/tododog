@@ -16,6 +16,8 @@ use App\Http\Controllers;
 
 Route::middleware('auth.very_basic')->group(function () {
     Route::get('/', Controllers\HomeController::class)->name('login');
+    Route::get('/terms', Controllers\TermsController::class)->name('terms');
+    Route::get('/privacy', Controllers\PrivacyController::class)->name('privacy');
     Route::get('/api/auth/todoist/call', Controllers\ApiAuthTodoistController::class . '@' . 'call');
     Route::get('/api/auth/todoist/callback', Controllers\ApiAuthTodoistController::class . '@' . 'callback');
 });
