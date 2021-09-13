@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
+<nav class="navbar fixed-top navbar-light" style="background-color: #CCBDB7;">
     <a class="navbar-brand logo" href="/">tododog</a>
     <div class="dropdown pr-2">
         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -18,3 +18,4 @@
         </div>
     </div>
 </nav>
+<div class="p-4"> </div>
