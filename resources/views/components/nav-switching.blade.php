@@ -3,5 +3,5 @@
 @endauth
 
 @guest
-    <x-nav-to-login />
+    <x-nav-for-guest />
 @endguest
