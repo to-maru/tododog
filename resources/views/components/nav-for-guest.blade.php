@@ -1,9 +1,10 @@
-<nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
+<nav class="navbar fixed-top navbar-light" style="background-color: #CCBDB7;">
     <a class="navbar-brand logo" href="/">tododog</a>
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#navForGuestModal">
         始める
     </button>
 </nav>
+<div class="p-4"> </div>
 <!-- Modal -->
 <div class="modal fade" id="navForGuestModal" tabindex="-1" role="dialog" aria-labelledby="navForGuestModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
