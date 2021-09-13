@@ -149,4 +149,5 @@
             </div>
         </form>
     </div>
+    <x-footer />
 </x-app>

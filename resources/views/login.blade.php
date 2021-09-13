@@ -25,14 +25,13 @@
         box-shadow: 0 0 1px rgba(255,255,255,.5);
         }
     </x-slot>
-    <nav class="navbar sticky-top navbar-light" style="background-color: #CCBDB7;">
-        <span class="navbar-brand logo">tododog</span>
-        <a class="btn btn-danger" href="/api/auth/todoist/call">Todoistと連携する</a>
-    </nav>
+    <x-nav-for-guest />
     <div class="text-center pt-5 pb-5">
         <h1 class="display-4">tododogを飼って<br>楽しく習慣を身につけよう</h1>
-        <p class="pt-3 ml-2 mr-2  font-weight-bold">tododogはTodoアプリと連携することで行動データを分析し習慣化の支援を行うツールです</p>
-        <a class="btn btn-danger" href="/api/auth/todoist/call">Todoistと連携する</a>
+        <p class="pt-3 ml-2 mr-2  font-weight-bold">tododogはTodoアプリと連携することで行動を分析し習慣化の支援を行うツールです</p>
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#navForGuestModal">
+            始める
+        </button>
     </div>
     <div class="text-center pt-5 pb-5">
         <img src="/images/app_abstruct.png" class="img-fluid" width="900">
@@ -67,5 +66,5 @@
     </div>
 
 
-
+    <x-footer />
 </x-app>
