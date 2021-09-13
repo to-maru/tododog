@@ -6,7 +6,7 @@
 </nav>
 <!-- Modal -->
 <div class="modal fade" id="navForGuestModal" tabindex="-1" role="dialog" aria-labelledby="navForGuestModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
                 <h5 class="modal-title" id="navForGuestModalLabel">ログイン</h5>

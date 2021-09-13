@@ -339,4 +339,5 @@
         <p class="pt-3">【2021年9月15日制定】</p>
     </div>
 
+    <x-footer />
 </x-app>

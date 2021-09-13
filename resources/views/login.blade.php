@@ -66,5 +66,5 @@
     </div>
 
 
-
+    <x-footer />
 </x-app>
