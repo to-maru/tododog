@@ -28,7 +28,7 @@
 
     </x-slot>
     <x-nav-switching :user="$user" />
-    <div class="p-5 m-3">
+    <div class="p-sm-5 pt-5 pb-5 m-3">
         <h1 class="mb-5">プライバシーポリシー</h1>
         <p>
             tododog運営事務局（以下「当事務局」といいます。）は、当事務局の提供するサービス（以下「本サービス」といいます。）における、ユーザーについての個人情報を含む利用者情報の取扱いについて、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定めます。
@@ -161,7 +161,7 @@
             <br>
             Cookie
         </p>
-        <p>
+        <p style="word-break: break-all;">
             (4)	上記提供者のプライバシーポリシーのURL
             <br>
             <a href="https://www.google.com/intl/ja/policies/privacy/partners/">https://www.google.com/intl/ja/policies/privacy/partners/</a>
