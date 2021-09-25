@@ -45,7 +45,7 @@ class Doghouse implements ShouldQueue
             });
 
         if ($users->isEmpty()) {
-            info('['.self::class.'] '.'batch not run');
+            Log::info('['.self::class.'] '.'batch not run');
             Log::info('['.self::class.'] '.'end');
             return;
         }
@@ -57,15 +57,15 @@ class Doghouse implements ShouldQueue
 
         $batch = Bus::batch($batch_list)
             ->then(function (Batch $batch) {
-                info('['.self::class.'] '.'batch success');
+                Log::info('['.self::class.'] '.'batch success');
                 // すべてのジョブが正常に完了
             })
             ->catch(function (Batch $batch, Throwable $e) {
-                info('['.self::class.'] '.'batch failure', ['error' => $e]);
+                Log::error('['.self::class.'] '.'batch failure', ['error' => $e]);
                 // バッチジョブの失敗をはじめて検出
             })
             ->finally(function (Batch $batch) {
-                info('['.self::class.'] '.'batch ended');
+                Log::info('['.self::class.'] '.'batch ended');
                 // バッチの実行が終了
             })
             ->onConnection('sync')
