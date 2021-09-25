@@ -41,7 +41,7 @@ class ApiAuthTodoistController extends Controller
             );
         } catch (RuntimeException $e) {
             Log::error(
-                $e->getMessage(),
+                '['.self::class.'] '. $e->getMessage(),
                 [
                     'request' => $request,
                     'request_state' => $request->state ?? '',
