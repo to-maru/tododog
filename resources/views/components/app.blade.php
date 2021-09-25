@@ -56,7 +56,7 @@
             @endif
             @if (session('msg_danger'))
             $(function () {
-                toastr.danger('{{ session('msg_danger') }}');
+                toastr.error('{{ session('msg_danger') }}');
             });
             @endif
         </script>

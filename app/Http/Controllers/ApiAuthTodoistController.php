@@ -10,6 +10,7 @@ use \RuntimeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -30,19 +31,32 @@ class ApiAuthTodoistController extends Controller
 
     public function callback(Request $request)
     {
-        $state = $request->session()->pull('state');
+        try {
+            $state = $request->session()->pull('state');
 
-        throw_unless(
-            strlen($state) > 0 && $state === $request->state,
-            RuntimeException::class
-        );
+            throw_unless(
+                strlen($state) > 0 && $state === $request->state,
+                RuntimeException::class,
+                '認証で用いるstateの値が不適切です',
+            );
+        } catch (RuntimeException $e) {
+            Log::error(
+                $e->getMessage(),
+                [
+                    'request' => $request,
+                    'request_state' => $request->state ?? '',
+                    'session_state' => $state ?? '',
+                ]
+            );
+            session()->flash('msg_danger', '認証エラーが発生しました。');
+            return redirect()->route('login');
+        }
+
         $access_token_response = Http::asForm()->post('https://todoist.com/oauth/access_token', [
             'code' => $request->code,
             'client_id' => config('todoapp.todoist.client_id'),
             'client_secret' => config('todoapp.todoist.client_secret'),
         ]);
-
-        //todo: error handling
 
         $access_token = json_decode($access_token_response->body(), true)['access_token'];
 
