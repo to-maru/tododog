@@ -102,9 +102,17 @@ class Analyzer
         $number_of_days = $this->setting->footprints_number;
         $ok_char = 'o';
         $ng_char = 'x';
+        $tbd_char = '?';
 
         $foot_prints = "";
-        $date = Carbon::yesterday();
+        $date = Carbon::now()->subHours($this->setting->boundary_hour);
+        $date = Carbon::create($date->year, $date->month, $date->day);
+
+        $should_skip_today = false;
+        if ($should_skip_today) {
+            $date = $date->subDay();
+        }
+
         for ($i = 0; $i < $number_of_days; $i++) {
             if ($date->lt($origin_created_at) && !$date->isSameDay($origin_created_at)) {
                 break;
@@ -112,7 +120,7 @@ class Analyzer
             if ($this->existsDoneDatetime($done_datetimes, $date)) {
                 $foot_prints = $foot_prints . $ok_char;
             } else {
-                $foot_prints = $foot_prints . $ng_char;
+                $foot_prints = $foot_prints . ($i > 0 ? $ng_char : $tbd_char);
             }
             $date = $date->subDay();
         }
