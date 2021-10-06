@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Exceptions\ApiPostingException;
 use App\Models\TodoApplication;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
@@ -134,6 +135,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["items"]',
         ]);
+        if ($response->failed()) {
+            throw new ApiPostingException($response->body, self::class, __FUNCTION__);
+        }
         return json_decode($response->body(),true);
     }
 
