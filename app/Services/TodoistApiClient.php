@@ -47,6 +47,10 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["projects"]',
         ]);
+
+        if ($response->failed()) {
+            throw new ApiPostingException($response, self::class, __FUNCTION__);
+        }
         return json_decode($response->body(),true);
     }
 
@@ -83,6 +87,10 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["labels"]',
         ]);
+
+        if ($response->failed()) {
+            throw new ApiPostingException($response, self::class, __FUNCTION__);
+        }
         return json_decode($response->body(),true);
     }
 
@@ -135,8 +143,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'sync_token' => '*',
             'resource_types' => '["items"]',
         ]);
+
         if ($response->failed()) {
-            throw new ApiPostingException($response->body, self::class, __FUNCTION__);
+            throw new ApiPostingException($response, self::class, __FUNCTION__);
         }
         return json_decode($response->body(),true);
     }
@@ -196,6 +205,10 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         }
 
         $response = Http::asForm()->post(self::API_BASE_URL . self::API_GET_ACTIVITY_LOGS, $payload);
+
+        if ($response->failed()) {
+            throw new ApiPostingException($response, self::class, __FUNCTION__);
+        }
         return json_decode($response->body(),true);
     }
 
@@ -207,6 +220,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
             'commands' => json_encode($commands),
         ]);
 
+        if ($response->failed()) {
+            throw new ApiPostingException($response, self::class, __FUNCTION__);
+        }
         return json_decode($response->body(),true);
     }
 
