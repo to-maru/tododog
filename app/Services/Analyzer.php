@@ -58,10 +58,20 @@ class Analyzer
         $cheat_day_interval = $this->setting->cheat_day_interval;
 
         $running_days = 0;
-        $days_to_cheat_day = 0;
-        $should_remove_cheat_day = false;
-        $date = Carbon::yesterday();
 
+        //次のチートデイまでの残り日数。一度チートデイを使用するとカウントが増える
+        $days_to_cheat_day = 0;
+
+        //trueのときにrunning_dayのカウントを1減らす
+        //2日連続で未実行のとき$offset_days=-1となる
+        $should_remove_cheat_day = false;
+
+        $date = $this->getTodayMidnightSettingApplied();
+        if ($this->existsDoneDatetime($done_datetimes, $date)) {
+            $running_days++;
+        }
+
+        $date = $date->subDay();
         while (true) {
             if ($this->existsDoneDatetime($done_datetimes, $date)) {
                 $days_to_cheat_day--;
@@ -84,7 +94,8 @@ class Analyzer
         if (is_null($done_datetimes->first())) {
             return null;
         }
-        return Carbon::today()->diffInDays($done_datetimes->first()->done_datetime);
+        $date = $this->getTodayMidnightSettingApplied();
+        return $date->diffInDays($done_datetimes->first()->done_datetime);
     }
 
     public function calculateDays($running_days, $sleeping_days)
@@ -102,9 +113,11 @@ class Analyzer
         $number_of_days = $this->setting->footprints_number;
         $ok_char = 'o';
         $ng_char = 'x';
+        $tbd_char = '?';
 
         $foot_prints = "";
-        $date = Carbon::yesterday();
+        $date = $this->getTodayMidnightSettingApplied();
+
         for ($i = 0; $i < $number_of_days; $i++) {
             if ($date->lt($origin_created_at) && !$date->isSameDay($origin_created_at)) {
                 break;
@@ -112,7 +125,7 @@ class Analyzer
             if ($this->existsDoneDatetime($done_datetimes, $date)) {
                 $foot_prints = $foot_prints . $ok_char;
             } else {
-                $foot_prints = $foot_prints . $ng_char;
+                $foot_prints = $foot_prints . ($i > 0 ? $ng_char : $tbd_char);
             }
             $date = $date->subDay();
         }
@@ -169,5 +182,11 @@ class Analyzer
             });
         }
         return $todos;
+    }
+
+    public function getTodayMidnightSettingApplied()
+    {
+        $date = Carbon::now()->subHours($this->setting->boundary_hour);
+        return Carbon::createMidnightDate($date->year, $date->month, $date->day);
     }
 }
