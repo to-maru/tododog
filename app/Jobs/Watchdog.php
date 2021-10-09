@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Exceptions\ApiPostingException;
 use App\Models\User;
 use App\Services\Notifier;
 use Illuminate\Bus\Batchable;
@@ -34,22 +35,26 @@ class Watchdog implements ShouldQueue
         Notifier $notifier,
     )
     {
-        Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
+        try {
+            Log::info('['.self::class.'] '.'start', ['user_id' => $this->user->id]);
 
-        $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
-        $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
-        Log::info('['.self::class.'] '.'pulled todos', ['user_id' => $this->user->id]);
+            $synchronizer->api_client = $synchronizer->getApiClient($this->user->todo_application);
+            $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+            Log::info('['.self::class.'] '.'pulled todos', ['user_id' => $this->user->id]);
 
-        $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
-        $analyzed = $analyzer->analyze($this->user);
-        Log::info('['.self::class.'] '.'analyzed', ['user_id' => $this->user->id]);
+            $notifier->api_client = $notifier->getApiClient($this->user->todo_application);
+            $analyzed = $analyzer->analyze($this->user);
+            Log::info('['.self::class.'] '.'analyzed', ['user_id' => $this->user->id]);
 
-        $notifier->notify($analyzed, $this->user->user_setting_notification);
-        Log::info('['.self::class.'] '.'notified', ['user_id' => $this->user->id]);
+            $notifier->notify($analyzed, $this->user->user_setting_notification);
+            Log::info('['.self::class.'] '.'notified', ['user_id' => $this->user->id]);
 
-        $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
-        Log::info('['.self::class.'] '.'pulled todos again', ['user_id' => $this->user->id]);
+            $synchronizer->pullTodosAndDonetimes($this->user->todo_application);
+            Log::info('['.self::class.'] '.'pulled todos again', ['user_id' => $this->user->id]);
 
-        Log::info('['.self::class.'] '.'end', ['user_id' => $this->user->id]);
+            Log::info('['.self::class.'] '.'end', ['user_id' => $this->user->id]);
+        } catch (ApiPostingException $e) {
+            Log::info('['.self::class.'] '.$e::class.' catched and force end', ['user_id' => $this->user->id]);
+        }
     }
 }
