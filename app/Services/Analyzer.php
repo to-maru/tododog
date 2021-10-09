@@ -106,7 +106,7 @@ class Analyzer
 
         $foot_prints = "";
         $date = Carbon::now()->subHours($this->setting->boundary_hour);
-        $date = Carbon::create($date->year, $date->month, $date->day);
+        $date = Carbon::createMidnightDate($date->year, $date->month, $date->day);
 
         $should_skip_today = false;
         if ($should_skip_today) {
@@ -120,7 +120,8 @@ class Analyzer
             if ($this->existsDoneDatetime($done_datetimes, $date)) {
                 $foot_prints = $foot_prints . $ok_char;
             } else {
-                $foot_prints = $foot_prints . ($i > 0 ? $ng_char : $tbd_char);
+                $is_today = !$should_skip_today && $i === 0;
+                $foot_prints = $foot_prints . ($is_today ? $tbd_char : $ng_char);
             }
             $date = $date->subDay();
         }
