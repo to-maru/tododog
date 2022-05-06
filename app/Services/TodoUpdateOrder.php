@@ -13,6 +13,7 @@ class TodoUpdateOrder
         public ?string $name = null,
         public ?array $tag_ids = null,
         public ?string $comment = null,
+        public ?array $due = null,
     )
     {
         $this->original->tag_ids = json_decode($this->original->tag_ids, true);
@@ -22,6 +23,9 @@ class TodoUpdateOrder
         }
         if (is_null($this->tag_ids)) {
             $this->tag_ids = $this->original->tag_ids;
+        }
+        if (is_null($this->due)) {
+            $this->due = $this->original->due;
         }
     }
 
@@ -69,9 +73,22 @@ class TodoUpdateOrder
         return $this->getTagsToAdd() != $this->getTagsToRemove(); //todo: ちゃんと作る
     }
 
+    public function updateDueDate(string $date)
+    {
+        $this->due['date'] = $date;
+        return $this;
+    }
+
+    public function existsDueUpdate(): bool
+    {
+        logger(print_r($this->original->due, true));
+        logger(print_r($this->due, true));
+        return array_diff($this->original->due, $this->due) != array_diff($this->due, $this->original->due);
+    }
+
     public function existsAnyUpdate(): bool
     {
-        return $this->existsNameUpdate() || $this->existsTagUpdate();
+        return $this->existsNameUpdate() || $this->existsTagUpdate() || $this->existsDueUpdate();
     }
 
 }

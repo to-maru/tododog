@@ -12,6 +12,12 @@ class Todo extends Model
     protected $dates = ['origin_created_at'];
     protected $guarded = [];
 
+    public function getDueAttribute()
+    {
+        $raw_data = json_decode($this->raw_data, true);
+        return $raw_data['due'] ?? [];
+    }
+
     public function todo_application()
     {
         return $this->belongsTo(TodoApplication::class);

@@ -253,6 +253,9 @@ class TodoistApiClient implements TodoApplicationApiClientInterface
         if ($todo_update_order->existsTagUpdate()) {
             $args['labels'] = $todo_update_order->tag_ids;
         }
+        if ($todo_update_order->existsDueUpdate()) {
+            $args['due'] = $todo_update_order->due;
+        }
         $commands[] = $this->makeWriteResourceCommand(self::COMMAND_TO_UPDATE_TODO, $args);
         return $commands;
     }

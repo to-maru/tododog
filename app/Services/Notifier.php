@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Todo;
 use App\Models\UserSettingNotification;
 use App\Traits\TodoApplicationApiClientTrait;
+use Carbon\Carbon;
 
 class Notifier
 {
@@ -52,8 +53,10 @@ class Notifier
         $tag_names = $this->convertAchievementsToTagNames($this->makeAchievements($result));
         $tag_ids = $this->makeTagIdsByTagNames($tag_names);
         $todo_update_order = new TodoUpdateOrder($todo);
+        $date = $result['exist_today_done'] ? Carbon::tomorrow() : Carbon::today();
 
         return $todo_update_order
+            ->updateDueDate($date->toDateString())
             ->removeFootnoteFromName(self::FOOTNOTE_PREFIX)
             ->addFootnoteToName($this->makeFootnote($result))
             ->removeTags(array_keys($this->all_created_tags))
