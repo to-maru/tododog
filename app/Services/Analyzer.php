@@ -46,6 +46,7 @@ class Analyzer
         $result['sleeping_days'] = $this->calculateSleepingDays($done_datetimes);
         $result['days'] = $this->calculateDays($result['running_days'], $result['sleeping_days']);
         $result['foot_prints'] = $this->makeFootPrints($done_datetimes, $todo->origin_created_at);
+        $result['exist_today_done'] = $this->getExistTodayDone($done_datetimes);
         $result['total_times'] = $this->getTotalTimes($done_datetimes);
         $result['max_monthly_times'] = $this->calculateMaxMonthlyTimes($done_datetimes);
         $result['this_month_times'] = $this->calculateTimesThisMonth($done_datetimes);
@@ -106,6 +107,12 @@ class Analyzer
             return 'sleep:' . $sleeping_days . 'd';
         }
         return '';
+    }
+
+    public function getExistTodayDone(Collection $done_datetimes): bool
+    {
+        $date = $this->getTodayMidnightSettingApplied();
+        return $this->existsDoneDatetime($done_datetimes, $date);
     }
 
     public function makeFootPrints(Collection $done_datetimes, Carbon $origin_created_at)
