@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
+        ini_set('session.cookie_domain', 'herokuapp.com');
         Cookie::queue('test1', 'x', 60*24*90, $domain='.herokuapp.com');
         Cookie::queue('test2', 'x', 60*24*90, $domain='herokuapp.com');
         Cookie::queue('test3', 'x', 60*24*90, $domain='.herokuapp.com');
