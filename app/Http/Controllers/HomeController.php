@@ -13,8 +13,8 @@ class HomeController extends Controller
         Cookie::queue('test2', 'x', 60*24*90, $domain='herokuapp.com');
         Cookie::queue('test3', 'x', 60*24*90, $domain='.herokuapp.com');
         Cookie::queue('test4', 'x', 60*24*90, $domain='herokuapp.com');
-        setcookie('test5','x',$domain='herokuapp.com');
-        setcookie('test6','x',$domain='herokuapp.com');
+        setcookie('test5','x', 60*24*90, $domain='herokuapp.com');
+        setcookie('test6','x', 60*24*90, $domain='herokuapp.com');
 
         
         if (Auth::check()) {
