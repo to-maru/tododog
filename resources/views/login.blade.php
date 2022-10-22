@@ -70,8 +70,9 @@
         document.cookie = "js-textA=xxx; max-age=3600";
         document.cookie = "js-text4=xxx; max-age=3600; domain=stg-todo-dog.herokuapp.com; path=/";
         document.cookie = "js-text4A=xxx; max-age=3600; domain=.stg-todo-dog.herokuapp.com; path=/";
-        document.cookie = "js-text5=xxx; max-age=3600; domain=herokuapp.com; path=/";
-        document.cookie = "js-text5A=xxx; max-age=3600; domain=.herokuapp.com; path=/";
+        document.cookie = "js-text5-1=xxx; max-age=3600; domain=herokuapp.com; path=/";
+        document.cookie = "js-text5-2=xxx; max-age=3600; domain=herokuapp.com; path=/; samesite=lax";
+        document.cookie = "js-text5-3=xxx; max-age=3600; domain=herokuapp.com; path=/; samesite=none; secure;";
 
 
 </script>
