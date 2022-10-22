@@ -65,6 +65,9 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        document.cookie = "js-text=xxx; max-age=3600; domain='.stg.herokuapp.com";
+    </script>
 
     <x-footer />
 </x-app>
