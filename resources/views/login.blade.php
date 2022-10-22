@@ -71,6 +71,7 @@
         document.cookie = "js-text4=xxx; max-age=3600; domain=stg-todo-dog.herokuapp.com; path=/";
         document.cookie = "js-text4A=xxx; max-age=3600; domain=.stg-todo-dog.herokuapp.com; path=/";
         document.cookie = "js-text5=xxx; max-age=3600; domain=herokuapp.com; path=/";
+        document.cookie = "js-text5A=xxx; max-age=3600; domain=.herokuapp.com; path=/";
 
 
 </script>
